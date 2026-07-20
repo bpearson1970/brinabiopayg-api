@@ -6,7 +6,7 @@ from datetime import datetime
 
 app = FastAPI()
 
-EVENT_DIR = "/tmp/event_deposit"
+EVENT_DIR = "/var/data/event_deposit"
 os.makedirs(EVENT_DIR, exist_ok=True)
 
 @app.get("/")
