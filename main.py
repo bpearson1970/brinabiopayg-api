@@ -1,8 +1,11 @@
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request, HTTPException
 from fastapi.responses import JSONResponse
 import os
 import json
 from datetime import datetime
+
+# Load API key from environment
+API_KEY = os.getenv("BRINABIOPAYG_API_KEY")
 
 app = FastAPI()
 
@@ -15,6 +18,11 @@ def root():
 
 @app.post("/event")
 async def receive_event(request: Request):
+    # Authorization check
+    auth_header = request.headers.get("Authorization")
+    if auth_header != f"Bearer {API_KEY}":
+        raise HTTPException(status_code=401, detail="Unauthorized")
+
     try:
         payload = await request.json()
 
