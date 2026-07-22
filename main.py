@@ -3,6 +3,7 @@ from fastapi import FastAPI, Request, HTTPException
 from fastapi.responses import JSONResponse
 import os
 import json
+import random
 from datetime import datetime
 
 # Load API key from environment
