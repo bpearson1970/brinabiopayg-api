@@ -1,3 +1,4 @@
+# main.py version 1.04
 from fastapi import FastAPI, Request, HTTPException
 from fastapi.responses import JSONResponse
 import os
@@ -27,8 +28,9 @@ async def receive_event(request: Request):
         payload = await request.json()
 
         # Create filename
-        timestamp = datetime.utcnow().strftime("%Y%m%d%H%M%S%f")
-        filename = f"event_{timestamp}.tmp"
+        timestamp = datetime.utcnow().strftime("%Y%m%dT%H%M%S")
+        rand = random.randint(10000, 99999)
+        filename = f"event_{timestamp}_{rand}.tmp"
         filepath = os.path.join(EVENT_DIR, filename)
 
         # Write JSON payload to file
