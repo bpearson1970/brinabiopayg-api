@@ -1,4 +1,4 @@
-# main.py version 1.04
+# main.py version 1.05
 from fastapi import FastAPI, Request, HTTPException
 from fastapi.responses import JSONResponse
 import os
@@ -11,8 +11,12 @@ API_KEY = os.getenv("BRINABIOPAYG_API_KEY")
 
 app = FastAPI()
 
+# Define the Endpoints
 EVENT_DIR = "/var/data/event_deposit"
 os.makedirs(EVENT_DIR, exist_ok=True)
+
+LOG_DIR = "/var/data/log_deposit"
+os.makedirs(LOG_DIR, exist_ok=True)
 
 @app.get("/")
 def root():
@@ -33,6 +37,34 @@ async def receive_event(request: Request):
         rand = random.randint(10000, 99999)
         filename = f"event_{timestamp}_{rand}.tmp"
         filepath = os.path.join(EVENT_DIR, filename)
+
+        # Write JSON payload to file
+        with open(filepath, "w") as f:
+            json.dump(payload, f)
+
+        return {"status": "success", "file": filename}
+
+    except Exception as e:
+        return JSONResponse(
+            status_code=400,
+            content={"status": "error", "message": str(e)}
+        )
+
+@app.post("/log")
+async def receive_log(request: Request):
+    # Authorization check
+    auth_header = request.headers.get("Authorization")
+    if auth_header != f"Bearer {API_KEY}":
+        raise HTTPException(status_code=401, detail="Unauthorized")
+
+    try:
+        payload = await request.json()
+
+        # Create filename
+        timestamp = datetime.utcnow().strftime("%Y%m%dT%H%M%S")
+        rand = random.randint(10000, 99999)
+        filename = f"logdump_{timestamp}_{rand}.tmp"
+        filepath = os.path.join(LOG_DIR, filename)
 
         # Write JSON payload to file
         with open(filepath, "w") as f:
