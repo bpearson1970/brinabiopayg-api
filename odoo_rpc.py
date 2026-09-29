@@ -3,10 +3,10 @@ import json
 import requests
 from datetime import datetime
 
-ODOO_URL = "https://brina-medical-inc.odoo.com/jsonrpc"
-ODOO_DB = "brina-medical-inc-odoo-com"  # check in Settings → Database name
-ODOO_API_KEY = os.getenv("b9bb0be72ca6673c277f28e7edc75a6f2dc89d91")  # create in Odoo, use as password
-ODOO_LOGIN = "brent@brinamedical.com"  # the user owning the API key
+ODOO_URL = os.getenv("ODOO_URL")
+ODOO_DB = os.getenv("ODOO_DB")  # check in Settings → Database name
+ODOO_API_KEY = os.getenv("ODOO_API_KEY")  # create in Odoo, use as password
+ODOO_LOGIN = os.getenv("ODOO_LOGIN")  # the user owning the API key
 
 def odoo_jsonrpc(model, method, args=None, kwargs=None):
     payload = {
