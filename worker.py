@@ -59,7 +59,7 @@ def ingest_event_file(path):
         "patient_id_external": data["PatientID"],
         "physician_id_external": data["PhysicianID"],
         "payload_json": json.dumps(data),
-        "schema_version": "1.0",
+        "schema_version": os.getenv("SCHEMA_VERSION","1.0"),
         "status": "new",
         "ingested_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
     }
