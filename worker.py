@@ -8,77 +8,97 @@ DEPOSIT_DIR = "/var/data/event_deposit"
 PROCESSED_DIR = "/var/data/event_processed"
 ERROR_DIR = "/var/data/event_error"
 
-# Ensure directories exist
-os.makedirs(DEPOSIT_DIR, exist_ok=True)
-os.makedirs(PROCESSED_DIR, exist_ok=True)
-os.makedirs(ERROR_DIR, exist_ok=True)
+SCHEMA_VERSION = os.getenv("SCHEMA_VERSION", "1.0")
 
-def ingest_event_file(path):
+
+def sanitize_filename(name: str) -> str:
+    """
+    Remove hidden characters such as CR, LF, tabs, nulls, and non‑printable ASCII.
+    This prevents ingestion failures caused by Windows CRLF or device‑generated strings.
+    """
+    return "".join(c for c in name if c.isprintable()).strip()
+
+
+def load_json_file(path: str):
     try:
         with open(path, "r", encoding="utf-8") as f:
-            data = json.load(f)
+            return json.load(f)
     except Exception as e:
         return {"status": "error", "message": f"Invalid JSON: {e}"}
 
+
+def process_event_file(filename: str):
+    clean_name = sanitize_filename(filename)
+
+    if not clean_name.endswith(".tmp"):
+        return {"status": "skip", "message": "Not a .tmp file"}
+
+    src_path = os.path.join(DEPOSIT_DIR, clean_name)
+    data = load_json_file(src_path)
+
+    if "status" in data and data["status"] == "error":
+        dst_path = os.path.join(ERROR_DIR, clean_name)
+        shutil.move(src_path, dst_path)
+        return {"status": "error", "message": data["message"]}
+
+    # Required fields
     required = ["DeviceID", "DeviceIP", "Firmware", "EventTS", "PatientID", "PhysicianID"]
-    missing = [k for k in required if k not in data]
-    if missing:
-        return {"status": "error", "message": f"Missing fields: {missing}"}
+    for field in required:
+        if field not in data:
+            dst_path = os.path.join(ERROR_DIR, clean_name)
+            shutil.move(src_path, dst_path)
+            return {"status": "error", "message": f"Missing field: {field}"}
 
-    event_ts = data["EventTS"]
-    external_event_id = event_ts
-
+    # Parse timestamp
     try:
-        ts_raw = event_ts.split("_")[0]
-        event_timestamp_local = datetime.strptime(ts_raw, "%Y%m%dT%H%M%S")
+        event_ts = data["EventTS"]
+        event_dt = datetime.strptime(event_ts.split("_")[0], "%Y%m%dT%H%M%S")
+        event_timestamp_local = event_dt.strftime("%Y-%m-%d %H:%M:%S")
     except Exception as e:
-        return {"status": "error", "message": f"Invalid EventTS format: {e}"}
+        dst_path = os.path.join(ERROR_DIR, clean_name)
+        shutil.move(src_path, dst_path)
+        return {"status": "error", "message": f"Timestamp parse error: {e}"}
 
-    # Duplicate check
-    existing = odoo_jsonrpc(
-        "x_payg_event",
-        "search_read",
-        args=[[("external_event_id", "=", external_event_id)]],
-        kwargs={"fields": ["id", "status"], "limit": 1},
-    )
+    # Check duplicate
+    existing = odoo_jsonrpc("x_payg_event", "search_read", [
+        [["external_event_id", "=", data["EventTS"]]],
+        ["id"]
+    ])
 
     if existing:
-        odoo_jsonrpc(
-            "x_payg_event",
-            "write",
-            args=[[existing[0]["id"]], {"status": "duplicate"}],
-        )
-        return {"status": "duplicate", "record_id": existing[0]["id"]}
+        dst_path = os.path.join(PROCESSED_DIR, clean_name)
+        shutil.move(src_path, dst_path)
+        return {"status": "duplicate", "message": "Event already exists"}
 
-    vals = {
-        "external_event_id": external_event_id,
-        "event_timestamp_local": event_timestamp_local.strftime("%Y-%m-%d %H:%M:%S"),
+    # Create new event
+    payload = {
+        "external_event_id": data["EventTS"],
+        "event_timestamp_local": event_timestamp_local,
+        "schema_version": SCHEMA_VERSION,
         "device_id": data["DeviceID"],
-        "device_ip": data["DeviceIP"],
-        "firmware_version": data["Firmware"],
         "patient_id_external": data["PatientID"],
         "physician_id_external": data["PhysicianID"],
         "payload_json": json.dumps(data),
-        "schema_version": os.getenv("SCHEMA_VERSION","1.0"),
         "status": "new",
-        "ingested_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
     }
 
-    record_id = odoo_jsonrpc("x_payg_event", "create", args=[vals])
-    return {"status": "success", "record_id": record_id}
+    try:
+        odoo_jsonrpc("x_payg_event", "create", [payload])
+    except Exception as e:
+        dst_path = os.path.join(ERROR_DIR, clean_name)
+        shutil.move(src_path, dst_path)
+        return {"status": "error", "message": f"Odoo create error: {e}"}
 
-def process_all():
-    for fname in os.listdir(DEPOSIT_DIR):
-        if not fname.endswith(".json"):
-            continue
+    dst_path = os.path.join(PROCESSED_DIR, clean_name)
+    shutil.move(src_path, dst_path)
+    return {"status": "ok", "message": "Event created"}
 
-        src = os.path.join(DEPOSIT_DIR, fname)
-        result = ingest_event_file(src)
 
-        if result["status"] in ("success", "duplicate"):
-            shutil.move(src, os.path.join(PROCESSED_DIR, fname))
-        else:
-            shutil.move(src, os.path.join(ERROR_DIR, fname))
+def main():
+    for filename in os.listdir(DEPOSIT_DIR):
+        result = process_event_file(filename)
+        print(f"{filename}: {result}")
+
 
 if __name__ == "__main__":
-    process_all()
+    main()
