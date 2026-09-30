@@ -106,12 +106,15 @@ def process_event_file(filename: str):
     shutil.move(src_path, dst_path)
     return {"status": "ok", "message": "Event created"}
 
-
-def main():
-    for filename in os.listdir(DEPOSIT_DIR):
-        result = process_event_file(filename)
-        print(f"{filename}: {result}")
-
+    def main():
+        while True:
+            files = os.listdir(DEPOSIT_DIR)
+    
+            for filename in files:
+                result = process_event_file(filename)
+                print(result)
+    
+            time.sleep(1)
 
 if __name__ == "__main__":
     main()
