@@ -61,7 +61,7 @@ def process_event_file(filename: str):
 
     # Check duplicate
     existing = odoo_jsonrpc("x_payg_event", "search_read", [
-        [["external_event_id", "=", data["EventTS"]]],
+        [["x_studio_payg_event_id, "=", data["EventTS"]]],
         ["id"]
     ])
 
