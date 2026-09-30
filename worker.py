@@ -71,29 +71,29 @@ def process_event_file(filename: str):
         return {"status": "duplicate", "message": "Event already exists"}
 
     # Create new event
-payload = {
-    "x_studio_payg_event_id": data["EventTS"],
-    "x_studio_event_timestamp_local": event_timestamp_local,
-    "x_studio_schema_version": SCHEMA_VERSION,
-
-    # Device metadata
-    "x_studio_device_id": data["DeviceID"],
-    "x_studio_device_ip": data["DeviceIP"],
-    "x_studio_firmware_version": data["Firmware"],
-
-    # Patient & physician
-    "x_studio_patient_id_external": data["PatientID"],
-    "x_studio_physician_id_external": data["PhysicianID"],
-
-    # Raw payload
-    "x_studio_payload_json": json.dumps(data),
-
-    # Status
-    "x_studio_status": "New",
-
-    # Ingestion timestamp (optional but recommended)
-    "x_studio_ingested_at": datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S"),
-}
+    payload = {
+        "x_studio_payg_event_id": data["EventTS"],
+        "x_studio_event_timestamp_local": event_timestamp_local,
+        "x_studio_schema_version": SCHEMA_VERSION,
+    
+        # Device metadata
+        "x_studio_device_id": data["DeviceID"],
+        "x_studio_device_ip": data["DeviceIP"],
+        "x_studio_firmware_version": data["Firmware"],
+    
+        # Patient & physician
+        "x_studio_patient_id_external": data["PatientID"],
+        "x_studio_physician_id_external": data["PhysicianID"],
+    
+        # Raw payload
+        "x_studio_payload_json": json.dumps(data),
+    
+        # Status
+        "x_studio_status": "New",
+    
+        # Ingestion timestamp (optional but recommended)
+        "x_studio_ingested_at": datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S"),
+    }
 
     try:
         odoo_jsonrpc("x_payg_event", "create", [payload])
