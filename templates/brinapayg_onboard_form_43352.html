@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Customer Onboarding</title>
+
+<style>
+
+body{
+    font-family: Arial, sans-serif;
+    background:#f5f6f7;
+    margin:40px;
+}
+
+.container{
+    max-width:900px;
+    margin:auto;
+    background:white;
+    padding:30px;
+    border-radius:10px;
+}
+
+h2{
+    background:#0078d4;
+    color:white;
+    padding:10px;
+}
+
+label{
+    display:block;
+    margin-top:15px;
+    font-weight:bold;
+}
+
+input, select, textarea{
+    width:100%;
+    padding:8px;
+}
+
+button{
+    margin-top:25px;
+    background:#0078d4;
+    color:white;
+    padding:12px 20px;
+    border:none;
+    cursor:pointer;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Customer Credit Application</h1>
+
+<form id="onboardForm">
+
+<h2>Business Information</h2>
+
+<label>Legal Business Name *</label>
+<input name="company_name" required>
+
+<label>Trading Name</label>
+<input name="trading_name">
+
+<label>EIN</label>
+<input name="ein_number">
+
+<label>State Registered</label>
+<input name="registered_state">
+
+<label>Registered Address</label>
+<textarea name="registered_address"></textarea>
+
+<h2>Primary Contact</h2>
+
+<label>Contact Name *</label>
+<input name="primary_contact_name" required>
+
+<label>Title</label>
+<input name="primary_contact_title">
+
+<label>Email *</label>
+<input type="email"
+       name="primary_contact_email"
+       required>
+
+<label>Phone</label>
+<input name="primary_contact_phone">
+
+<h2>Operations</h2>
+
+<label>Years in Operation</label>
+<input type="number"
+       name="years_in_operation">
+
+<label>Number of Staff</label>
+<input type="number"
+       name="number_staff">
+
+<label>Number of Clients</label>
+<input type="number"
+       name="number_clients">
+
+<label>Average Client Visits Per Month</label>
+<input type="number"
+       name="avg_client_visits_month">
+
+<h2>Financial Information</h2>
+
+<label>Annual Turnover</label>
+<input type="number"
+       step="0.01"
+       name="annual_turnover">
+
+<label>Total Assets</label>
+<input type="number"
+       step="0.01"
+       name="total_assets">
+
+<label>Total Liabilities</label>
+<input type="number"
+       step="0.01"
+       name="total_liabilities">
+
+<label>Main Banking Relationship</label>
+<input name="bank_name">
+
+<button type="submit">
+
+Submit Application
+
+</button>
+
+</form>
+
+</div>
+
+<script>
+
+document
+.getElementById("onboardForm")
+.addEventListener("submit",
+async function(e){
+
+    e.preventDefault();
+
+    const formData =
+        new FormData(this);
+
+    const payload =
+        Object.fromEntries(
+            formData.entries()
+        );
+
+    const response =
+        await fetch(
+            "/onboard",
+            {
+                method:"POST",
+                headers:{
+                   "Content-Type":
+                   "application/json"
+                },
+                body:JSON.stringify(payload)
+            }
+        );
+
+    if(response.ok){
+        alert(
+            "Application Submitted"
+        );
+        this.reset();
+    }
+    else{
+        alert(
+            "Submission Failed"
+        );
+    }
+
+});
+
+</script>
+
+</body>
+</html>
