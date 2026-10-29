@@ -129,14 +129,7 @@ async def onboard_application(request: Request):
 
         print("Received onboarding fields:", fields)
 
-        return HTMLResponse("""
-        <html>
-            <body style="font-family: Arial; text-align:center; padding-top:50px;">
-                <h2>Form Successfully Submitted</h2>
-                <p>Thank you. Your onboarding application has been received.</p>
-            </body>
-        </html>
-        """)
+        return PlainTextResponse("Form successfully submitted")
         
     except Exception as e:
         return JSONResponse(
