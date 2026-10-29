@@ -22,11 +22,20 @@ os.makedirs(LOG_DIR, exist_ok=True)
 ONBOARD_DIR = "/var/data/on-board"
 os.makedirs(ONBOARD_DIR, exist_ok=True)
 
-#app information
+#Testing directories are there
 
 @app.get("/")
 def root():
     return {"status": "ok", "message": "BrinaBio PAYG API running"}
+
+@app.get("/onboard")
+async def onboard_test():
+    return {
+        "status": "ok",
+        "message": "Onboarding endpoint ready"
+    }
+
+#App definitions
 
 @app.post("/event")
 async def receive_event(request: Request):
@@ -84,7 +93,7 @@ async def receive_log(request: Request):
             content={"status": "error", "message": str(e)}
         )
 
-@app.post("/on-board")
+@app.post("/onboard")
 async def onboard_application(request: Request):
     try:
         raw = await request.body()
