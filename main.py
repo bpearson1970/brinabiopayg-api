@@ -1,4 +1,5 @@
 # main.py version 1.06
+
 from fastapi import FastAPI, Request, HTTPException
 from fastapi.responses import JSONResponse
 import os
@@ -19,7 +20,7 @@ os.makedirs(EVENT_DIR, exist_ok=True)
 LOG_DIR = "/var/data/log_deposit"
 os.makedirs(LOG_DIR, exist_ok=True)
 
-ONBOARD_DIR = "/var/data/on-board"
+ONBOARD_DIR = "/var/data/onboard"
 os.makedirs(ONBOARD_DIR, exist_ok=True)
 
 #Testing directories are there
@@ -97,6 +98,9 @@ async def receive_log(request: Request):
 async def onboard_application(request: Request):
     try:
         raw = await request.body()
+        print("CONTENT TYPE:", request.headers.get("content-type"))
+        print(raw.decode("utf-8"))
+
         xml = raw.decode("utf-8")
 
         root = ET.fromstring(xml)
@@ -127,7 +131,8 @@ async def onboard_application(request: Request):
 
         return {
             "status": "success",
-            "file": filename
+            "file": filename,
+            "fields": fields
         }
 
     except Exception as e:
