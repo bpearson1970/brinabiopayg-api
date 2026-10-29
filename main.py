@@ -1,9 +1,10 @@
-# main.py version 1.05
+# main.py version 1.06
 from fastapi import FastAPI, Request, HTTPException
 from fastapi.responses import JSONResponse
 import os
 import json
 import random
+import xml.etree.ElementTree as ET
 from datetime import datetime
 
 # Load API key from environment
@@ -17,6 +18,11 @@ os.makedirs(EVENT_DIR, exist_ok=True)
 
 LOG_DIR = "/var/data/log_deposit"
 os.makedirs(LOG_DIR, exist_ok=True)
+
+ONBOARD_DIR = "/var/data/on-board"
+os.makedirs(ONBOARD_DIR, exist_ok=True)
+
+#app information
 
 @app.get("/")
 def root():
@@ -77,3 +83,21 @@ async def receive_log(request: Request):
             status_code=400,
             content={"status": "error", "message": str(e)}
         )
+
+@app.post("/on-board")
+async def onboard_application(request: Request):
+    raw = await request.body()
+    xml = raw.decode("utf-8")
+
+    # Parse XFDF
+    root = ET.fromstring(xml)
+    fields = {}
+
+    for field in root.findall(".//{http://ns.adobe.com/xfdf/}field"):
+        name = field.attrib.get("name")
+        value = field.find("{http://ns.adobe.com/xfdf/}value")
+        fields[name] = value.text if value is not None else None
+
+    print("Received onboarding fields:", fields)
+
+    return {"status": "ok", "received": fields}
