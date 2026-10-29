@@ -86,18 +86,46 @@ async def receive_log(request: Request):
 
 @app.post("/on-board")
 async def onboard_application(request: Request):
-    raw = await request.body()
-    xml = raw.decode("utf-8")
+    try:
+        raw = await request.body()
+        xml = raw.decode("utf-8")
 
-    # Parse XFDF
-    root = ET.fromstring(xml)
-    fields = {}
+        root = ET.fromstring(xml)
 
-    for field in root.findall(".//{http://ns.adobe.com/xfdf/}field"):
-        name = field.attrib.get("name")
-        value = field.find("{http://ns.adobe.com/xfdf/}value")
-        fields[name] = value.text if value is not None else None
+        fields = {}
 
-    print("Received onboarding fields:", fields)
+        for field in root.findall(".//{http://ns.adobe.com/xfdf/}field"):
+            name = field.attrib.get("name")
 
-    return {"status": "ok", "received": fields}
+            value = field.find(
+                "{http://ns.adobe.com/xfdf/}value"
+            )
+
+            fields[name] = (
+                value.text if value is not None else None
+            )
+
+        timestamp = datetime.utcnow().strftime("%Y%m%dT%H%M%S")
+        rand = random.randint(10000, 99999)
+
+        filename = f"onboard_{timestamp}_{rand}.json"
+        filepath = os.path.join(ONBOARD_DIR, filename)
+
+        with open(filepath, "w") as f:
+            json.dump(fields, f, indent=2)
+
+        print("Received onboarding fields:", fields)
+
+        return {
+            "status": "success",
+            "file": filename
+        }
+
+    except Exception as e:
+        return JSONResponse(
+            status_code=400,
+            content={
+                "status": "error",
+                "message": str(e)
+            }
+        )
