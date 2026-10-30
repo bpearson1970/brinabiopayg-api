@@ -42,7 +42,12 @@ async def onboard_form(
         )
 
     print(type(template_name))
-    print(template_name)
+    print("Template selected: ",template_name)
+    print(
+        os.path.exists(
+            f"templates/{template_name}"
+        )
+    )
     
     return templates.TemplateResponse(
         template_name,
