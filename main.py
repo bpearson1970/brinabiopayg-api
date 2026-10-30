@@ -13,6 +13,13 @@ API_KEY = os.getenv("BRINABIOPAYG_API_KEY")
 
 app = FastAPI()
 
+# Load "static" directory
+app.mount(
+    "/static",
+    StaticFiles(directory="static"),
+    name="static"
+)
+
 # Define the Endpoints
 EVENT_DIR = "/var/data/event_deposit"
 os.makedirs(EVENT_DIR, exist_ok=True)
@@ -23,7 +30,7 @@ os.makedirs(LOG_DIR, exist_ok=True)
 ONBOARD_DIR = "/var/data/onboard"
 os.makedirs(ONBOARD_DIR, exist_ok=True)
 
-#Testing directories are there
+# Testing directories exist
 
 @app.get("/")
 def root():
