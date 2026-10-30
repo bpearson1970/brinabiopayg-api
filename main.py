@@ -48,6 +48,7 @@ async def onboard_form(
             f"templates/{template_name}"
         )
     )
+    print(type(request))    
     
     return templates.TemplateResponse(
         template_name,
