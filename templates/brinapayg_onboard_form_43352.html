@@ -66,6 +66,17 @@ body{
     grid-template-columns: 3fr 1fr;
     gap: 15px;
 }
+
+.contact-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+.contact-column {
+    display: flex;
+    flex-direction: column;
+}
     
 h2 {
     background:#E35CA3;
@@ -73,6 +84,14 @@ h2 {
     padding:10px;
 }
 
+h3{
+    color:#143358;
+    margin-top:0;
+    margin-bottom:15px;
+    border-bottom:1px solid #cccccc;
+    padding-bottom:5px;
+}
+    
 label{
     display:block;
     margin-top:15px;
@@ -81,6 +100,7 @@ label{
 textarea{
     min-height:80px;
     resize:vertical;
+    line-height:1.2;
 }
     
 input, select, textarea{
@@ -196,19 +216,54 @@ button{
 
 <h2>Contact Information</h2>
 
-<label>Contact Name *</label>
-<input name="primary_contact_name" required>
+<div class="contact-row">
 
-<label>Title</label>
-<input name="primary_contact_title">
+    <div class="contact-column">
 
-<label>Email *</label>
-<input type="email"
-       name="primary_contact_email"
-       required>
+        <h3>Primary Contact</h3>
 
-<label>Phone</label>
-<input name="primary_contact_phone">
+        <label>Contact Name *</label>
+        <input name="primary_contact_name" required>
+
+        <label>Title *</label>
+        <input name="primary_contact_title" required>
+
+        <label>Email *</label>
+        <input
+            type="email"
+            name="primary_contact_email"
+            required>
+
+        <label>Phone *</label>
+        <input
+            type="tel"
+            name="primary_contact_phone"
+            required>
+
+    </div>
+
+    <div class="contact-column">
+
+        <h3>Secondary Contact</h3>
+
+        <label>Contact Name</label>
+        <input name="secondary_contact_name">
+
+        <label>Title</label>
+        <input name="secondary_contact_title">
+
+        <label>Email</label>
+        <input
+            type="email"
+            name="secondary_contact_email">
+
+        <label>Phone</label>
+        <input
+            type="tel"
+            name="secondary_contact_phone">
+
+    </div>
+</div>
 
 <h2>Operations</h2>
 
