@@ -12,6 +12,10 @@ body{
     margin:40px;
 }
 
+.bold-input {
+    font-weight: bold;
+    text-transform: uppercase;
+}
 .container{
     max-width:900px;
     margin:auto;
@@ -68,11 +72,16 @@ label{
     margin-top:15px;
     font-weight:bold;
 }
-
+textarea{
+    min-height:100px;
+    resize:vertical;
+}
+    
 input, select, textarea{
     width:100%;
     padding:8px;
     box-sizing:border-box;
+    font-family: Arial, sans-serif;
     font-size:16px;
     color: #02128C;
 }
@@ -155,7 +164,7 @@ button{
 <label>State Registered</label>
 <select
     id="registered_state"
-    name="registered_state"
+    name="x_state"
     required>
 
     <option value="">
