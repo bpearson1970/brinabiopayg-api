@@ -302,22 +302,14 @@ button{
 <div class="four_column-row">
 
     <div class="four_column-group">
-        <label for="years_in_operation">
+        <label for="business_years">
             Years in Operation
         </label>
 
         <select
-            id="years_in_operation"
-            name="x_years_in_operation"
+            id="business_years"
+            name="x_business_years"
             required>
-
-            <option value="">-- Select --</option>
-            <option value="<1">Less than 1 year</option>
-            <option value="1-2">1 - 2 years</option>
-            <option value="3-5">3 - 5 years</option>
-            <option value="6-10">6 - 10 years</option>
-            <option value=">10">More than 10 years</option>
-
         </select>
     </div>
 
@@ -433,10 +425,43 @@ button{
     
 </div>
     
+<div class="four_column-row">
 
-<label>Main Banking Relationship</label>
-<input name="bank_name">
+    <div class="four_column-group">
+        <label for="bank_name">
+            Main Banking Relationship
+        </label>
+        <input
+            type="text"
+            id="bank_name"
+            name="bank_name"
+            required>
+    </div>
+    
+    <div class="four_column-group">
+        <label for="bank_years">
+            Relationship Yearsn
+        </label>
+        <select
+            id="bank_years"
+            name="x_bank_years"
+            required>
+        </select>
+    </div>
 
+    <div class="four_column-group">
+        <label for="approved_credit">
+            Approved Credit Facilities
+        </label>
+        <select
+            id="approved_credit"
+            name="x_approved_credit"
+            required>
+        </select>
+    </div>
+    
+</div>
+    
 <button type="submit">
 
 Submit Application
@@ -527,6 +552,85 @@ async function loadFinancialRanges()
         });
     });
 }
+
+async function loadFinancialRanges1()
+{
+    const response =
+        await fetch(
+            "/static/reference/financial_ranges1.json"
+        );
+
+    const ranges =
+        await response.json();
+
+    const dropdowns =
+    [
+        "approved_credit"
+    ];
+
+    dropdowns.forEach(id =>
+    {
+        const select =
+            document.getElementById(id);
+
+        select.innerHTML =
+            '<option value="">-- Select Range --</option>';
+
+        ranges.forEach(range =>
+        {
+            const option =
+                document.createElement("option");
+
+            option.value =
+                range.code;
+
+            option.textContent =
+                range.name;
+
+            select.appendChild(option);
+        });
+    });
+}
+    
+async function loadYearRanges()
+{
+    const response =
+        await fetch(
+            "/static/reference/year_ranges.json"
+        );
+
+    const ranges =
+        await response.json();
+
+    const dropdowns =
+    [
+        "business_years",
+        "bank_years"
+    ];
+
+    dropdowns.forEach(id =>
+    {
+        const select =
+            document.getElementById(id);
+
+        select.innerHTML =
+            '<option value="">-- Select Range --</option>';
+
+        ranges.forEach(range =>
+        {
+            const option =
+                document.createElement("option");
+
+            option.value =
+                range.code;
+
+            option.textContent =
+                range.name;
+
+            select.appendChild(option);
+        });
+    });
+}
     
 async function loadLegalForms()
 {
@@ -563,6 +667,8 @@ async function loadLegalForms()
 loadStates();
 loadLegalForms();
 loadFinancialRanges();
+loadFinancialRanges1();
+loadYearRanges();
     
 function validateEIN(field)
 {
