@@ -41,7 +41,7 @@ body{
 }
     
 .title h1 {
-    color: #143358;
+    color: #0000FF;
     font-size: 40px;
     margin: 0;
 }
@@ -113,8 +113,17 @@ button{
     onblur="validateEIN(this)">
    
 <label>State Registered</label>
-<input name="registered_state">
+<select
+    id="registered_state"
+    name="registered_state"
+    required>
 
+    <option value="">
+        Loading states...
+    </option>
+
+</select>
+    
 <label>Registered Address</label>
 <textarea name="registered_address"></textarea>
 
@@ -184,6 +193,45 @@ Submit Application
 
 <script>
 
+async function loadStates()
+{
+    const response =
+        await fetch(
+            "/static/reference/us_states.json"
+        );
+
+    const states =
+        await response.json();
+
+    const select =
+        document.getElementById(
+            "registered_state"
+        );
+
+    select.innerHTML =
+        '<option value="">-- Select State --</option>';
+
+    states.forEach(state =>
+    {
+        const option =
+            document.createElement(
+                "option"
+            );
+
+        option.value =
+            state.code;
+
+        option.textContent =
+            state.name;
+
+        select.appendChild(
+            option
+        );
+    });
+}
+
+loadStates();
+    
 function validateEIN(field)
 {
     const pattern = /^\d{2}-\d{7}$/;
