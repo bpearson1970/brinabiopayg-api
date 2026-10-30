@@ -130,16 +130,11 @@ button{
 
     <div class="form-group">
         <label for="legal_form">Legal Form *</label>
-        <select
-            id="legal_form"
-            name="x_legal_form"
-            required>
-            <option value="">-- Select --</option>
-            <option value="Corporation">Corporation</option>
-            <option value="Partnership">Partnership</option>
-            <option value="Sole Proprietor">Sole Proprietor</option>
-            <option value="Other">Other</option>
-        </select>
+            <select
+                id="legal_form"
+                name="x_legal_form"
+                required>
+            </select>
     </div>
 
     <div class="form-group">
@@ -273,7 +268,40 @@ async function loadStates()
     });
 }
 
+async function loadLegalForms()
+{
+    const response =
+        await fetch(
+            "/static/reference/legal_forms.json"
+        );
+
+    const forms =
+        await response.json();
+
+    const select =
+        document.getElementById(
+            "legal_form"
+        );
+
+    select.innerHTML =
+        '<option value="">-- Select Legal Form --</option>';
+
+    forms.forEach(form =>
+    {
+        const option =
+            document.createElement("option");
+
+        option.value =
+            form.code;
+
+        option.textContent =
+            form.name;
+
+        select.appendChild(option);
+    });
+}
 loadStates();
+loadLegalForms();
     
 function validateEIN(field)
 {
