@@ -1,0 +1,22 @@
+[
+  {
+    "code": "LT1",
+    "name": "Less than 1 year"
+  },
+  {
+    "code": "1-2",
+    "name": "1 - 2 years"
+  },
+  {
+    "code": "3-5",
+    "name": "3 - 5 years"
+  },
+  {
+    "code": "6-10",
+    "name": "6 - 10 years"
+  },
+  {
+    "code": "GT10",
+    "name": "More than 10 years"
+  }
+]
