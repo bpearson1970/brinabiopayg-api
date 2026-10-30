@@ -84,7 +84,19 @@ body{
     border-radius: 8px;
     margin-bottom: 15px;
 }
-    
+
+.operations-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.operations-group {
+    display: flex;
+    flex-direction: column;
+}
+
 h2 {
     background:#E35CA3;
     color:white;
@@ -279,21 +291,89 @@ button{
 
 <h2>Operations</h2>
 
-<label>Years in Operation</label>
-<input type="number"
-       name="years_in_operation">
+<div class="operations-row">
 
-<label>Number of Staff</label>
-<input type="number"
-       name="number_staff">
+    <div class="operations-group">
+        <label for="years_in_operation">
+            Years in Operation
+        </label>
 
-<label>Number of Clients</label>
-<input type="number"
-       name="number_clients">
+        <select
+            id="years_in_operation"
+            name="years_in_operation"
+            required>
 
-<label>Average Client Visits Per Month</label>
-<input type="number"
-       name="avg_client_visits_month">
+            <option value="">-- Select --</option>
+            <option value="<1">Less than 1 year</option>
+            <option value="1-2">1 - 2 years</option>
+            <option value="3-5">3 - 5 years</option>
+            <option value="6-10">6 - 10 years</option>
+            <option value=">10">More than 10 years</option>
+
+        </select>
+    </div>
+
+    <div class="operations-group">
+        <label for="number_staff">
+            Number of Staff
+        </label>
+
+        <select
+            id="number_staff"
+            name="number_staff"
+            required>
+
+            <option value="">-- Select --</option>
+            <option value="<5">Less than 5 staff</option>
+            <option value="5-10">5 - 10 staff</option>
+            <option value="11-25">11 - 25 staff</option>
+            <option value="26-50">26 - 50 staff</option>
+            <option value=">50">More than 50 staff</option>
+
+        </select>
+    </div>
+
+    <div class="operations-group">
+        <label for="active_patients">
+            Number of Active Patients
+        </label>
+
+        <select
+            id="active_patients"
+            name="active_patients"
+            required>
+
+            <option value="">-- Select --</option>
+            <option value="<20">Less than 20 patients</option>
+            <option value="21-50">21 - 50 patients</option>
+            <option value="51-200">51 - 200 patients</option>
+            <option value="201-500">201 - 500 patients</option>
+            <option value=">500">More than 500 patients</option>
+
+        </select>
+    </div>
+
+    <div class="operations-group">
+        <label for="patient_interactions">
+            Average Patient Interactions Per Month
+        </label>
+
+        <select
+            id="patient_interactions"
+            name="patient_interactions"
+            required>
+
+            <option value="">-- Select --</option>
+            <option value="<50">Less than 50 interactions</option>
+            <option value="51-100">51 - 100 interactions</option>
+            <option value="101-250">101 - 250 interactions</option>
+            <option value="251-500">251 - 500 interactions</option>
+            <option value=">500">More than 500 interactions</option>
+
+        </select>
+    </div>
+
+</div>
 
 <h2>Financial Information</h2>
 
