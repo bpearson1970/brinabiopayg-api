@@ -30,6 +30,10 @@ body{
     margin-bottom: 30px;
 }
 
+.small-label {
+    font-size: 90%;
+}
+    
 .logo {
     flex: 0 0 220px;   /* fixed width for logo area */
 }
@@ -89,9 +93,13 @@ body{
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 15px;
-    margin-top: 2px;
+    margin-top: 10px;
 }
 
+.operations-row label {
+    margin-top: 0;
+}
+    
 .operations-group {
     display: flex;
     flex-direction: column;
@@ -354,7 +362,7 @@ button{
     </div>
 
     <div class="operations-group">
-        <label for="patient_interactions">
+        <label class="small-label" for="patient_interactions">
             Monthly Patient Interactions
         </label>
 
