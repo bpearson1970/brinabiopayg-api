@@ -1,0 +1,42 @@
+[
+  {
+    "code": "CORP",
+    "name": "Corporation (C-Corp)"
+  },
+  {
+    "code": "SCORP",
+    "name": "S-Corporation"
+  },
+  {
+    "code": "LLC",
+    "name": "Limited Liability Company (LLC)"
+  },
+  {
+    "code": "PART",
+    "name": "Partnership"
+  },
+  {
+    "code": "LP",
+    "name": "Limited Partnership (LP)"
+  },
+  {
+    "code": "LLP",
+    "name": "Limited Liability Partnership (LLP)"
+  },
+  {
+    "code": "SOLE",
+    "name": "Sole Proprietorship"
+  },
+  {
+    "code": "NONPROFIT",
+    "name": "Non-Profit Organization"
+  },
+  {
+    "code": "TRUST",
+    "name": "Trust"
+  },
+  {
+    "code": "OTHER",
+    "name": "Other"
+  }
+]
