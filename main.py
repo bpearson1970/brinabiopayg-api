@@ -1,4 +1,4 @@
-# main.py version 1.06
+# main.py version 1.07
 
 from fastapi import FastAPI, Request, HTTPException
 from fastapi.responses import JSONResponse
@@ -8,6 +8,9 @@ import random
 import xml.etree.ElementTree as ET
 from datetime import datetime
 from fastapi.staticfiles import StaticFiles
+from fastapi.templating import Jinja2Templates
+
+templates = Jinja2Templates(directory="templates")
 
 # Load API key from environment
 API_KEY = os.getenv("BRINABIOPAYG_API_KEY")
