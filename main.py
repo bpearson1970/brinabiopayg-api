@@ -51,8 +51,11 @@ async def onboard_form(
     print(type(request))    
     
     return templates.TemplateResponse(
-        template_name,
-        {"request": request}
+        request=request,
+        name=template_name,
+        context={
+            "client_code": client_code
+        }
     )
 
 # Define the Endpoints
