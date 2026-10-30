@@ -7,6 +7,7 @@ import json
 import random
 import xml.etree.ElementTree as ET
 from datetime import datetime
+from fastapi.staticfiles import StaticFiles
 
 # Load API key from environment
 API_KEY = os.getenv("BRINABIOPAYG_API_KEY")
