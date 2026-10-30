@@ -103,13 +103,26 @@ button{
 <input
     type="text"
     id="ein_number"
-    name="x_ein_number"
+    name="x_ein"
     required
     maxlength="10"
     pattern="[0-9]{2}-[0-9]{7}"
     placeholder="12-3456789"
     title="Format must be 12-3456789">
 
+<script>
+function validateEIN(field)
+{
+    const pattern = /^\d{2}-\d{7}$/;
+
+    if (!pattern.test(field.value))
+    {
+        alert("EIN must be in format 12-3456789");
+        field.focus();
+    }
+}
+</script>
+    
 <label>State Registered</label>
 <input name="registered_state">
 
