@@ -440,7 +440,7 @@ button{
     
     <div class="four_column-group">
         <label for="bank_years">
-            Relationship Yearsn
+            Relationship Years
         </label>
         <select
             id="bank_years"
@@ -459,7 +459,18 @@ button{
             required>
         </select>
     </div>
-    
+
+    <div class="four_column-group">
+        <label for="liability_insurance">
+            General Liability Insurance
+        </label>
+        <select
+            id="liability_insurance"
+            name="x_liability_insurance"
+            required>
+        </select>
+    </div>
+
 </div>
     
 <button type="submit">
@@ -527,6 +538,45 @@ async function loadFinancialRanges()
         "total_assets",
         "total_liabilities",
         "net_assets"
+    ];
+
+    dropdowns.forEach(id =>
+    {
+        const select =
+            document.getElementById(id);
+
+        select.innerHTML =
+            '<option value="">-- Select Range --</option>';
+
+        ranges.forEach(range =>
+        {
+            const option =
+                document.createElement("option");
+
+            option.value =
+                range.code;
+
+            option.textContent =
+                range.name;
+
+            select.appendChild(option);
+        });
+    });
+}
+
+async function loadLiabilityInsurance()
+{
+    const response =
+        await fetch(
+            "/static/reference/liability_insurance.json"
+        );
+
+    const ranges =
+        await response.json();
+
+    const dropdowns =
+    [
+        "liability_insurance"
     ];
 
     dropdowns.forEach(id =>
@@ -669,6 +719,7 @@ loadLegalForms();
 loadFinancialRanges();
 loadFinancialRanges1();
 loadYearRanges();
+loadLiabilityInsurance();
     
 function validateEIN(field)
 {
