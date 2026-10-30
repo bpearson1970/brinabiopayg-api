@@ -385,20 +385,54 @@ button{
 
 <h2>Financial Information</h2>
 
-<label>Annual Turnover</label>
-<input type="number"
-       step="0.01"
-       name="annual_turnover">
+<div class="four_column-row">
 
-<label>Total Assets</label>
-<input type="number"
-       step="0.01"
-       name="total_assets">
+    <div class="four_column-group">
+        <label for="annual_turnover">
+            Annual Turnover
+        </label>
+        <select
+            id="x_annual_turnover"
+            name="annual_turnover"
+            required>
+        </select>
+    </div>
 
-<label>Total Liabilities</label>
-<input type="number"
-       step="0.01"
-       name="total_liabilities">
+    <div class="four_column-group">
+        <label for="total_assets">
+            Total Assets
+        </label>
+        <select
+            id="x_total_assets"
+            name="total_assets"
+            required>
+        </select>
+    </div>
+
+    <div class="four_column-group">
+        <label for="total_liabilities">
+            Total Liabilities
+        </label>
+        <select
+            id="x_total_liabilities"
+            name="total_liabilities"
+            required>
+        </select>
+    </div>
+
+    <div class="four_column-group">
+        <label for="net_assets">
+            Net Assets
+        </label>
+        <select
+            id="x_net_assets"
+            name="net_assets"
+            required>
+        </select>
+    </div>
+    
+</div>
+    
 
 <label>Main Banking Relationship</label>
 <input name="bank_name">
@@ -452,6 +486,48 @@ async function loadStates()
     });
 }
 
+async function loadFinancialRanges()
+{
+    const response =
+        await fetch(
+            "/static/reference/financial_ranges.json"
+        );
+
+    const ranges =
+        await response.json();
+
+    const dropdowns =
+    [
+        "annual_turnover",
+        "total_assets",
+        "total_liabilities",
+        "net_assets"
+    ];
+
+    dropdowns.forEach(id =>
+    {
+        const select =
+            document.getElementById(id);
+
+        select.innerHTML =
+            '<option value="">-- Select Range --</option>';
+
+        ranges.forEach(range =>
+        {
+            const option =
+                document.createElement("option");
+
+            option.value =
+                range.code;
+
+            option.textContent =
+                range.name;
+
+            select.appendChild(option);
+        });
+    });
+}
+    
 async function loadLegalForms()
 {
     const response =
@@ -486,6 +562,7 @@ async function loadLegalForms()
 }
 loadStates();
 loadLegalForms();
+loadFinancialRanges();
     
 function validateEIN(field)
 {
