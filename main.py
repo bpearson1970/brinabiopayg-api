@@ -21,6 +21,28 @@ app.mount(
     name="static"
 )
 
+# Load clients for on-boarding from client_map.json
+@app.get("/onboard/{client_code}")
+async def onboard_form(
+    request: Request,
+    client_code: str
+):
+    with open("client_map.json") as f:
+        client_map = json.load(f)
+
+    template_name = client_map.get(client_code)
+
+    if not template_name:
+        raise HTTPException(
+            status_code=404,
+            detail="Unknown onboarding code"
+        )
+
+    return templates.TemplateResponse(
+        template_name,
+        {"request": request}
+    )
+
 # Define the Endpoints
 EVENT_DIR = "/var/data/event_deposit"
 os.makedirs(EVENT_DIR, exist_ok=True)
