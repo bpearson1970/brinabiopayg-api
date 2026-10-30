@@ -41,7 +41,7 @@ body{
 }
     
 .title h1 {
-    color: #2C4769;
+    color: #143358;
     font-size: 40px;
     margin: 0;
 }
@@ -94,13 +94,21 @@ button{
 <h2>Business Information</h2>
 
 <label>Legal Business Name *</label>
-<input name="company_name" required>
+<input name="x_company_name" required>
 
 <label>Trading Name</label>
-<input name="trading_name">
+<input name="x_trading_name">
 
-<label>EIN</label>
-<input name="ein_number">
+<label for="ein_number">EIN *</label>
+<input
+    type="text"
+    id="ein_number"
+    name="x_ein_number"
+    required
+    maxlength="10"
+    pattern="[0-9]{2}-[0-9]{7}"
+    placeholder="12-3456789"
+    title="Format must be 12-3456789">
 
 <label>State Registered</label>
 <input name="registered_state">
