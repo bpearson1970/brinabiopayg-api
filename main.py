@@ -41,6 +41,9 @@ async def onboard_form(
             detail="Unknown onboarding code"
         )
 
+    print(type(template_name))
+    print(template_name)
+    
     return templates.TemplateResponse(
         template_name,
         {"request": request}
