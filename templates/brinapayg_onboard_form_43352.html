@@ -190,9 +190,15 @@ function validateEIN(field)
 
     if (!pattern.test(field.value))
     {
-        alert("EIN must be in format 12-3456789");
-        field.focus();
+        field.setCustomValidity(
+            "Please enter a valid EIN in the format 12-3456789"
+        );
     }
+    else
+    {
+        field.setCustomValidity("");
+    }
+    field.reportValidity();
 }
 
 function formatEIN(field)
