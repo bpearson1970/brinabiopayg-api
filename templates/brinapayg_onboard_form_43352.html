@@ -89,7 +89,7 @@ body{
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 15px;
-    margin-top: 10px;
+    margin-top: 2px;
 }
 
 .operations-group {
@@ -217,7 +217,7 @@ button{
         </label>
 
         <textarea
-            name="registered_address"
+            name="x_registered_address"
             rows="3"
             required></textarea>
     </div>
@@ -245,22 +245,22 @@ button{
             <h3>Primary Contact</h3>
         </div>
         
-        <label>Contact Name *</label>
-        <input name="primary_contact_name" required>
+        <label>Full Name *</label>
+        <input name="x_primary_contact_name" required>
 
         <label>Title *</label>
-        <input name="primary_contact_title" required>
+        <input name="x_primary_contact_title" required>
 
         <label>Email *</label>
         <input
             type="email"
-            name="primary_contact_email"
+            name="_primary_contact_email"
             required>
 
         <label>Phone *</label>
         <input
             type="tel"
-            name="primary_contact_phone"
+            name="_primary_contact_phone"
             required>
 
     </div>
@@ -270,21 +270,21 @@ button{
             <h3>Secondary Contact</h3>
         </div>
             
-        <label>Contact Name</label>
-        <input name="secondary_contact_name">
+        <label>Full Name</label>
+        <input name="x_secondary_contact_name">
 
         <label>Title</label>
-        <input name="secondary_contact_title">
+        <input name="x_secondary_contact_title">
 
         <label>Email</label>
         <input
             type="email"
-            name="secondary_contact_email">
+            name="x_secondary_contact_email">
 
         <label>Phone</label>
         <input
             type="tel"
-            name="secondary_contact_phone">
+            name="x_secondary_contact_phone">
 
     </div>
 </div>
@@ -300,7 +300,7 @@ button{
 
         <select
             id="years_in_operation"
-            name="years_in_operation"
+            name="x_years_in_operation"
             required>
 
             <option value="">-- Select --</option>
@@ -315,12 +315,12 @@ button{
 
     <div class="operations-group">
         <label for="number_staff">
-            Number of Staff
+            Staff
         </label>
 
         <select
             id="number_staff"
-            name="number_staff"
+            name="x_staff"
             required>
 
             <option value="">-- Select --</option>
@@ -335,12 +335,12 @@ button{
 
     <div class="operations-group">
         <label for="active_patients">
-            Number of Active Patients
+            Active Patients
         </label>
 
         <select
             id="active_patients"
-            name="active_patients"
+            name="x_active_patients"
             required>
 
             <option value="">-- Select --</option>
@@ -355,12 +355,12 @@ button{
 
     <div class="operations-group">
         <label for="patient_interactions">
-            Average Patient Interactions Per Month
+            Monthly Patient Interactions
         </label>
 
         <select
             id="patient_interactions"
-            name="patient_interactions"
+            name="x_patient_interactions"
             required>
 
             <option value="">-- Select --</option>
