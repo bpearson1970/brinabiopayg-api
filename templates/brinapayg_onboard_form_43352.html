@@ -60,6 +60,12 @@ body{
     display: flex;
     flex-direction: column;
 }
+
+.form-row-75-25 {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    gap: 15px;
+}
     
 h2 {
     background:#E35CA3;
@@ -73,7 +79,7 @@ label{
     font-weight:bold;
 }
 textarea{
-    min-height:100px;
+    min-height:80px;
     resize:vertical;
 }
     
@@ -149,34 +155,47 @@ button{
     </div>
 
     <div class="form-group">
-        <label for="commenced_business">
-            Date Commenced Business *
+        <label for="entity_formed">
+            Date Entity Formed *
         </label>
         <input
             type="date"
-            id="commenced_business"
-            name="x_commenced_business"
+            id="entity_formed"
+            name="x_entity_formed"
             required>
     </div>
 
 </div>
-   
-<label>State Registered</label>
-<select
-    id="registered_state"
-    name="x_state"
-    required>
 
-    <option value="">
-        Loading states...
-    </option>
+<div class="form-row-75-25">
 
-</select>
-    
-<label>Registered Address</label>
-<textarea name="registered_address"></textarea>
+    <div class="form-group">
+        <label for="registered_address">
+            Registered Address *
+        </label>
 
-<h2>Primary Contact</h2>
+        <input
+            type="text"
+            id="registered_address"
+            name="registered_address"
+            required>
+    </div>
+
+    <div class="form-group">
+        <label for="registered_state">
+            State Registered *
+        </label>
+
+        <select
+            id="registered_state"
+            name="registered_state"
+            required>
+        </select>
+    </div>
+
+</div>
+
+<h2>Contact Information</h2>
 
 <label>Contact Name *</label>
 <input name="primary_contact_name" required>
