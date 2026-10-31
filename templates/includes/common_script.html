@@ -10,31 +10,37 @@ async function loadStates()
     const states =
         await response.json();
 
-    const select =
-        document.getElementById(
-            "registered_state"
-        );
+    const dropdowns =
+    [
+        "registered_state"
+    ];
 
-    select.innerHTML =
-        '<option value="">-- Select State --</option>';
-
-    states.forEach(state =>
+    dropdowns.forEach(id =>
     {
-        const option =
-            document.createElement(
-                "option"
+        const select =
+            document.getElementById(id);
+
+        select.innerHTML =
+            '<option value="">-- Select State --</option>';
+    
+        states.forEach(state =>
+        {
+            const option =
+                document.createElement(
+                    "option"
+                );
+    
+            option.value =
+                state.code;
+    
+            option.textContent =
+                state.name;
+    
+            select.appendChild(
+                option
             );
-
-        option.value =
-            state.code;
-
-        option.textContent =
-            state.name;
-
-        select.appendChild(
-            option
-        );
-    });
+        });
+    }
 }
 
 async function loadFinancialRanges()
