@@ -149,6 +149,18 @@ button{
     cursor:pointer;
 }
 
-</style>
+input:required:invalid,
+select:required:invalid,
+textarea:required:invalid {
+    border: 2px solid red;
+}
 
+input:required:valid,
+select:required:valid,
+textarea:required:valid {
+    border: 2px solid green;
+}
+    
+</style>
+    
 </head>
