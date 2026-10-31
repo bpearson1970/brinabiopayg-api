@@ -226,6 +226,13 @@ function formatPhone(field)
 
 function validatePhone(field)
 {
+    // Allow blank values
+    if (field.value.trim() === "")
+    {
+        field.setCustomValidity("");
+        return;
+    }
+    
     const pattern =
         /^\(\d{3}\)\s\d{3}-\d{4}$/;
 
