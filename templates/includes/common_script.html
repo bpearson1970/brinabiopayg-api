@@ -3,12 +3,9 @@
 async function loadStates()
 {
     const response =
-        await fetch(
-            "/static/reference/us_states.json"
-        );
+        await fetch("/static/reference/us_states.json");
 
-    const states =
-        await response.json();
+    const states = await response.json();
 
     const dropdowns =
     [
@@ -17,30 +14,15 @@ async function loadStates()
 
     dropdowns.forEach(id =>
     {
-        const select =
-            document.getElementById(id);
+        const select = document.getElementById(id);
 
-        if (!select)
-        {
-            return;
-        }
-        
-        select.innerHTML =
-            '<option value="">-- Select State --</option>';
-    
+        if (!select) { return; }
+        select.innerHTML = '<option value="">-- Select State --</option>';
         states.forEach(state =>
         {
-            const option =
-                document.createElement(
-                    "option"
-                );
-    
-            option.value =
-                state.code;
-    
-            option.textContent =
-                state.name;
-    
+            const option = document.createElement("option");
+            option.value = state.code;
+            option.textContent = state.name;
             select.appendChild(option)
         });
     });
@@ -253,6 +235,7 @@ async function loadLegalForms()
         select.appendChild(option);
     });
 }
+    
 loadStates();
 loadLegalForms();
 loadFinancialRanges();
