@@ -68,7 +68,12 @@ async function loadFinancialRanges()
     {
         const select =
             document.getElementById(id);
-
+        
+        if (!select)
+        {
+            return;
+        }
+        
         select.innerHTML =
             '<option value="">-- Select Range --</option>';
 
@@ -108,6 +113,11 @@ async function loadLiabilityInsurance()
         const select =
             document.getElementById(id);
 
+        if (!select)
+        {
+            return;
+        }
+        
         select.innerHTML =
             '<option value="">-- Select Range --</option>';
 
@@ -147,6 +157,7 @@ async function loadFinancialRanges1()
         const select =
             document.getElementById(id);
 
+        
         select.innerHTML =
             '<option value="">-- Select Range --</option>';
 
@@ -187,6 +198,10 @@ async function loadYearRanges()
         const select =
             document.getElementById(id);
 
+        if (!select)
+        {
+            return;
+        }        
         select.innerHTML =
             '<option value="">-- Select Range --</option>';
 
