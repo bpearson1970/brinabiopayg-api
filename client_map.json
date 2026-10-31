@@ -1,4 +1,16 @@
 {
-  "MediWeightLoss": "brinapayg_onboard_form_43352.html",
-  "Standard": "brinapayg_onboard_form_00042.html"
+  "MediWeightLoss": {
+    "client_id": "43352",
+    "company_name": "Medi-WeightLoss",
+    "logo": "MediWeightLoss.png",
+    "template": "brinapayg_onboard_form_43352.html"
+  }
+
+  "Standard": {
+    "client_id": "00042",
+    "company_name": "None",
+    "logo": "None",
+    "template": "brinapayg_onboard_form_00042.html"
+  }
+
 }
