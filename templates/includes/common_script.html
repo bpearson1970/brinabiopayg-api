@@ -20,6 +20,11 @@ async function loadStates()
         const select =
             document.getElementById(id);
 
+        if (!select)
+        {
+            return;
+        }
+        
         select.innerHTML =
             '<option value="">-- Select State --</option>';
     
@@ -36,8 +41,7 @@ async function loadStates()
             option.textContent =
                 state.name;
     
-            select.appendChild(
-                option
+            select.appendChild(option)
         });
     });
 }
