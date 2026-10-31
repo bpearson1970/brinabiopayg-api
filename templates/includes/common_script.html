@@ -192,6 +192,56 @@ function formatEIN(field)
 
     field.value = value;
 }
+
+function formatPhone(field)
+{
+    let value = field.value.replace(/\D/g, '');
+
+    if (value.length > 10)
+    {
+        value = value.substring(0,10);
+    }
+
+    if (value.length > 6)
+    {
+        value =
+            "(" +
+            value.substring(0,3) +
+            ") " +
+            value.substring(3,6) +
+            "-" +
+            value.substring(6);
+    }
+    else if (value.length > 3)
+    {
+        value =
+            "(" +
+            value.substring(0,3) +
+            ") " +
+            value.substring(3);
+    }
+
+    field.value = value;
+}
+
+function validatePhone(field)
+{
+    const pattern =
+        /^\(\d{3}\)\s\d{3}-\d{4}$/;
+
+    if (!pattern.test(field.value))
+    {
+        field.setCustomValidity(
+            "Please enter a phone number in the format (555) 123-4567"
+        );
+    }
+    else
+    {
+        field.setCustomValidity("");
+    }
+
+    field.reportValidity();
+}    
     
 document
 .getElementById("onboardForm")
