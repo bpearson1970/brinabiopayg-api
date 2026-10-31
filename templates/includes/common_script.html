@@ -2,9 +2,7 @@
     
 async function loadStates()
 {
-    const response =
-        await fetch("/static/reference/us_states.json");
-
+    const response = await fetch("/static/reference/us_states.json");
     const states = await response.json();
 
     const dropdowns =
@@ -30,13 +28,8 @@ async function loadStates()
 
 async function loadFinancialRanges()
 {
-    const response =
-        await fetch(
-            "/static/reference/financial_ranges.json"
-        );
-
-    const ranges =
-        await response.json();
+    const response = await fetch("/static/reference/financial_ranges.json");
+    const ranges = await response.json();
 
     const dropdowns =
     [
@@ -48,28 +41,15 @@ async function loadFinancialRanges()
 
     dropdowns.forEach(id =>
     {
-        const select =
-            document.getElementById(id);
+        const select = document.getElementById(id);
         
-        if (!select)
-        {
-            return;
-        }
-        
-        select.innerHTML =
-            '<option value="">-- Select Range --</option>';
-
+        if (!select) { return; }
+        select.innerHTML = '<option value="">-- Select Range --</option>';
         ranges.forEach(range =>
         {
-            const option =
-                document.createElement("option");
-
-            option.value =
-                range.code;
-
-            option.textContent =
-                range.name;
-
+            const option = document.createElement("option");
+            option.value = range.code;
+            option.textContent = range.name;
             select.appendChild(option);
         });
     });
@@ -77,13 +57,8 @@ async function loadFinancialRanges()
 
 async function loadLiabilityInsurance()
 {
-    const response =
-        await fetch(
-            "/static/reference/liability_insurance.json"
-        );
-
-    const ranges =
-        await response.json();
+    const response = await fetch("/static/reference/liability_insurance.json");
+    const ranges = await response.json();
 
     const dropdowns =
     [
@@ -92,28 +67,14 @@ async function loadLiabilityInsurance()
 
     dropdowns.forEach(id =>
     {
-        const select =
-            document.getElementById(id);
-
-        if (!select)
-        {
-            return;
-        }
-        
-        select.innerHTML =
-            '<option value="">-- Select Range --</option>';
-
+        const select = document.getElementById(id);
+        if (!select) { return; }        
+        select.innerHTML = '<option value="">-- Select Range --</option>';
         ranges.forEach(range =>
         {
-            const option =
-                document.createElement("option");
-
-            option.value =
-                range.code;
-
-            option.textContent =
-                range.name;
-
+            const option = document.createElement("option");
+            option.value = range.code;
+            option.textContent = range.name;
             select.appendChild(option);
         });
     });
@@ -121,13 +82,8 @@ async function loadLiabilityInsurance()
 
 async function loadFinancialRanges1()
 {
-    const response =
-        await fetch(
-            "/static/reference/financial_ranges1.json"
-        );
-
-    const ranges =
-        await response.json();
+    const response = await fetch("/static/reference/financial_ranges1.json");
+    const ranges = await response.json();
 
     const dropdowns =
     [
@@ -136,24 +92,14 @@ async function loadFinancialRanges1()
 
     dropdowns.forEach(id =>
     {
-        const select =
-            document.getElementById(id);
-
-        
-        select.innerHTML =
-            '<option value="">-- Select Range --</option>';
-
+        const select = document.getElementById(id);
+        if (!select) { return; }        
+        select.innerHTML = '<option value="">-- Select Range --</option>';
         ranges.forEach(range =>
         {
-            const option =
-                document.createElement("option");
-
-            option.value =
-                range.code;
-
-            option.textContent =
-                range.name;
-
+            const option = document.createElement("option");
+            option.value = range.code;
+            option.textContent = range.name;
             select.appendChild(option);
         });
     });
@@ -161,13 +107,8 @@ async function loadFinancialRanges1()
     
 async function loadYearRanges()
 {
-    const response =
-        await fetch(
-            "/static/reference/year_ranges.json"
-        );
-
-    const ranges =
-        await response.json();
+    const response = await fetch("/static/reference/year_ranges.json");
+    const ranges = await response.json();
 
     const dropdowns =
     [
@@ -177,27 +118,14 @@ async function loadYearRanges()
 
     dropdowns.forEach(id =>
     {
-        const select =
-            document.getElementById(id);
-
-        if (!select)
-        {
-            return;
-        }        
-        select.innerHTML =
-            '<option value="">-- Select Range --</option>';
-
+        const select = document.getElementById(id);
+        if (!select) { return; }        
+        select.innerHTML = '<option value="">-- Select Range --</option>';
         ranges.forEach(range =>
         {
-            const option =
-                document.createElement("option");
-
-            option.value =
-                range.code;
-
-            option.textContent =
-                range.name;
-
+            const option = document.createElement("option");
+            option.value = range.code;
+            option.textContent = range.name;
             select.appendChild(option);
         });
     });
@@ -205,33 +133,18 @@ async function loadYearRanges()
     
 async function loadLegalForms()
 {
-    const response =
-        await fetch(
-            "/static/reference/legal_forms.json"
-        );
+    const response = await fetch("/static/reference/legal_forms.json");
+    const forms = await response.json();
 
-    const forms =
-        await response.json();
-
-    const select =
-        document.getElementById(
-            "legal_form"
-        );
-
-    select.innerHTML =
-        '<option value="">-- Select Legal Form --</option>';
-
+    const select = document.getElementById("legal_form");
+    if (!select) { return; }
+    
+    select.innerHTML = '<option value="">-- Select Legal Form --</option>';
     forms.forEach(form =>
     {
-        const option =
-            document.createElement("option");
-
-        option.value =
-            form.code;
-
-        option.textContent =
-            form.name;
-
+        const option = document.createElement("option");
+        option.value = form.code;
+        option.textContent = form.name;
         select.appendChild(option);
     });
 }
@@ -283,6 +196,7 @@ function formatEIN(field)
 document
 .getElementById("onboardForm")
 .addEventListener("submit",
+
 async function(e){
 
     e.preventDefault();
