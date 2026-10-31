@@ -33,20 +33,31 @@ async def onboard_form(
     with open("client_map.json") as f:
         client_map = json.load(f)
 
-    template_name = client_map.get(client_code)
+    client_info = client_map.get(client_code)
 
-    if not template_name:
+    if not client_info:
         raise HTTPException(
             status_code=404,
             detail="Unknown onboarding code"
         )
 
-    print(type(template_name))
-    print("Template selected: ",template_name)
-    print(
-        os.path.exists(
-            f"templates/{template_name}"
-        )
+    template_name = client_info["template"]
+
+    print("Client Code:", client_code)
+    print("Client ID:", client_info["client_id"])
+    print("Company Name:", client_info["company_name"])
+    print("Logo:", client_info["logo"])
+    print("Template:", template_name)
+
+    return templates.TemplateResponse(
+        request=request,
+        name=template_name,
+        context={
+            "client_code": client_code,
+            "client_id": client_info["client_id"],
+            "company_name": client_info["company_name"],
+            "logo": client_info["logo"]
+        }
     )
     print(type(request))    
     
