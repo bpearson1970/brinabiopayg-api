@@ -22,9 +22,14 @@
         <label>Phone *</label>
         <input
             type="tel"
-            name="_primary_contact_phone"
+            id="primary_contact_phone"
+            name="x_primary_contact_phone"
+            placeholder="(555) 123-4567"
+            maxlength="14"
+            required
+            oninput="formatPhone(this)"
+            onblur="validatePhone(this)"
             required>
-
     </div>
 
     <div class="contact-column">
@@ -46,7 +51,12 @@
         <label>Phone</label>
         <input
             type="tel"
-            name="x_secondary_contact_phone">
-
+            id="secondary_contact_phone"
+            name="x_secondary_contact_phone"
+            placeholder="(555) 123-4567"
+            maxlength="14"
+            required
+            oninput="formatPhone(this)"
+            onblur="validatePhone(this)">
     </div>
 </div>
