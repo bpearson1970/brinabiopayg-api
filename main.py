@@ -48,7 +48,8 @@ async def onboard_form(
     print("Company Name:", client_info["company_name"])
     print("Logo:", client_info["logo"])
     print("Template:", template_name)
-
+    print("Active:", active)
+    
     return templates.TemplateResponse(
         request=request,
         name=template_name,
@@ -56,7 +57,7 @@ async def onboard_form(
             "client_code": client_code,
             "client_id": client_info["client_id"],
             "company_name": client_info["company_name"],
-            "logo": client_info["logo"]
+            "logo": client_info["logo"],
             "active": client_info["active"]
         }
     )
