@@ -84,41 +84,45 @@
 
 <!-- Hidden submission reference -->
 
-<input
-    type="hidden"
+<input type="hidden"
     id="x_submit_reference"
     name="x_submit_reference"
+    value="0">
+
+<input type="hidden"
+    id="ip_address"
+    name="x_ip_address"
+    value="0">
+
+<input type="hidden"
+    id="submitted_timestamp"
+    name="x_submitted_timestamp"
+    value="0">
+
+<input type="hidden"
+    id="form_version"
+    name="x_form_version"
     value="0">
 
 <!-- Buttons -->
 
 <div class="button-row">
-
     <div class="button-center">
-
         <button
             type="button"
             class="submit-button"
             onclick="prepareSubmission()">
-
-            Submit Application
-
+            Submit
         </button>
-
     </div>
 
     <div class="button-right">
-
         <button
             type="button"
             class="reset-button"
             onclick="resetForm()">
-
-            Reset Form
-
+            Reset
         </button>
-
     </div>
-
 </div>
 
