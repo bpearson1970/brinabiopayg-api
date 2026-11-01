@@ -1,0 +1,5 @@
+<div class="footer">
+    Version <span id="version"></span>
+    &nbsp;|&nbsp;
+    Updated <span id="updated"></span>
+</div>
