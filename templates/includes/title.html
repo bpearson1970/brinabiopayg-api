@@ -2,10 +2,14 @@
     <div class="logo">
         <img src="/static/images/BrinaBioPAYG.png" alt="Brina Bio PAYG">
     </div>
-    <div class="title">
-        <h1>Client On-Boarding Submission</h1>
-            <div class="company-name">
-                {{ company_name }}
-            </div>
-    </div>
+        <div class="title">
+            <h1>Client On-Boarding Submission</h1>
+            
+            {% if company_name %}
+                <div class="company-name">
+                    {{ company_name }}
+                </div>
+            {% endif %}
+            
+        </div>
 </div>
