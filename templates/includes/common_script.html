@@ -217,8 +217,21 @@ function updateSubmitter()
         field.value = "";
         field.readOnly = false;
     }
+
+    updateSignature();
 }
 
+function updateSignature()
+{
+    const name =
+        document.getElementById(
+            "submitted_by_name"
+        ).value;
+
+    document.getElementById(
+        "signature_preview"
+    ).textContent = name;
+}    
     
 function validateEIN(field)
 {
