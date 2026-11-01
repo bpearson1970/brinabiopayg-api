@@ -273,6 +273,25 @@ function validatePhone(field)
 
     field.reportValidity();
 }    
+
+function validateEmail(field)
+{
+    const pattern =
+        /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!pattern.test(field.value))
+    {
+        field.setCustomValidity(
+            "Please enter a valid email address"
+        );
+    }
+    else
+    {
+        field.setCustomValidity("");
+    }
+
+    field.reportValidity();
+}
     
 document
 .getElementById("onboardForm")
