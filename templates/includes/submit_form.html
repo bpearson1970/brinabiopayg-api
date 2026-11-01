@@ -13,55 +13,71 @@
 
     </div>
 
-<div class="submitted-by-row">
-
-    <div class="submission-label">
-        Submitted by:
-    </div>
-
-    <label class="radio-label">
-        <input
-            type="radio"
-            name="submitter_type"
-            value="Primary Contact"
-            onchange="updateSubmitter()"
-            required>
-
-        Primary Contact
-    </label>
-
-    <label class="radio-label">
-        <input
-            type="radio"
-            name="submitter_type"
-            value="Secondary Contact"
-            onchange="updateSubmitter()">
-
-        Secondary Contact
-    </label>
-
-    <label class="radio-label">
-        <input
-            type="radio"
-            name="submitter_type"
-            value="Other"
-            onchange="updateSubmitter()">
-
-        Other
-    </label>
-
-</div>
-    <div class="submitted-name-row">
-
-        <label class="submission-label" for="submitted_by_name" >
-            Name of person submitting:
+    <div class="submitted-by-row">
+    
+        <div class="submission-label">
+            Submitted by:
+        </div>
+    
+        <label class="radio-label">
+            <input
+                type="radio"
+                name="submitter_type"
+                value="Primary Contact"
+                onchange="updateSubmitter()"
+                required>
+    
+            Primary Contact
         </label>
     
-        <input
-            type="text"
-            id="submitted_by_name"
-            name="x_submitted_by_name"
-            required>
+        <label class="radio-label">
+            <input
+                type="radio"
+                name="submitter_type"
+                value="Secondary Contact"
+                onchange="updateSubmitter()">
+    
+            Secondary Contact
+        </label>
+    
+        <label class="radio-label">
+            <input
+                type="radio"
+                name="submitter_type"
+                value="Other"
+                onchange="updateSubmitter()">
+    
+            Other
+        </label>
+    
+    </div>
+
+    <div class="signature-row">
+
+        <div class="submitter-block">
+    
+            <label class="submission-label"
+                   for="submitted_by_name">
+                Name of person submitting:
+            </label>
+    
+            <input
+                type="text"
+                id="submitted_by_name"
+                name="submitted_by_name"
+                required
+                oninput="updateSignature()">
+    
+        </div>
+
+        <div class="signature-block">
+    
+            <div id="signature_preview"
+                 class="signature-preview">
+            </div>
+    
+        </div>
+
     </div>
     
 </div>
