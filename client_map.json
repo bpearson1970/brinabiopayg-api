@@ -8,8 +8,8 @@
 
   "Standard": {
     "client_id": "00042",
-    "company_name": "None",
-    "logo": "None",
+    "company_name": null,
+    "logo": null,
     "template": "brinapayg_onboard_form_00042.html"
   }
 
