@@ -13,37 +13,44 @@
 
     </div>
 
-    <div class="submitted-by-row">
+<div class="submitted-by-row">
 
-        <div class="submission-label"> Submitted by:</div>
-
-        <label "submitter-options">
-            <input type="radio"
-                   name="submitter_type"
-                   value="Primary Contact"
-                   onchange="updateSubmitter()"
-                   required>
-            Primary Contact
-        </label>
-
-        <label"submitter-options">
-            <input type="radio"
-                   name="submitter_type"
-                   value="Secondary Contact"
-                   onchange="updateSubmitter()">
-            Secondary Contact
-        </label>
-
-        <label "submitter-options">
-            <input type="radio"
-                   name="submitter_type"
-                   value="Other"
-                   onchange="updateSubmitter()">
-            Other
-        </label>
-
+    <div class="submission-label">
+        Submitted by:
     </div>
 
+    <label>
+        <input
+            type="radio"
+            name="submitter_type"
+            value="Primary Contact"
+            onchange="updateSubmitter()"
+            required>
+
+        Primary Contact
+    </label>
+
+    <label>
+        <input
+            type="radio"
+            name="submitter_type"
+            value="Secondary Contact"
+            onchange="updateSubmitter()">
+
+        Secondary Contact
+    </label>
+
+    <label>
+        <input
+            type="radio"
+            name="submitter_type"
+            value="Other"
+            onchange="updateSubmitter()">
+
+        Other
+    </label>
+
+</div>
     <div class="submitted-name-row">
 
         <label class="submission-label" for="submitted_by_name" >
