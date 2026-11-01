@@ -17,6 +17,7 @@
         <input
             type="email"
             name="_primary_contact_email"
+            onblur="validateEmail(this)"
             required>
 
         <label>Phone *</label>
@@ -46,7 +47,8 @@
         <label>Email</label>
         <input
             type="email"
-            name="x_secondary_contact_email">
+            name="x_secondary_contact_email"
+            onblur="validateEmail(this)">
 
         <label>Phone</label>
         <input
