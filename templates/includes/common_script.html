@@ -179,6 +179,47 @@ loadFinancialRanges1();
 loadYearRanges();
 loadLiabilityInsurance();
 loadVersion();
+
+function updateSubmitter()
+{
+    const selected =
+        document.querySelector(
+            'input[name="submitter_type"]:checked'
+        ).value;
+
+    const field =
+        document.getElementById(
+            "submitted_by_name"
+        );
+
+    const primary =
+        document.querySelector(
+            'input[name="x_primary_contact_name"]'
+        ).value;
+
+    const secondary =
+        document.querySelector(
+            'input[name="x_secondary_contact_name"]'
+        ).value;
+
+    if (selected === "Primary")
+    {
+        field.value = primary;
+        field.readOnly = true;
+    }
+    else if (selected === "Secondary")
+    {
+        field.value = secondary;
+        field.readOnly = true;
+    }
+    else
+    {
+        field.value = "";
+        field.readOnly = false;
+    }
+}
+
+updateSubmitter();
     
 function validateEIN(field)
 {
