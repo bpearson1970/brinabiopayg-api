@@ -1,5 +1,54 @@
-<h2a>Form Submission</h2a>
-<label>Form submitted by: </label>
+<h2 class="submission-heading">
+    Submission
+</h2>
+
+<div class="submission-statement">
+
+    By submitting this application, you confirm that
+    the information provided in this form is true,
+    complete and accurate to the best of your
+    knowledge.
+
+</div>
+
+<label>
+    Form Submitted By *
+</label>
+
+<div class="submitted-by-options">
+
+    <input
+        type="radio"
+        name="submitter_type"
+        value="Primary"
+        checked
+        onchange="updateSubmitter()">
+    Primary Contact
+
+    <input
+        type="radio"
+        name="submitter_type"
+        value="Secondary"
+        onchange="updateSubmitter()">
+    Secondary Contact
+
+    <input
+        type="radio"
+        name="submitter_type"
+        value="Other"
+        onchange="updateSubmitter()">
+    Other
+
+</div>
+
+<label>
+    Submitted By Name *
+</label>
+
+<input
+    id="submitted_by_name"
+    name="x_submitted_by_name"
+    required>
 <button type="submit">
 
 Submit
