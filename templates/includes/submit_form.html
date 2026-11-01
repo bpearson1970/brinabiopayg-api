@@ -2,53 +2,54 @@
     Submission
 </h2>
 
-<div class="submission-statement">
+<div class="declaration-section">
 
-    By submitting this application, you confirm that
-    the information provided in this form is true,
-    complete and accurate to the best of your
-    knowledge.
+    <div class="declaration-text">
+
+        I certify that the information provided in this application is true,
+        complete and accurate to the best of my knowledge. I understand that
+        Brina Medical (US) LLC may rely upon this information in assessing
+        this application and conducting ongoing business activities.
+
+    </div>
+
+    <div class="submitted-by-row">
+
+        Submitted by:
+
+        <label>
+            <input type="radio"
+                   name="submitted_by"
+                   value="Owner"
+                   required>
+            Owner
+        </label>
+
+        <label>
+            <input type="radio"
+                   name="submitted_by"
+                   value="Partner">
+            Partner
+        </label>
+
+        <label>
+            <input type="radio"
+                   name="submitted_by"
+                   value="Officer">
+            Officer
+        </label>
+
+        <label>
+            <input type="radio"
+                   name="submitted_by"
+                   value="Authorised Representative">
+            Authorised Representative
+        </label>
+
+    </div>
 
 </div>
 
-<label>
-    Form Submitted By *
-</label>
-
-<div class="submitted-by-options">
-
-    <input
-        type="radio"
-        name="submitter_type"
-        value="Primary"
-        checked
-        onchange="updateSubmitter()">
-    Primary Contact
-
-    <input
-        type="radio"
-        name="submitter_type"
-        value="Secondary"
-        onchange="updateSubmitter()">
-    Secondary Contact
-
-    <input
-        type="radio"
-        name="submitter_type"
-        value="Other"
-        onchange="updateSubmitter()">
-    Other
-
-</div>
-
-<label>
-    Submitted By Name *
-</label>
-
-<input
-    id="submitted_by_name"
-    name="x_submitted_by_name"
-    required>
 <button type="submit">
 
 Submit
