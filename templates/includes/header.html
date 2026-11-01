@@ -127,29 +127,43 @@ body{
     align-items: flex-end;
 }
 
-.submit-container {
-    text-align: center;
-    margin-top: 30px;
+.button-row {
+    position: relative;
+    margin-top: 15px;
+    min-height: 60px;
 }
 
-button {
+.button-center {
+    text-align: center;
+}
+
+.button-right {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.submit-button {
     background: #0A67C8;
     color: white;
-
-    padding: 15px 40px;
-
+    padding: 15px 50px;
     font-size: 20px;
     font-weight: 700;
-
     border: none;
     border-radius: 6px;
-
     cursor: pointer;
 }
 
-button:hover {
-    background: #084f98;
-}  
+.reset-button {
+    background: #C62828;
+    color: white;
+    padding: 15px 35px;
+    font-size: 18px;
+    font-weight: 700;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
     
 .footer {
     display: flex;
