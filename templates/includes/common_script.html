@@ -148,6 +148,27 @@ async function loadLegalForms()
         select.appendChild(option);
     });
 }
+
+async function loadVersion()
+{
+    const response =
+        await fetch(
+            "/static/reference/version.json"
+        );
+
+    const versionInfo =
+        await response.json();
+
+    document
+        .getElementById("version")
+        .textContent =
+        versionInfo.version;
+
+    document
+        .getElementById("updated")
+        .textContent =
+        versionInfo.updated;
+}
     
 loadStates();
 loadLegalForms();
@@ -155,6 +176,7 @@ loadFinancialRanges();
 loadFinancialRanges1();
 loadYearRanges();
 loadLiabilityInsurance();
+loadVersion();
     
 function validateEIN(field)
 {
