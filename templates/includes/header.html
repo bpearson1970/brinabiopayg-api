@@ -54,12 +54,42 @@ body{
 }    
 
 .footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
     margin-top: 40px;
     padding-top: 15px;
+
     border-top: 1px solid #cccccc;
-    text-align: center;
+
     font-size: 12px;
     color: #666666;
+}
+
+.footer-left {
+    flex: 1;
+    text-align: left;
+}
+
+.footer-center {
+    flex: 1;
+    text-align: center;
+}
+
+.footer-right {
+    flex: 1;
+    text-align: right;
+
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+}
+
+.footer-logo {
+    height: 18px;
+    width: auto;
 }
     
 .small-label {
