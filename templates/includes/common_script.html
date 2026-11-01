@@ -276,6 +276,13 @@ function validatePhone(field)
 
 function validateEmail(field)
 {
+    field.value = field.value.trim();
+
+    if (field.value === "")
+    {
+        field.setCustomValidity("");
+        return;
+    }
     const pattern =
         /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
