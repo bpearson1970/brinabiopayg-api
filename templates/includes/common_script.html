@@ -159,6 +159,8 @@ async function loadVersion()
     const versionInfo =
         await response.json();
 
+    console.log(versionInfo);
+    
     document
         .getElementById("x_version")
         .textContent =
