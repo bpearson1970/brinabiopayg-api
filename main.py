@@ -57,17 +57,11 @@ async def onboard_form(
             "client_id": client_info["client_id"],
             "company_name": client_info["company_name"],
             "logo": client_info["logo"]
+            "active": client_info["active"]
         }
     )
     print(type(request))    
     
-    return templates.TemplateResponse(
-        request=request,
-        name=template_name,
-        context={
-            "client_code": client_code
-        }
-    )
 
 # Define the Endpoints
 EVENT_DIR = "/var/data/event_deposit"
