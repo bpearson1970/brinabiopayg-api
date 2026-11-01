@@ -21,6 +21,7 @@
             <input type="radio"
                    name="submitted_by"
                    value="Primary Contact"
+                   onchange="updateSubmitter()"
                    required>
             Primary Contact
         </label>
@@ -28,14 +29,16 @@
         <label>
             <input type="radio"
                    name="submitted_by"
-                   value="Secondary Contact">
+                   value="Secondary Contact"
+                   onchange="updateSubmitter()">
             Secondary Contact
         </label>
 
         <label>
             <input type="radio"
                    name="submitted_by"
-                   value="Other">
+                   value="Other"
+                   onchange="updateSubmitter()">
             Other
         </label>
 
