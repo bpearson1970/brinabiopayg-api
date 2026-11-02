@@ -283,6 +283,8 @@ function updateSubmitter()
             document.getElementById(
                 "submitted_by_name"
             ).value = "";
+
+            field.readOnly = true;
             return;
         }
         field.value = secondary;
