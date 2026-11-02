@@ -1,7 +1,16 @@
 <!DOCTYPE html>
 <html>
-
     {% include "includes/styles.html" %}
+
+    <div class="receipt-header">
+        <img
+            src="/static/logos/{{ logo }}"
+            alt="{{ company_name }}"
+            class="logo">
+    
+        <h1> On-Boarding Submission Receipt </h1>
+    </div>
+    
     {% include "includes/header_receipt.html" %}
 
     <body>
