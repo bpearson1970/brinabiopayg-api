@@ -529,6 +529,53 @@ async function prepareSubmission()
 
 async function submitApplication()
 {
+
+    const payload = {};
+    document
+        .querySelectorAll("[name^='x_']")
+        .forEach(field =>
+        {
+            payload[field.name] = field.value;
+        });
+    
+    payload.submitted_timestamp =
+        submittedTimestamp;
+    
+    payload.submitted_by =
+        document.getElementById(
+            "submitted_by_name"
+        ).value;
+    
+    payload.submitter_type =
+        document.getElementById(
+            "submitter_type"
+        ).value;
+    
+    console.log(payload);
+    
+    const response = await fetch(
+        "/onboard",
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(payload)
+        }
+    );
+
+    if (!response.ok)
+    {
+        alert(
+            "Submission failed. Please try again."
+        );
+    
+        return;
+    }
+
+    const result =
+        await response.json();
+    
     const submissionReference =
         document.getElementById(
             "submit_reference"
@@ -598,11 +645,17 @@ async function submitApplication()
         encodeURIComponent(
             version
         );
-    
-    window.open(
-        receiptUrl,
-        "_blank"
-    );
+
+    if (result.status === "ok")
+    {
+        window.open(
+            receiptUrl,
+            "_blank" );
+    }
+    else
+    {
+        alert("Submission failed.");
+    }
 }
 
    
