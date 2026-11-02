@@ -66,12 +66,22 @@ async def onboard_form(
 #On-boarding Receipt
 @app.get("/receipt")
 async def receipt(
-    request: Request
+    request: Request,
+    submission_reference: str = "",
+    company_name: str = "",
+    submitted_by: str = "",
+    version: str = "",
+    logo: str = ""
 ):
     return templates.TemplateResponse(
         request=request,
         name="brinapayg_onboard_receipt.html",
-        context={}
+        context={
+           "submission_reference": submission_reference,
+            "company_name": company_name,
+            "submitted_by": submitted_by,
+            "version": version      
+        }
     )
 
 # Define the Endpoints
