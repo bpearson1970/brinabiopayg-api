@@ -529,7 +529,21 @@ async function prepareSubmission()
 
 async function submitApplication()
 {
-
+    const submittedTimestamp =
+    new Date().toLocaleString(
+        "en-GB",
+        {
+            day: "2-digit",
+            month: "long",
+            year: "numeric",
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit",
+            hour12: false,
+            timeZoneName: "longOffset"
+        }
+    );   
+    
     const payload = {};
     document
         .querySelectorAll("[name^='x_']")
@@ -542,14 +556,10 @@ async function submitApplication()
         submittedTimestamp;
     
     payload.submitted_by =
-        document.getElementById(
-            "submitted_by_name"
-        ).value;
+        document.getElementById("submitted_by_name").value;
     
     payload.submitter_type =
-        document.getElementById(
-            "submitter_type"
-        ).value;
+        document.getElementById("submitter_type").value;
     
     console.log(payload);
     
@@ -565,11 +575,7 @@ async function submitApplication()
     );
 
     if (!response.ok)
-    {
-        alert(
-            "Submission failed. Please try again."
-        );
-    
+    {  alert("Submission failed. Please try again." );
         return;
     }
 
@@ -577,44 +583,19 @@ async function submitApplication()
         await response.json();
     
     const submissionReference =
-        document.getElementById(
-            "submit_reference"
-        ).value;
+        document.getElementById("submit_reference").value;
     
     const companyName =
-        document.getElementById(
-            "company_name"
-        ).value;
+        document.getElementById("company_name").value;
     
     const submittedBy =
-        document.getElementById(
-            "submitted_by_name"
-        ).value;
+        document.getElementById("submitted_by_name").value;
 
     const submitterType =
-    document.getElementById(
-        "submitter_type"
-    ).value;
+    document.getElementById("submitter_type").value;
 
     const version =
-        document.getElementById(
-            "version"
-        ).textContent;
-
-    const submittedTimestamp =
-    new Date().toLocaleString(
-        "en-GB",
-        {
-            day: "2-digit",
-            month: "long",
-            year: "numeric",
-            hour: "2-digit",
-            minute: "2-digit",
-            second: "2-digit",
-            hour12: false,
-            timeZoneName: "longOffset"
-        }
-    );
+        document.getElementById("version").textContent;
     
     const receiptUrl =
         "/receipt?" +
