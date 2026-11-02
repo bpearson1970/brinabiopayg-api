@@ -527,6 +527,67 @@ async function prepareSubmission()
     submitApplication();
 }
 
+async function submitApplication()
+{
+    const submissionReference =
+        document.getElementById(
+            "x_submit_reference"
+        ).value;
+
+    const companyName =
+        document.getElementById(
+            "x_company_name"
+        ).value;
+
+    const submittedBy =
+        document.getElementById(
+            "submitted_by_name"
+        ).value;
+
+    const submitterType =
+        document.querySelector(
+            'input[name="submitter_type"]:checked'
+        ).value;
+
+    const version =
+        document.getElementById(
+            "x_version"
+        ).value;
+
+    const receiptUrl =
+
+        "/receipt?" +
+
+        "submission_reference=" +
+        encodeURIComponent(
+            submissionReference
+        ) +
+
+        "&company_name=" +
+        encodeURIComponent(
+            companyName
+        ) +
+
+        "&submitted_by=" +
+        encodeURIComponent(
+            submittedBy +
+            " (" +
+            submitterType +
+            ")"
+        ) +
+
+        "&version=" +
+        encodeURIComponent(
+            version
+        );
+
+    window.open(
+        receiptUrl,
+        "_blank"
+    );
+}
+
+   
 document
     .getElementById("entity_formed")
     .max =
