@@ -75,6 +75,10 @@ async def receipt(
 ):
     
     ip_address = request.client.host
+
+    user_agent = request.headers.get(
+        "user-agent", "Unknown"
+    )
     
     return templates.TemplateResponse(
         request=request,
@@ -85,7 +89,8 @@ async def receipt(
             "submitted_by": submitted_by,
             "version": version,
             "submitted_timestamp": submitted_timestamp,
-            "ip_address": ip_address
+            "ip_address": ip_address,
+            "user_agent": user_agent
         }
     )
 
