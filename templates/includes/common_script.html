@@ -285,6 +285,7 @@ function updateSubmitter()
             ).value = "";
 
             field.readOnly = true;
+            document.getElementById("signature_preview").textContent = "";
             return;
         }
         field.value = secondary;
