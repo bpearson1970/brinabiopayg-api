@@ -279,10 +279,17 @@ function updateSubmitter()
             alert(
                 "Please enter a Secondary Contact Name before selecting Secondary Contact as the submitter."
             );
-            document.getElementById( "submitted_by_name" ).value = "";
+            document.querySelector(
+                'input[name="submitter_type"][value="Other"]'
+                ).checked = true;
+            field.value = "";
+            field.readOnly = false;
         }
-        field.value = secondary;
-        field.readOnly = true;
+        else
+        {
+            field.value = secondary;
+            field.readOnly = true;
+        }   
     }
     else
     {
