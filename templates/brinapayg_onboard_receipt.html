@@ -89,8 +89,17 @@
             </div>
         </div>   
         
-        <div class="receipt-footer">
-
+        <div class="receipt-footer"
+            style="
+                display:grid;
+                grid-template-columns:1fr auto 1fr;
+                align-items:center;
+                background:white;
+                border-radius:8px;
+                padding:20px;
+                margin-top:20px;
+            ">
+            <div></div>
             <div
                 class="receipt-buttons no-print"
                 style="text-align:center;">
@@ -130,12 +139,7 @@
                     Close
                 </button>    
             </div>
-            <div
-               style="
-                    position:absolute;
-                    right:20px;
-                    bottom:15px;
-                ">
+            <div style="text-align:right;">
                 <div class="logo_receipt_footer">
                     <img src="/static/images/BrinaMedical.png" alt="Brina logo">
                 </div>
