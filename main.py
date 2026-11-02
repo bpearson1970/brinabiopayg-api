@@ -70,9 +70,14 @@ async def receipt(
     submission_reference: str = "",
     company_name: str = "",
     submitted_by: str = "",
-    version: str = "",
-    logo: str = ""
+    version: str = ""
 ):
+    submitted_timestamp = datetime.now().strftime(
+        "%d %B %Y %H:%M:%S"
+    )
+
+    ip_address = request.client.host
+    
     return templates.TemplateResponse(
         request=request,
         name="brinapayg_onboard_receipt.html",
@@ -80,7 +85,9 @@ async def receipt(
            "submission_reference": submission_reference,
             "company_name": company_name,
             "submitted_by": submitted_by,
-            "version": version      
+            "version": version,
+            "submitted_timestamp": submitted_timestamp,
+            "ip_address": ip_address
         }
     )
 
