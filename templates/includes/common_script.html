@@ -180,6 +180,47 @@ loadYearRanges();
 loadLiabilityInsurance();
 loadVersion();
 
+function checkActive()
+{
+    const active =
+        document.getElementById(
+            "x_active"
+        ).value;
+    
+    if (active === "0")
+    {
+        alert(
+            "This onboarding form is temporarily disabled.\n\n" +
+            "Please refresh and try again later."
+        );
+        disableForm();
+    }
+}
+
+function disableForm()
+{
+    document
+        .querySelectorAll(
+            'input:not([type="hidden"]), select, textarea'
+        )
+        .forEach(
+            field => field.disabled = true
+        );
+
+    document
+        .querySelector(
+            '.submit-button'
+        )
+        .disabled = true;
+
+    document
+        .querySelector(
+            '.submit-button'
+        )
+        .textContent =
+        "Form Disabled";
+}
+    
 function updateSubmitter()
 {
     const selected =
@@ -396,4 +437,6 @@ async function(e){
 
 });
 
+checkActive();
+    
 </script>
