@@ -478,11 +478,11 @@ function resetForm()
 
 async function prepareSubmission()
 {
-    alert("prepareSubmission started");
+    alert("Step 1");
     
     const form =
         document.querySelector("form");
-
+    alert("Step 2");
     if (!form.checkValidity())
     {
         form.reportValidity();
@@ -493,7 +493,7 @@ async function prepareSubmission()
         document.getElementById(
             "submit_reference"
         );
-
+        alert("Step 3");
     if (submitRefField.value !== "0")
     {
         alert(
