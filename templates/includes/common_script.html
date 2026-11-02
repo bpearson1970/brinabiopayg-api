@@ -274,6 +274,17 @@ function updateSubmitter()
     }
     else if (selected === "Secondary Contact")
     {
+        if (secondary.trim() === "")
+        {
+            alert(
+                "Please enter a Secondary Contact Name before selecting Secondary Contact as the submitter."
+            );
+    
+            document.getElementById(
+                "submitted_by_name"
+            ).value = "";
+            return;
+        }
         field.value = secondary;
         field.readOnly = true;
     }
@@ -488,6 +499,16 @@ async function prepareSubmission()
         return;
     }
 
+    if (selected === "Secondary Contact" &&  secondary.trim() === ""
+    )
+    {
+        alert(
+            "Secondary Contact has been selected as the submitter, but no Secondary Contact Name has been entered."
+        );
+    
+        return;
+    }
+    
     const submitReference =
         generateSubmitReference();
 
