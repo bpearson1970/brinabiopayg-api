@@ -200,14 +200,14 @@ function checkActive()
         );
         disableForm();
         return;
-
-        const overrideCode =
+    }
+    
+    const overrideCode =
         prompt(
             "This onboarding form is currently disabled.\n\n" +
             "Please enter the administrator access code."
         );
-    }
-
+    
     if (overrideCode !== active)
     {
         alert(
