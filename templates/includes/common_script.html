@@ -511,6 +511,13 @@ async function prepareSubmission()
 
     submitApplication();
 }
+
+document
+    .getElementById("entity_formed")
+    .max =
+    new Date()
+        .toISOString()
+        .split("T")[0];
     
 checkActive();
     
