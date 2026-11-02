@@ -249,7 +249,7 @@ function updateSubmitter()
 {
     const selected =
         document.querySelector(
-            'input[name="submitter_type"]:checked'
+            'input[name="x_submitter_type"]:checked'
         ).value;
 
     const field =
@@ -280,7 +280,7 @@ function updateSubmitter()
                 "Please enter a Secondary Contact Name before selecting Secondary Contact as the submitter."
             );
             document.querySelector(
-                'input[name="submitter_type"][value="Other"]'
+                'input[name="x_submitter_type"][value="Other"]'
                 ).checked = true;
             field.value = "";
             field.readOnly = false;
