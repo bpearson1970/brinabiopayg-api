@@ -279,14 +279,7 @@ function updateSubmitter()
             alert(
                 "Please enter a Secondary Contact Name before selecting Secondary Contact as the submitter."
             );
-    
-            document.getElementById(
-                "submitted_by_name"
-            ).value = "";
-
-            field.readOnly = true;
-            document.getElementById("signature_preview").textContent = "";
-            return;
+            document.getElementById( "submitted_by_name" ).value = "";
         }
         field.value = secondary;
         field.readOnly = true;
@@ -478,11 +471,9 @@ function resetForm()
 
 async function prepareSubmission()
 {
-    alert("Step 1");
-    
     const form =
         document.querySelector("form");
-    alert("Step 2");
+
     if (!form.checkValidity())
     {
         form.reportValidity();
@@ -493,7 +484,7 @@ async function prepareSubmission()
         document.getElementById(
             "submit_reference"
         );
-        alert("Step 3");
+
     if (submitRefField.value !== "0")
     {
         alert(
@@ -503,17 +494,7 @@ async function prepareSubmission()
 
         return;
     }
-
-    if (selected === "Secondary Contact" &&  secondary.trim() === ""
-    )
-    {
-        alert(
-            "Secondary Contact has been selected as the submitter, but no Secondary Contact Name has been entered."
-        );
-    
-        return;
-    }
-    
+   
     const submitReference =
         generateSubmitReference();
 
