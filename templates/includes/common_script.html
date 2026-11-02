@@ -186,6 +186,11 @@ function checkActive()
         document.getElementById(
             "active"
         ).value;
+
+    if (active === "1")
+    {
+        return;
+    }
     
     if (active === "0")
     {
@@ -194,6 +199,23 @@ function checkActive()
             "Please refresh and try again later."
         );
         disableForm();
+        return;
+
+        const overrideCode =
+        prompt(
+            "This onboarding form is currently disabled.\n\n" +
+            "Please enter the administrator access code."
+        );
+    }
+
+    if (overrideCode !== active)
+    {
+        alert(
+            "Invalid access code."
+        );
+
+        disableForm();
+        return;
     }
 }
 
