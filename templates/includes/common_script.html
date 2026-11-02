@@ -529,6 +529,8 @@ async function prepareSubmission()
 
 async function submitApplication()
 {
+    alert("submitApplication started");
+    
     const submissionReference =
         document.getElementById(
             "x_submit_reference"
@@ -580,7 +582,8 @@ async function submitApplication()
         encodeURIComponent(
             version
         );
-
+    
+    alert(receiptUrl);
     window.open(
         receiptUrl,
         "_blank"
