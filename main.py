@@ -62,7 +62,17 @@ async def onboard_form(
         }
     )
     print(type(request))    
-    
+
+#On-boarding Receipt
+@app.get("/receipt")
+async def receipt(
+    request: Request
+):
+    return templates.TemplateResponse(
+        request=request,
+        name="brinapayg_onboard_receipt.html",
+        context={}
+    )
 
 # Define the Endpoints
 EVENT_DIR = "/var/data/event_deposit"
