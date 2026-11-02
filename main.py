@@ -149,13 +149,23 @@ def root():
     return {"status": "ok", "message": "BrinaBio PAYG API running"}
 
 @app.get("/onboard")
-async def onboard_test():
+async def onboard_submit():
     return {
         "status": "ok",
         "message": "Onboarding endpoint ready"
     }
 
 #App definitions
+
+@app.post("/onboard")
+async def onboard_submit(
+    request: Request
+):
+    payload = await request.json()
+    print(payload)
+    return {
+        "success": True
+    }
 
 @app.post("/event")
 async def receive_event(request: Request):
