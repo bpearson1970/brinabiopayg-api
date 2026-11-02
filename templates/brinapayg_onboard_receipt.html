@@ -91,22 +91,51 @@
         
         <div class="receipt-footer">
 
-            <div class="receipt-buttons no-print"> 
+            <div
+                class="receipt-buttons no-print"
+                style="text-align:center;">
+        
                 <button
                     type="button"
-                    class="print-button"
-                    onclick="window.print()">
-                        Print Receipt
+                    onclick="window.print()"
+        
+                    style="
+                        background:#0A67C8;
+                        color:white;
+                        border:none;
+                        border-radius:6px;
+                        padding:12px 30px;
+                        font-size:16px;
+                        font-weight:bold;
+                        cursor:pointer;
+                        margin-right:20px;
+                    ">        
+                    Print Receipt
                 </button>
+                
                 <button
                     type="button"
-                    class="close-button"
-                    onclick="window.close()">
-                        Close 
-                </button>
+                    onclick="window.close()"
+        
+                    style="
+                        background:#C62828;
+                        color:white;
+                        border:none;
+                        border-radius:6px;
+                        padding:12px 30px;
+                        font-size:16px;
+                        font-weight:bold;
+                        cursor:pointer;
+                    ">
+                    Close
+                </button>    
             </div>
-
-            <div class="footer-logo">  
+            <div>
+               style="
+                    position:absolute;
+                    right:20px;
+                    bottom:15px;
+                ">
                 <div class="logo_receipt_footer">
                     <img src="/static/images/BrinaMedical.png" alt="Brina logo">
                 </div>
