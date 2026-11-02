@@ -76,8 +76,13 @@ async def receipt(
     
     ip_address = request.client.host
 
-    user_agent = request.headers.get(
-        "user-agent", "Unknown"
+    user_agent_raw = request.headers.get(
+        "user-agent", ""
+    )
+
+    user_agent =
+    parse_user_agent(
+        user_agent_raw
     )
     
     return templates.TemplateResponse(
@@ -93,6 +98,42 @@ async def receipt(
             "user_agent": user_agent
         }
     )
+
+def parse_user_agent(user_agent: str) -> str:
+
+    browser = "Unknown Browser"
+    operating_system = "Unknown OS"
+
+    # Browser
+
+    if "Edg/" in user_agent:
+        browser = "Microsoft Edge"
+    elif "Chrome/" in user_agent:
+        browser = "Google Chrome"
+    elif "Firefox/" in user_agent:
+        browser = "Mozilla Firefox"
+    elif "Safari/" in user_agent and "Chrome/" not in user_agent:
+        browser = "Safari"
+
+    # Operating System
+
+    if "Windows NT 10.0" in user_agent:
+        operating_system = "Windows 10/11"
+
+    elif "Android" in user_agent:
+        operating_system = "Android"
+
+    elif "iPhone" in user_agent:
+        operating_system = "iPhone"
+
+    elif "iPad" in user_agent:
+        operating_system = "iPad"
+
+    elif "Mac OS X" in user_agent:
+        operating_system = "macOS"
+
+    return f"{browser} on {operating_system}"
+
 
 # Define the Endpoints
 EVENT_DIR = "/var/data/event_deposit"
