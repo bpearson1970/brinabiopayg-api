@@ -80,10 +80,7 @@ async def receipt(
         "user-agent", ""
     )
 
-    user_agent =
-    parse_user_agent(
-        user_agent_raw
-    )
+    user_agent = parse_user_agent( user_agent_raw )
     
     return templates.TemplateResponse(
         request=request,
