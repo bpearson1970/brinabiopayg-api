@@ -323,15 +323,6 @@ input, select, textarea{
     color: #02128C;
 }
 
-button{
-    margin-top:25px;
-    background:#0078d4;
-    color:white;
-    padding:12px 20px;
-    border:none;
-    cursor:pointer;
-}
-
 input:required:invalid,
 select:required:invalid,
 textarea:required:invalid {
@@ -343,6 +334,13 @@ select:required:valid,
 textarea:required:valid {
     border: 2px solid green;
 }
+
+document
+    .getElementById("entity_formed")
+    .max =
+    new Date()
+        .toISOString()
+        .split("T")[0];
     
 </style>
     
