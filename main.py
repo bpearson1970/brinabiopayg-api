@@ -70,12 +70,10 @@ async def receipt(
     submission_reference: str = "",
     company_name: str = "",
     submitted_by: str = "",
-    version: str = ""
+    version: str = "",
+    submitted_timestamp: str = ""
 ):
-    submitted_timestamp = datetime.now().strftime(
-        "%d %B %Y %H:%M:%S"
-    )
-
+    
     ip_address = request.client.host
     
     return templates.TemplateResponse(
