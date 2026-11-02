@@ -452,13 +452,64 @@ function resetForm()
 
         document
             .getElementById(
-                "x_submit_reference"
+                "submit_reference"
             )
             .value = "0";
 
         updateSubmitter();
         updateSignature();
     }
+}
+
+async function prepareSubmission()
+{
+    const form =
+        document.querySelector("form");
+
+    if (!form.checkValidity())
+    {
+        form.reportValidity();
+        return;
+    }
+
+    const submitRefField =
+        document.getElementById(
+            "submit_reference"
+        );
+
+    if (submitRefField.value !== "0")
+    {
+        alert(
+            "This application has already been submitted.\n\n" +
+            "Please use Reset Form before creating a new application."
+        );
+
+        return;
+    }
+
+    const submitReference =
+        generateSubmitReference();
+
+    const proceed =
+        confirm(
+            "APPLICATION READY FOR SUBMISSION\n\n" +
+            "Submission Reference:\n\n" +
+            submitReference +
+            "\n\n" +
+            "Please note this reference number.\n\n" +
+            "Press OK to submit.\n" +
+            "Press Cancel to return to the form."
+        );
+
+    if (!proceed)
+    {
+        return;
+    }
+
+    submitRefField.value =
+        submitReference;
+
+    submitApplication();
 }
     
 checkActive();
