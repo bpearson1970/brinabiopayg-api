@@ -3,7 +3,7 @@
     "client_id": "43352",
     "company_name": "Medi-WeightLoss",
     "logo": "MediWeightLoss.png",
-    "template": "brinapayg_onboard_form_43352.html"
+    "template": "brinapayg_onboard_form_43352.html",
     "active": "0"
   },
 
@@ -11,7 +11,7 @@
     "client_id": "00042",
     "company_name": null,
     "logo": null,
-    "template": "brinapayg_onboard_form_00042.html"
+    "template": "brinapayg_onboard_form_00042.html",
     "active": "0"
   }
 
