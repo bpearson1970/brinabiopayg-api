@@ -437,6 +437,49 @@ async function(e){
 
 });
 
+function generateSubmitReference()
+{
+    const now = new Date();
+
+    const timestamp =
+        now.getFullYear().toString() +
+        String(now.getMonth() + 1).padStart(2, "0") +
+        String(now.getDate()).padStart(2, "0") +
+        String(now.getHours()).padStart(2, "0") +
+        String(now.getMinutes()).padStart(2, "0") +
+        String(now.getSeconds()).padStart(2, "0");
+
+    const random =
+        Math.floor(
+            100000 + Math.random() * 900000
+        );
+
+    return `${timestamp}_${random}`;
+}
+
+function resetForm()
+{
+    if (
+        confirm(
+            "Are you sure you want to clear the entire form?"
+        )
+    )
+    {
+        document
+            .querySelector("form")
+            .reset();
+
+        document
+            .getElementById(
+                "x_submit_reference"
+            )
+            .value = "0";
+
+        updateSubmitter();
+        updateSignature();
+    }
+}
+    
 checkActive();
     
 </script>
