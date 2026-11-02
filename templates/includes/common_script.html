@@ -529,38 +529,31 @@ async function prepareSubmission()
 
 async function submitApplication()
 {
-    alert("submitApplication started");
-    
     const submissionReference =
         document.getElementById(
             "submit_reference"
         ).value;
     
-    alert("1");
     const companyName =
         document.getElementById(
             "company_name"
         ).value;
     
-    alert("2");
     const submittedBy =
         document.getElementById(
             "submitted_by_name"
         ).value;
 
-    alert("3");
     const submitterType =
     document.getElementById(
         "submitter_type"
     ).value;
 
-    alert("4");
     const version =
         document.getElementById(
             "version"
-        ).value;
+        ).textContent;
     
-    alert("5");
     const receiptUrl =
         "/receipt?" +
         "submission_reference=" +
