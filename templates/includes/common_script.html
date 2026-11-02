@@ -487,10 +487,7 @@ async function prepareSubmission()
         return;
     }
 
-    const submitRefField =
-        document.getElementById(
-            "submit_reference"
-        );
+    const submitRefField = document.getElementById("submit_reference");
 
     if (submitRefField.value !== "0")
     {
@@ -521,8 +518,7 @@ async function prepareSubmission()
         return;
     }
 
-    submitRefField.value =
-        submitReference;
+    submitRefField.value = submitReference;
 
     submitApplication();
 }
@@ -543,6 +539,9 @@ async function submitApplication()
             timeZoneName: "longOffset"
         }
     );   
+
+    const submitTSField = document.getElementById("submitted_timestamp");
+    submitTSField.value = submittedTimestamp;
     
     const payload = {};
     document
@@ -551,13 +550,7 @@ async function submitApplication()
         {
             payload[field.name] = field.value;
         });
-    
-    payload.submitted_timestamp =
-        submittedTimestamp;
-    
-    payload.submitted_by =
-        document.getElementById("submitted_by_name").value;
-    
+       
     payload.submitter_type =
         document.getElementById("submitter_type").value;
     
