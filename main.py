@@ -164,11 +164,9 @@ async def onboard_submit():
 async def onboard_submit(
     request: Request
 ):
-
     payload = await request.json()
 
     payload["x_ip_address"] = request.client.host
-
     payload["x_user_agent"] = parse_user_agent(
         request.headers.get(
             "user-agent",
@@ -181,15 +179,13 @@ async def onboard_submit(
     )
 
     if not submission_reference:
-
         return {
             "success": False,
             "message":
                 "Submission reference missing."
         }
 
-    file_name = (
-        f"{submission_reference}.json"
+    file_name = os.path.join( ONBOARD_PATH , f"{submission_reference}.json"
     )
 
     with open(
@@ -203,11 +199,7 @@ async def onboard_submit(
             file,
             indent=4
         )
-    print(
-        "Current directory:",
-        os.getcwd()
-    )
-    
+      
     print(
         f"Writing file: {file_name}"
     )
