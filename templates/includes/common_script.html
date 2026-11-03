@@ -574,6 +574,9 @@ async function submitApplication()
         }
     );
 
+    console.log(response.status);
+    console.log(await response.text());
+    
     if (!response.ok)
     {  alert("Submission failed. Please try again." );
         return;
