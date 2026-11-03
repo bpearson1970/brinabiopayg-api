@@ -249,7 +249,6 @@ function updateSubmitter()
 {
     const selected =
         document.querySelector('input[name="x_submitter_type"]:checked').value;
-    alert(selected);
             
     const field =
         document.getElementById("submitted_by_name");
@@ -265,7 +264,6 @@ function updateSubmitter()
     
     if (selected === "Primary Contact")
     {
-        alert("In Primary");
         field.value = primary;
         field.readOnly = true;
         store.value = selected;
