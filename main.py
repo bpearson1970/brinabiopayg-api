@@ -192,7 +192,7 @@ async def onboard_submit(
         }
 
     file_name = (
-        f"{submission_reference}.json"
+        f"submissions/{submission_reference}.json"
     )
 
     with open(
