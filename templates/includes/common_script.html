@@ -558,7 +558,9 @@ async function submitApplication()
             );
             payload[field.name] = field.value;
         });
-         
+
+    payload.x_version = document.getElementById("version").textContent;
+    
     console.log(payload);
     
     const response = await fetch(
