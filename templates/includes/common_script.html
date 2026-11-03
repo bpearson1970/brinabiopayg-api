@@ -267,7 +267,7 @@ function updateSubmitter()
     {
         field.value = primary;
         field.readOnly = true;
-        store.value = primary;
+        store.value = selected;
     }
     else if (selected === "Secondary Contact")
     {
@@ -280,12 +280,15 @@ function updateSubmitter()
             field.value = "";
             field.readOnly = false;
             store.value = "Other";
+
+            UpdateSignature();
+            return
         }
         else
         {
             field.value = secondary;
             field.readOnly = true;
-            store.value = secondary;
+            store.value = selected;
         }   
     }
     else
