@@ -248,25 +248,18 @@ function disableForm()
 function updateSubmitter()
 {
     const selected =
-        document.querySelector(
-            'input[name="x_submitter_type"]:checked'
-        ).value;
-
+        document.querySelector('input[name="y_submitter_type"]:checked').value;
+    alert(selected);
+            
     const field =
-        document.getElementById(
-            "submitted_by_name"
-        );
+        document.getElementById("submitted_by_name");
 
     const primary =
-        document.querySelector(
-            'input[name="x_primary_contact_name"]'
-        ).value;
+        document.getElementById("primary_contact_name").value;
 
     const secondary =
-        document.querySelector(
-            'input[name="x_secondary_contact_name"]'
-        ).value;
-
+        document.getElementById("secondary_contact_name").value;
+    
     if (selected === "Primary Contact")
     {
         field.value = primary;
@@ -279,8 +272,7 @@ function updateSubmitter()
             alert(
                 "Please enter a Secondary Contact Name before selecting Secondary Contact as the submitter."
             );
-            document.querySelector(
-                'input[name="x_submitter_type"][value="Other"]'
+            document.getElementById("submitter_type").value="Other"'
                 ).checked = true;
             field.value = "";
             field.readOnly = false;
