@@ -203,7 +203,11 @@ async def onboard_submit(
             file,
             indent=4
         )
-
+    print(
+        "Current directory:",
+        os.getcwd()
+    )
+    
     print(
         f"Writing file: {file_name}"
     )
