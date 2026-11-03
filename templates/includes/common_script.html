@@ -35,8 +35,7 @@ async function loadFinancialRanges()
     [
         "annual_turnover",
         "total_assets",
-        "total_liabilities",
-        "net_assets"
+        "total_liabilities"
     ];
 
     dropdowns.forEach(id =>
@@ -55,6 +54,32 @@ async function loadFinancialRanges()
     });
 }
 
+async function loadFinancialRanges_Negative()
+{
+    const response = await fetch("/static/reference/financial_ranges_neg.json");
+    const ranges = await response.json();
+
+    const dropdowns =
+    [
+        "net_assets"
+    ];
+
+    dropdowns.forEach(id =>
+    {
+        const select = document.getElementById(id);
+        
+        if (!select) { return; }
+        select.innerHTML = '<option value="">-- Select Range --</option>';
+        ranges.forEach(range =>
+        {
+            const option = document.createElement("option");
+            option.value = range.code;
+            option.textContent = range.name;
+            select.appendChild(option);
+        });
+    });
+}
+    
 async function loadLiabilityInsurance()
 {
     const response = await fetch("/static/reference/liability_insurance.json");
