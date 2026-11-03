@@ -548,20 +548,10 @@ async function submitApplication()
         .querySelectorAll("[name^='x_']")
         .forEach(field =>
         {
-            console.log(
-                "ID:",
-                field.id,
-                " NAME:",
-                field.name,
-                " VALUE:",
-                field.value
-            );
             payload[field.name] = field.value;
         });
 
     payload.x_version = document.getElementById("version").textContent;
-    
-    console.log(payload);
     
     const response = await fetch(
         "/onboard",
@@ -574,8 +564,8 @@ async function submitApplication()
         }
     );
 
-    console.log(response.status);
-    console.log(await response.text());
+    const result = await response.json();
+    console.log(result);
     
     if (!response.ok)
     {  alert("Submission failed. Please try again." );
