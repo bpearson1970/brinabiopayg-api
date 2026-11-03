@@ -564,76 +564,36 @@ async function submitApplication()
         }
     );
 
-const result =
-    await response.json();
-
-    console.log(
-        "Status:",
-        response.status
-    );
+    const result =
+        await response.json();
     
-    console.log(result);
+        console.log("Status:", response.status);
+        console.log(result);
+        
+        if (!response.ok)
+        {  alert("Submission failed. Please try again." );
+            return;
+        }
     
-    if (!response.ok)
-    {  alert("Submission failed. Please try again." );
-        return;
-    }
-    alert("Still going");
-    const submissionReference =
-        document.getElementById("submit_reference").value;
+    const submissionReference = document.getElementById("submit_reference").value;
+    const companyName = document.getElementById("company_name").value;
+    const submittedBy = document.getElementById("submitted_by_name").value;
+    const submitterType = document.getElementById("submitter_type_value").value;
+    const version = document.getElementById("version").textContent;
     
-    const companyName =
-        document.getElementById("company_name").value;
-    
-    const submittedBy =
-        document.getElementById("submitted_by_name").value;
-
-    const submitterType =
-        document.getElementById("submitter_type_value").value;
-
-    const version =
-        document.getElementById("version").textContent;
+    alert(submissionReference + " | " + companyName + " | " + submittedBy + " | " + submitterType + " | " + version);
     
     const receiptUrl =
         "/receipt?" +
-        "submission_reference=" +
-        encodeURIComponent(
-            submissionReference
-        ) +
+        "submission_reference=" + encodeURIComponent(submissionReference) +
+        "&company_name=" + encodeURIComponent(companyName) +
+        "&submitted_by=" + encodeURIComponent(submittedBy + " (" + submitterType + ")" ) +
+        "&submitted_timestamp=" + encodeURIComponent(submittedTimestamp) +
+        "&version=" +  encodeURIComponent(version);
 
-        "&company_name=" +
-        encodeURIComponent(
-            companyName
-        ) +
-
-        "&submitted_by=" +
-        encodeURIComponent(
-            submittedBy +
-            " (" +
-            submitterType +
-            ")"
-        ) +
-
-        "&submitted_timestamp=" +
-        encodeURIComponent(
-            submittedTimestamp
-        ) +
-        
-        "&version=" +
-        encodeURIComponent(
-            version
-        );
-
-    if (result.status === "ok")
-    {
-        window.open(
-            receiptUrl,
-            "_blank"); 
-    }
-    else
-    {
-        alert("Receipt generation failed.");
-    }
+    alert(receiptUrl);
+    
+    window.open(receiptUrl, "_blank"); 
 }
 
    
