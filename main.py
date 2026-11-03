@@ -160,9 +160,6 @@ async def onboard_submit():
 
 #App definitions
 
-import json
-import os
-
 @app.post("/onboard")
 async def onboard_submit(
     request: Request
@@ -192,7 +189,7 @@ async def onboard_submit(
         }
 
     file_name = (
-        f"submissions/{submission_reference}.json"
+        f"{submission_reference}.json"
     )
 
     with open(
@@ -267,48 +264,3 @@ async def receive_log(request: Request):
             content={"status": "error", "message": str(e)}
         )
 
-@app.post("/onboard")
-async def onboard_application(request: Request):
-    try:
-        raw = await request.body()
-        print("CONTENT TYPE:", request.headers.get("content-type"))
-        print(raw.decode("utf-8"))
-
-        xml = raw.decode("utf-8")
-
-        root = ET.fromstring(xml)
-
-        fields = {}
-
-        for field in root.findall(".//{http://ns.adobe.com/xfdf/}field"):
-            name = field.attrib.get("name")
-
-            value = field.find(
-                "{http://ns.adobe.com/xfdf/}value"
-            )
-
-            fields[name] = (
-                value.text if value is not None else None
-            )
-
-        timestamp = datetime.utcnow().strftime("%Y%m%dT%H%M%S")
-        rand = random.randint(10000, 99999)
-
-        filename = f"onboard_{timestamp}_{rand}.json"
-        filepath = os.path.join(ONBOARD_DIR, filename)
-
-        with open(filepath, "w") as f:
-            json.dump(fields, f, indent=2)
-
-        print("Received onboarding fields:", fields)
-
-        return PlainTextResponse("Form successfully submitted")
-        
-    except Exception as e:
-        return JSONResponse(
-            status_code=400,
-            content={
-                "status": "error",
-                "message": str(e)
-            }
-        )
