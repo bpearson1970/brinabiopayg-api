@@ -142,6 +142,9 @@ os.makedirs(LOG_DIR, exist_ok=True)
 ONBOARD_DIR = "/var/data/onboard"
 os.makedirs(ONBOARD_DIR, exist_ok=True)
 
+ONBOARDSub_DIR = "/var/data/onboard/submissions"
+os.makedirs(ONBOARDSub_DIR, exist_ok=True)
+
 # Testing directories exist
 
 @app.get("/")
@@ -157,12 +160,53 @@ async def onboard_submit():
 
 #App definitions
 
+import json
+import os
+
 @app.post("/onboard")
 async def onboard_submit(
     request: Request
 ):
+
     payload = await request.json()
-    print(payload)
+
+    payload["x_ip_address"] = request.client.host
+
+    payload["x_user_agent"] = parse_user_agent(
+        request.headers.get(
+            "user-agent",
+            ""
+        )
+    )
+
+    submission_reference = payload.get(
+        "x_submit_reference"
+    )
+
+    if not submission_reference:
+
+        return {
+            "success": False,
+            "message":
+                "Submission reference missing."
+        }
+
+    file_name = (
+        f"{submission_reference}.json"
+    )
+
+    with open(
+        file_name,
+        "w",
+        encoding="utf-8"
+    ) as file:
+
+        json.dump(
+            payload,
+            file,
+            indent=4
+        )
+
     return {
         "success": True
     }
