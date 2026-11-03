@@ -204,6 +204,10 @@ async def onboard_submit(
             indent=4
         )
 
+    print(
+        f"Writing file: {file_name}"
+    )
+    
     return {
         "success": True
     }
