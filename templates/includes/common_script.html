@@ -248,11 +248,14 @@ function disableForm()
 function updateSubmitter()
 {
     const selected =
-        document.querySelector('input[name="y_submitter_type"]:checked').value;
+        document.querySelector('input[name="x_submitter_type"]:checked').value;
     alert(selected);
             
     const field =
         document.getElementById("submitted_by_name");
+
+    const store =
+        document.getElementById("submitter_type_value");
 
     const primary =
         document.getElementById("primary_contact_name").value;
@@ -264,6 +267,7 @@ function updateSubmitter()
     {
         field.value = primary;
         field.readOnly = true;
+        store.value = primary;
     }
     else if (selected === "Secondary Contact")
     {
@@ -276,17 +280,20 @@ function updateSubmitter()
                 ).checked = true;
             field.value = "";
             field.readOnly = false;
+            store.value = "Other";
         }
         else
         {
             field.value = secondary;
             field.readOnly = true;
+            store.value = secondary;
         }   
     }
     else
     {
         field.value = "";
         field.readOnly = false;
+        store.value = "Other";
     }
 
     updateSignature();
