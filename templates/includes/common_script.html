@@ -564,16 +564,20 @@ async function submitApplication()
         }
     );
 
-    const result = await response.json();
+const result =
+    await response.json();
+
+    console.log(
+        "Status:",
+        response.status
+    );
+    
     console.log(result);
     
     if (!response.ok)
     {  alert("Submission failed. Please try again." );
         return;
     }
-
-    const result =
-        await response.json();
     
     const submissionReference =
         document.getElementById("submit_reference").value;
