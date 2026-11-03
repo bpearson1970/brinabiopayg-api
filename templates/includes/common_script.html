@@ -550,10 +550,7 @@ async function submitApplication()
         {
             payload[field.name] = field.value;
         });
-       
-    payload.submitter_type =
-        document.getElementById("submitter_type").value;
-    
+         
     console.log(payload);
     
     const response = await fetch(
