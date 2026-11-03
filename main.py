@@ -185,9 +185,11 @@ async def onboard_submit(
                 "Submission reference missing."
         }
 
-    file_name = os.path.join( ONBOARD_PATH , f"{submission_reference}.json"
+    file_name = os.path.join( ONBOARDSub_DIR , f"{submission_reference}.json"
     )
 
+    print(f"Writing file: {file_name}")
+    
     with open(
         file_name,
         "w",
@@ -199,11 +201,7 @@ async def onboard_submit(
             file,
             indent=4
         )
-      
-    print(
-        f"Writing file: {file_name}"
-    )
-    
+          
     return {
         "success": True
     }
