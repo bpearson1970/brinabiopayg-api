@@ -2,23 +2,31 @@
     <div class="logo">
         <img src="/static/images/BrinaBioPAYG.png" alt="Brina Bio PAYG">
     </div>
-        <div class="title">
-            <h1>Client On-Boarding Submission</h1>
-            
-            {% if company_name %}
-                <div class="client-info">
-                    <div class="company-name">
-                        {{ company_name }}
-                    </div>
     
-                    {% if logo %}
-                        <img
-                            class="client-logo"
-                            src="/static/images/{{ logo }}"
-                            alt="{{ company_name }}">
-                    {% endif %}
-                </div>            
-            {% endif %}
-            
-        </div>
+    <div class="title">
+        <h1>Client On-Boarding Submission</h1>
+        
+        {% if company_name %}
+            <div class="client-info">
+                <div class="company-name">
+                    {{ company_name }}
+                </div>
+
+                {% if logo %}
+                    <img
+                        class="client-logo"
+                        src="/static/images/{{ logo }}"
+                        alt="{{ company_name }}">
+                {% endif %}
+            </div>            
+        {% endif %}
+        
+    </div>
+    <div id="test-mode-banner">
+    ⚠ TEST MODE ⚠
+    <br>
+    <span>
+        No data will be submitted
+    </span>
+</div>
 </div>
