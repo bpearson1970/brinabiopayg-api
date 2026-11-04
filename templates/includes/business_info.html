@@ -82,6 +82,7 @@
             maxlength="5"
             pattern="[0-9]{5}"
             placeholder="12345"
+            oninput="this.value=this.value.replace(/[^0-9]/g,'').slice(0,5)"
             onblur="validateZip(this)"
             required>
         </input>
