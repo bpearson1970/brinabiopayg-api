@@ -208,11 +208,13 @@ loadVersion();
 
 function checkActive()
 {
-    const active =
-        document.getElementById(
-            "active"
-        ).value;
+    const active = document.getElementById( "active" ).value;
 
+    document.getElementById( "test-mode-banner" ).style.display =
+        active === "100"
+        ? "block"
+        : "none"
+    
     if ( ["1", "100"].includes(active) )
     {
         return;
