@@ -643,6 +643,7 @@ async function submitApplication()
     const submittedBy = document.getElementById("submitted_by_name").value;
     const submitterType = document.getElementById("submitter_type_value").value;
     const version = document.getElementById("version").textContent;
+    const activeValue = document.getElementById("active").value;
        
     const receiptUrl =
         "/receipt?" +
@@ -650,7 +651,8 @@ async function submitApplication()
         "&company_name=" + encodeURIComponent(companyName) +
         "&submitted_by=" + encodeURIComponent(submittedBy + " (" + submitterType + ")" ) +
         "&submitted_timestamp=" + encodeURIComponent(submittedTimestamp) +
-        "&version=" +  encodeURIComponent(version);
+        "&version=" +  encodeURIComponent(version) +
+        "&active=" +  encodeURIComponent(activeValue);
     
     window.open(receiptUrl, "_blank"); 
 }
