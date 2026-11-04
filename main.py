@@ -71,8 +71,7 @@ async def receipt(
     company_name: str = "",
     submitted_by: str = "",
     version: str = "",
-    submitted_timestamp: str = "",
-    active: str = ""
+    submitted_timestamp: str = ""
 ):
     
     ip_address = request.client.host
