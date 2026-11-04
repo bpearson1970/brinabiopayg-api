@@ -1,33 +1,37 @@
 <div class="header">
-    <div class="logo">
-        <img src="/static/images/BrinaBioPAYG.png" alt="Brina Bio PAYG">
+    <div>
+        <div class="logo">
+            <img src="/static/images/BrinaBioPAYG.png" alt="Brina Bio PAYG">
+        </div>
+        
+        <div class="title">
+            <h1>Client On-Boarding Submission</h1>
+            
+            {% if company_name %}
+                <div class="client-info">
+                    <div class="company-name">
+                        {{ company_name }}
+                    </div>
+    
+                    {% if logo %}
+                        <img
+                            class="client-logo"
+                            src="/static/images/{{ logo }}"
+                            alt="{{ company_name }}">
+                    {% endif %}
+                </div>            
+            {% endif %}
+    
+        </div>
     </div>
     
-    <div class="title">
-        <h1>Client On-Boarding Submission</h1>
-        
-        {% if company_name %}
-            <div class="client-info">
-                <div class="company-name">
-                    {{ company_name }}
-                </div>
-
-                {% if logo %}
-                    <img
-                        class="client-logo"
-                        src="/static/images/{{ logo }}"
-                        alt="{{ company_name }}">
-                {% endif %}
-            </div>            
-        {% endif %}
-
     </div>
-</div>
-<div id="test-mode-banner"> 
-    <div class="title">
-        ⚠ TEST MODE ⚠
-    </div>
-    <div class="message">
-        No data will be submitted. A sample receipt will be provided.
+    <div id="test-mode-banner"> 
+        <div class="title">
+            ⚠ TEST MODE ⚠
+        </div>
+        <div class="message">
+            No data will be submitted. A sample receipt will be provided.
+        </div>
     </div>
 </div>
