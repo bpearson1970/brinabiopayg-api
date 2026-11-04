@@ -457,6 +457,28 @@ function validateEmail(field)
 
     field.reportValidity();
 }
+
+function validateZip(field)
+{
+    const zip =
+        field.value.trim();
+
+    if (
+        zip !== "" &&
+        !/^\d{5}$/.test(zip)
+    )
+    {
+        field.setCustomValidity(
+            "ZIP Code must contain exactly 5 numeric digits."
+        );
+    }
+    else
+    {
+        field.setCustomValidity("");
+    }
+
+    field.reportValidity();
+}
     
 function generateSubmitReference()
 {
