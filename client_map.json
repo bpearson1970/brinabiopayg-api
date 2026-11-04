@@ -22,5 +22,12 @@
     "template": "brinapayg_onboard_form_10001.html",
     "active": "100"
   }
-  
+
+   "Test": {
+    "client_id": "10002",
+    "company_name": null,
+    "logo": null,
+    "template": "brinapayg_onboard_form_10002.html",
+    "active": "100"
+  }
 }
