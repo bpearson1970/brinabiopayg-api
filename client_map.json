@@ -15,7 +15,7 @@
     "active": "0"
   },
 
-  "Test Group": {
+  "TestMedicalGroup": {
     "client_id": "10001",
     "company_name": "Test Medical Group",
     "logo": "testmedicallogo.png",
