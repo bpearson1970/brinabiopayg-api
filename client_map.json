@@ -18,7 +18,7 @@
   "Test Group": {
     "client_id": "10001",
     "company_name": "Test Medical Group",
-    "logo": testmedicallogo.png",
+    "logo": "testmedicallogo.png",
     "template": "brinapayg_onboard_form_10001.html",
     "active": "100"
   }
