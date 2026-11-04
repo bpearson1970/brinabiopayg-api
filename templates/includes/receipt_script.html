@@ -3,7 +3,12 @@
 function checkActive()
 {
     const active = document.getElementById( "active" ).value;
-    alert(active);
+
+    if (active === "100")
+    {
+        document.getElementById( "test-watermark" ).style.opacity = "1";
+    }
+    
 }
 
 checkActive();
