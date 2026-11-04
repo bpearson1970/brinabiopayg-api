@@ -437,24 +437,27 @@ textarea:required:valid {
 #test-mode-banner {
     margin: 15px 0 20px 0;
     padding: 12px;
+    width: 100%;
+    box-sizing: border-box;
     text-align: center;
-    font-size: 24px;
-    font-weight: bold;
     color: #cc3300;
     background: #fff3cd;
-    border: 2px solid #ffcc00;
+    border: 2px solid #ffc107;
     border-radius: 6px;
     display: none;
 }
 
-#test-mode-banner span {
-    display: block;
-    margin-top: 5px;
-    font-size: 14px;
-    font-weight: normal;
-    color: #666666;
+#test-mode-banner .title {
+    font-size: 32px;
+    font-weight: 700;
 }
 
+#test-mode-banner .message {
+    margin-top: 5px;
+    font-size: 15px;
+    color: #495057;
+}
+    
 @media print {
     .no-print {
         display: none !important;
