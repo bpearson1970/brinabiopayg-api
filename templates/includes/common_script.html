@@ -213,7 +213,7 @@ function checkActive()
             "active"
         ).value;
 
-    if (active === "1")
+    if ( ["1", "100"].includes(active) )
     {
         return;
     }
