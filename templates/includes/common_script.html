@@ -590,38 +590,51 @@ async function submitApplication()
 
     const submitTSField = document.getElementById("submitted_timestamp");
     submitTSField.value = submittedTimestamp;
-    
-    const payload = {};
-    document
-        .querySelectorAll("[name^='x_']")
-        .forEach(field =>
-        {
-            payload[field.name] = field.value;
-        });
 
-    payload.x_version = document.getElementById("version").textContent;
+    const activeField = document.getElementById("active");
     
-    const response = await fetch(
-        "/onboard",
-        {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(payload)
-        }
-    );
-
-    const result =
-        await response.json();
+    if (activeField.value !== "100")
+    {
+        const payload = {};
+        document
+            .querySelectorAll("[name^='x_']")
+            .forEach(field =>
+            {
+                payload[field.name] = field.value;
+            });
     
-        console.log("Status:", response.status);
-        console.log(result);
+        payload.x_version = document.getElementById("version").textContent;
         
-        if (!response.ok)
-        {  alert("Submission failed. Please try again." );
-            return;
-        }
+        const response = await fetch(
+            "/onboard",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(payload)
+            }
+        );
+    
+        const result =
+            await response.json();
+        
+            console.log("Status:", response.status);
+            console.log(result);
+            
+            if (!response.ok)
+            {  alert("Submission failed. Please try again." );
+                return;
+            }
+    }
+    else
+    {
+        alert(
+            "TEST MODE\n\n" +
+            "Please note that the system is currently operating in Test Mode.\n\n" +
+            "No data will be submitted; however, a sample receipt will be provided."
+        );
+    }
     
     const submissionReference = document.getElementById("submit_reference").value;
     const companyName = document.getElementById("company_name").value;
