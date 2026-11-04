@@ -92,7 +92,8 @@ async def receipt(
             "version": version,
             "submitted_timestamp": submitted_timestamp,
             "ip_address": ip_address,
-            "user_agent": user_agent
+            "user_agent": user_agent,
+            "active": active
         }
     )
 
