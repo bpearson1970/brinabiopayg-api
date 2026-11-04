@@ -57,40 +57,41 @@
             rows="3"
             required></textarea>
     </div>
-
-    <div class="form-group">
-        <label for="state">
-            State *
-        </label>
-
-        <select
-            id="state"
-            name="x_state"
-            required>
-        </select>
-    </div>
+    
+    <div style="grid-column: 2 / 4;">
         <div class="form-group">
-        <label for="zip">
-            Zip *
-        </label>
+            <label for="state">
+                State *
+            </label>
+    
+            <select
+                id="state"
+                name="x_state"
+                required>
+            </select>
 
-        <input
-            id="zip"
-            name="x_zip"
-           type="text"
-            inputmode="numeric"
-            maxlength="5"
-            pattern="[0-9]{5}"
-            placeholder="12345"
-            oninput="this.value=this.value.replace(/[^0-9]/g,'').slice(0,5)"
-            onblur="validateZip(this)"
-            required>
-        </input>
-    </div>
-    <div></div>
-    <div class="form-group" style="grid-column: 2 / 4;">
-        <label for="city">
-            City/Town *
-        </label>
+            <label for="zip">
+                Zip *
+            </label>
+    
+            <input
+                id="zip"
+                name="x_zip"
+               type="text"
+                inputmode="numeric"
+                maxlength="5"
+                pattern="[0-9]{5}"
+                placeholder="12345"
+                oninput="this.value=this.value.replace(/[^0-9]/g,'').slice(0,5)"
+                onblur="validateZip(this)"
+                required>
+            </input>
+        </div>
+
+        <div class="form-group">
+            <label for="city_town">
+                City/Town *
+            </label>
+        </div>
     </div>
 </div>
