@@ -646,7 +646,13 @@ async function submitApplication()
         "&version=" +  encodeURIComponent(version) +
         "&active=" +  encodeURIComponent(activeValue);
     
-    window.open(receiptUrl, "_blank"); 
+    window.open(receiptUrl, "_blank");
+
+    /* CHANGE BUTTON CHARACTERISTICS */
+    const submitButton = document.getElementById("submitButton");
+    submitButton.textContent = "Print Receipt";
+    submitButton.style.background = "#2E7D32";
+    
 }
 
 document
