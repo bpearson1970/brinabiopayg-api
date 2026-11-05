@@ -526,7 +526,7 @@ function resetForm()
         const submitButton = document.getElementById("submitButton");
         submitButton.textContent = "Submit";
         submitButton.style.background = "#0A67C8";
-        onclick = "prepareSubmission()";
+        submitButton.onclick = prepareSubmission;
 
         updateSubmitter();
     }
@@ -635,7 +635,21 @@ async function submitApplication()
                 return;
             }
     }
+
+    printReceipt();
     
+    /* CHANGE SUBMIT BUTTON CHARACTERISTICS */
+    const submitButton = document.getElementById("submitButton");
+    submitButton.textContent = "Print Receipt";
+    submitButton.style.background = "#2E7D32";
+    submitButton.onclick = printReceipt;
+}
+
+function printReceipt()
+{
+    alert("Print");
+
+    const submittedTimestamp = document.getElementById("submitted_timestamp").value;
     const submissionReference = document.getElementById("submit_reference").value;
     const companyName = document.getElementById("company_name").value;
     const submittedBy = document.getElementById("submitted_by_name").value;
@@ -654,16 +668,6 @@ async function submitApplication()
     
     window.open(receiptUrl, "_blank");
 
-    /* CHANGE SUBMIT BUTTON CHARACTERISTICS */
-    const submitButton = document.getElementById("submitButton");
-    submitButton.textContent = "Print Receipt";
-    submitButton.style.background = "#2E7D32";
-    submitButton.onclick = printReceipt;
-}
-
-function printReceipt()
-{
-    alert("Print");
 }
     
 document
