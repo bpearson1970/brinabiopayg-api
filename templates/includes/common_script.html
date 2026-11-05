@@ -526,7 +526,7 @@ function resetForm()
         const submitButton = document.getElementById("submitButton");
         submitButton.textContent = "Submit";
         submitButton.style.background = "#0A67C8";
-        onclick = prepareSubmission();
+        onclick = "prepareSubmission()";
 
         updateSubmitter();
     }
@@ -658,7 +658,7 @@ async function submitApplication()
     const submitButton = document.getElementById("submitButton");
     submitButton.textContent = "Print Receipt";
     submitButton.style.background = "#2E7D32";
-    onclick = printReceipt();
+    onclick = "printReceipt()";
 }
 
 function printReceipt()
