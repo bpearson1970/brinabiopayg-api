@@ -522,10 +522,10 @@ function resetForm()
 
         document.getElementById("signature_preview").textContent = "";
 
-        /* CHANGE SUBMIT BUTTON CHARACTERISTICS */
+        /* REVERT SUBMIT BUTTON CHARACTERISTICS */
         const submitButton = document.getElementById("submitButton");
         submitButton.textContent = "Submit";
-        submitButton.style.background = "#2E7D32";
+        submitButton.style.background = "#0A67C8";
         submitButton.onclick = prepareSubmission;
 
         updateSubmitter();
