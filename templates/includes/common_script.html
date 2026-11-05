@@ -521,7 +521,13 @@ function resetForm()
             .value = "0";
 
         document.getElementById("signature_preview").textContent = "";
-        
+
+        /* CHANGE SUBMIT BUTTON CHARACTERISTICS */
+        const submitButton = document.getElementById("submitButton");
+        submitButton.textContent = "Submit";
+        submitButton.style.background = "#2E7D32";
+        submitButton.onclick = prepareSubmission;
+
         updateSubmitter();
     }
 }
@@ -648,7 +654,7 @@ async function submitApplication()
     
     window.open(receiptUrl, "_blank");
 
-    /* CHANGE BUTTON CHARACTERISTICS */
+    /* CHANGE SUBMIT BUTTON CHARACTERISTICS */
     const submitButton = document.getElementById("submitButton");
     submitButton.textContent = "Print Receipt";
     submitButton.style.background = "#2E7D32";
