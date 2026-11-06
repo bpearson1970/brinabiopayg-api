@@ -45,12 +45,16 @@ async def test_odoo():
         "id": 1
     }
 
-    response = requests.post(
+ response = requests.post(
         os.getenv("ODOO_URL"),
         json=payload
     )
 
-    return response.json()
+    uid = response.json()["result"]
+
+    return {
+        "uid": uid
+    }
 
 # Load clients for on-boarding from client_map.json
 @app.get("/onboard/{client_code}")
