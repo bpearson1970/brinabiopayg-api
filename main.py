@@ -27,9 +27,10 @@ app.mount(
 # Create ODOO connectivity test
 @app.get("/test-odoo")
 async def test_odoo():
-
     return {
-        "status": "test route working"
+        "url": os.getenv("ODOO_URL"),
+        "db": os.getenv("ODOO_DB"),
+        "login": os.getenv("ODOO_LOGIN")
     }
 
 # Load clients for on-boarding from client_map.json
