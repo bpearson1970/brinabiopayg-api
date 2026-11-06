@@ -29,7 +29,11 @@ app.mount(
 @app.get("/test-odoo")
 async def test_odoo():
 
-    # Authenticate
+    import json
+
+    # --------------------------------------------------
+    # Authenticate to Odoo
+    # --------------------------------------------------
 
     payload = {
         "jsonrpc": "2.0",
@@ -54,14 +58,35 @@ async def test_odoo():
 
     uid = response.json()["result"]
 
-    # Create Test Record
+    # --------------------------------------------------
+    # Read one JSON file
+    # --------------------------------------------------
+
+    test_file = (
+        "/var/data/onboard/submissions/"
+        "20261104191257_337332.json"
+    )
+
+    with open(test_file, "r") as f:
+        data = json.load(f)
+
+    # --------------------------------------------------
+    # Map to Odoo fields
+    # --------------------------------------------------
 
     vals = {
-        "x_name": "TEST002",
-        "x_company_name": "ABC Medical Group",
+        "x_name": data["x_submit_reference"],
+        "x_company_name": data["x_company_name"],
         "x_status": "Received",
-        "x_json_payload": '{"test":"success"}'
+        "x_json_payload": json.dumps(
+            data,
+            indent=2
+        )
     }
+
+    # --------------------------------------------------
+    # Create Odoo record
+    # --------------------------------------------------
 
     payload = {
         "jsonrpc": "2.0",
@@ -87,6 +112,7 @@ async def test_odoo():
     )
 
     return response.json()
+
     
 # Load clients for on-boarding from client_map.json
 @app.get("/onboard/{client_code}")
