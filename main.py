@@ -5,6 +5,7 @@ from fastapi.responses import JSONResponse
 import os
 import json
 import random
+import requests
 import xml.etree.ElementTree as ET
 from datetime import datetime
 from fastapi.staticfiles import StaticFiles
@@ -27,11 +28,29 @@ app.mount(
 # Create ODOO connectivity test
 @app.get("/test-odoo")
 async def test_odoo():
-    return {
-        "url": os.getenv("ODOO_URL"),
-        "db": os.getenv("ODOO_DB"),
-        "login": os.getenv("ODOO_LOGIN")
+
+    payload = {
+        "jsonrpc": "2.0",
+        "method": "call",
+        "params": {
+            "service": "common",
+            "method": "authenticate",
+            "args": [
+                os.getenv("ODOO_DB"),
+                os.getenv("ODOO_LOGIN"),
+                os.getenv("ODOO_API_KEY"),
+                {}
+            ]
+        },
+        "id": 1
     }
+
+    response = requests.post(
+        os.getenv("ODOO_URL"),
+        json=payload
+    )
+
+    return response.json()
 
 # Load clients for on-boarding from client_map.json
 @app.get("/onboard/{client_code}")
