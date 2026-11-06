@@ -24,6 +24,14 @@ app.mount(
     name="static"
 )
 
+# Create ODOO connectivity test
+@app.get("/test-odoo")
+async def test_odoo():
+
+    return {
+        "status": "test route working"
+    }
+
 # Load clients for on-boarding from client_map.json
 @app.get("/onboard/{client_code}")
 async def onboard_form(
