@@ -45,7 +45,7 @@ async def test_odoo():
         "id": 1
     }
 
-     response = requests.post(
+    response = requests.post(
         os.getenv("ODOO_URL"),
         json=payload
     )
