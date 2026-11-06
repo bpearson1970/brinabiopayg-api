@@ -29,6 +29,8 @@ app.mount(
 @app.get("/test-odoo")
 async def test_odoo():
 
+    # Authenticate
+
     payload = {
         "jsonrpc": "2.0",
         "method": "call",
@@ -52,10 +54,40 @@ async def test_odoo():
 
     uid = response.json()["result"]
 
-    return {
-        "uid": uid
+    # Create Test Record
+
+    vals = {
+        "x_name": "TEST002",
+        "x_company_name": "ABC Medical Group",
+        "x_status": "Received",
+        "x_json_payload": '{"test":"success"}'
     }
 
+    payload = {
+        "jsonrpc": "2.0",
+        "method": "call",
+        "params": {
+            "service": "object",
+            "method": "execute_kw",
+            "args": [
+                os.getenv("ODOO_DB"),
+                uid,
+                os.getenv("ODOO_API_KEY"),
+                "x_payg_onboarding",
+                "create",
+                [vals]
+            ]
+        },
+        "id": 2
+    }
+
+    response = requests.post(
+        os.getenv("ODOO_URL"),
+        json=payload
+    )
+
+    return response.json()
+    
 # Load clients for on-boarding from client_map.json
 @app.get("/onboard/{client_code}")
 async def onboard_form(
