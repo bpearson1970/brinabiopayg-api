@@ -195,7 +195,7 @@ async def onboard_submit(
     print(f"Writing file: {file_name}")
     
     with open(file_name, "w", encoding="utf-8") as file:
-        json.dump(payload,file, indent=4)
+        json.dump(payload, file, indent=4)
         
     odoo_record_id = create_onboarding_record(payload)
 
