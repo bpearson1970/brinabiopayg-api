@@ -71,18 +71,33 @@ async def test_odoo():
         data = json.load(f)
 
     # --------------------------------------------------
-    # Map to Odoo fields
+    # Load field mapping
     # --------------------------------------------------
-
-    with open("field_map.json") as f:
+    
+    with open("field_map.json", "r") as f:
         field_map = json.load(f)
-
+    
+    # --------------------------------------------------
+    # Build Odoo values dictionary
+    # --------------------------------------------------
+    
     vals = {}
-
+    
     for source_field, target_field in field_map.items():
-
+    
         if source_field in data:
             vals[target_field] = data[source_field]
+    
+    # --------------------------------------------------
+    # System / derived fields
+    # --------------------------------------------------
+    
+    vals["x_status"] = "Received"
+    
+    vals["x_json_payload"] = json.dumps(
+        data,
+        indent=2
+    )
 
     # --------------------------------------------------
     # Create Odoo record
