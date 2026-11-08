@@ -64,7 +64,7 @@ async def test_odoo():
 
     test_file = (
         "/var/data/onboard/submissions/"
-        "20261104191257_337332.json"
+        "20261104144745_240546.json"
     )
 
     with open(test_file, "r") as f:
@@ -74,15 +74,15 @@ async def test_odoo():
     # Map to Odoo fields
     # --------------------------------------------------
 
-    vals = {
-        "x_name": data["x_submit_reference"],
-        "x_company_name": data["x_company_name"],
-        "x_status": "Received",
-        "x_json_payload": json.dumps(
-            data,
-            indent=2
-        )
-    }
+    with open("field_map.json") as f:
+        field_map = json.load(f)
+
+    vals = {}
+
+    for source_field, target_field in field_map.items():
+
+        if source_field in data:
+            vals[target_field] = data[source_field]
 
     # --------------------------------------------------
     # Create Odoo record
