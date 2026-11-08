@@ -130,7 +130,7 @@ def create_onboarding_record(data):
         response_data=result
     )
 
-return record_id
+    return record_id
 
 def create_odoo_receipt(
     submission_reference,
