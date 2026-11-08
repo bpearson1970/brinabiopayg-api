@@ -149,6 +149,9 @@ os.makedirs(ONBOARD_DIR, exist_ok=True)
 ONBOARDSub_DIR = "/var/data/onboard/submissions"
 os.makedirs(ONBOARDSub_DIR, exist_ok=True)
 
+ODOOReceipt_DIR = "/var/data/onboard/odoo_receipts"
+os.makedirs(ODOOReceipt_DIR, exist_ok=True)
+
 # Testing directories exist
 
 @app.get("/")
