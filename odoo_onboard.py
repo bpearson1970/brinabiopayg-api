@@ -1,9 +1,66 @@
-def create_onboarding_record(data):
+# --------------------------------------------------
+# Odoo Onboarding Integration
+# --------------------------------------------------
 
-    uid = authenticate_odoo()
+import os
+import json
+import requests
+
+
+# --------------------------------------------------
+# Authenticate to Odoo
+# --------------------------------------------------
+
+def authenticate_odoo():
+
+    payload = {
+        "jsonrpc": "2.0",
+        "method": "call",
+        "params": {
+            "service": "common",
+            "method": "authenticate",
+            "args": [
+                os.getenv("ODOO_DB"),
+                os.getenv("ODOO_LOGIN"),
+                os.getenv("ODOO_API_KEY"),
+                {}
+            ]
+        },
+        "id": 1
+    }
+
+    response = requests.post(
+        os.getenv("ODOO_URL"),
+        json=payload
+    )
+
+    result = response.json()
+
+    if "result" not in result:
+        raise Exception(
+            f"Odoo authentication failed: {result}"
+        )
+
+    return result["result"]
+
+
+# --------------------------------------------------
+# Load field mappings
+# --------------------------------------------------
+
+def load_field_map():
 
     with open("field_map.json", "r") as f:
-        field_map = json.load(f)
+        return json.load(f)
+
+
+# --------------------------------------------------
+# Build Odoo values dictionary
+# --------------------------------------------------
+
+def build_odoo_values(data):
+
+    field_map = load_field_map()
 
     vals = {}
 
@@ -12,9 +69,52 @@ def create_onboarding_record(data):
         if source_field in data:
             vals[target_field] = data[source_field]
 
+    # System-managed fields
+
     vals["x_status"] = "Received"
 
     vals["x_json_payload"] = json.dumps(
         data,
         indent=2
     )
+
+    return vals
+
+
+# --------------------------------------------------
+# Create onboarding record
+# --------------------------------------------------
+
+def create_onboarding_record(data):
+
+    uid = authenticate_odoo()
+
+    vals = build_odoo_values(data)
+
+    payload = {
+        "jsonrpc": "2.0",
+        "method": "call",
+        "params": {
+            "service": "object",
+            "method": "execute_kw",
+            "args": [
+                os.getenv("ODOO_DB"),
+                uid,
+                os.getenv("ODOO_API_KEY"),
+                "x_payg_onboarding",
+                "create",
+                [vals]
+            ]
+        },
+        "id": 2
+    }
+
+    response = requests.post(
+        os.getenv("ODOO_URL"),
+        json=payload
+    )
+
+    result = response.json()
+
+    if "result" not in result:
+        raise Exception
