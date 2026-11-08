@@ -121,4 +121,47 @@ def create_onboarding_record(data):
             f"Odoo record creation failed: {result}"
         )
 
-    return result["result"]
+    record_id = result["result"]
+    
+    create_odoo_receipt(
+        submission_reference=data["x_submit_reference"],
+        odoo_record_id=record_id,
+        status="success",
+        response_data=result
+    )
+
+return record_id
+
+def create_odoo_receipt(
+    submission_reference,
+    odoo_record_id,
+    status,
+    response_data
+):
+
+    receipt = {
+        "submission_reference": submission_reference,
+        "odoo_record_id": odoo_record_id,
+        "status": status,
+        "timestamp": datetime.utcnow().isoformat(),
+        "response": response_data
+    }
+
+    receipt_file = (
+        f"/var/data/onboard/odoo_receipts/"
+        f"{submission_reference}.receipt.json"
+    )
+
+    with open(
+        receipt_file,
+        "w",
+        encoding="utf-8"
+    ) as file:
+
+        json.dump(
+            receipt,
+            file,
+            indent=4
+        )
+
+    return receipt_file
