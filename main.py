@@ -10,6 +10,7 @@ import xml.etree.ElementTree as ET
 from datetime import datetime
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
+from odoo_onboard import create_onboarding_record
 
 templates = Jinja2Templates(directory="templates")
 
@@ -25,110 +26,6 @@ app.mount(
     name="static"
 )
 
-# Create ODOO connectivity test
-@app.get("/test-odoo")
-async def test_odoo():
-
-    import json
-
-    # --------------------------------------------------
-    # Authenticate to Odoo
-    # --------------------------------------------------
-
-    payload = {
-        "jsonrpc": "2.0",
-        "method": "call",
-        "params": {
-            "service": "common",
-            "method": "authenticate",
-            "args": [
-                os.getenv("ODOO_DB"),
-                os.getenv("ODOO_LOGIN"),
-                os.getenv("ODOO_API_KEY"),
-                {}
-            ]
-        },
-        "id": 1
-    }
-
-    response = requests.post(
-        os.getenv("ODOO_URL"),
-        json=payload
-    )
-
-    uid = response.json()["result"]
-
-    # --------------------------------------------------
-    # Read one JSON file
-    # --------------------------------------------------
-
-    test_file = (
-        "/var/data/onboard/submissions/"
-        "20261104144745_240546.json"
-    )
-
-    with open(test_file, "r") as f:
-        data = json.load(f)
-
-    # --------------------------------------------------
-    # Load field mapping
-    # --------------------------------------------------
-    
-    with open("field_map.json", "r") as f:
-        field_map = json.load(f)
-    
-    # --------------------------------------------------
-    # Build Odoo values dictionary
-    # --------------------------------------------------
-    
-    vals = {}
-    
-    for source_field, target_field in field_map.items():
-    
-        if source_field in data:
-            vals[target_field] = data[source_field]
-    
-    # --------------------------------------------------
-    # System / derived fields
-    # --------------------------------------------------
-    
-    vals["x_status"] = "Received"
-    
-    vals["x_json_payload"] = json.dumps(
-        data,
-        indent=2
-    )
-
-    # --------------------------------------------------
-    # Create Odoo record
-    # --------------------------------------------------
-
-    payload = {
-        "jsonrpc": "2.0",
-        "method": "call",
-        "params": {
-            "service": "object",
-            "method": "execute_kw",
-            "args": [
-                os.getenv("ODOO_DB"),
-                uid,
-                os.getenv("ODOO_API_KEY"),
-                "x_payg_onboarding",
-                "create",
-                [vals]
-            ]
-        },
-        "id": 2
-    }
-
-    response = requests.post(
-        os.getenv("ODOO_URL"),
-        json=payload
-    )
-
-    return response.json()
-
-    
 # Load clients for on-boarding from client_map.json
 @app.get("/onboard/{client_code}")
 async def onboard_form(
@@ -297,20 +194,19 @@ async def onboard_submit(
 
     print(f"Writing file: {file_name}")
     
-    with open(
-        file_name,
-        "w",
-        encoding="utf-8"
-    ) as file:
+    with open(file_name, "w", encoding="utf-8") as file:
+        json.dump(payload,file, indent=4)
+        
+    odoo_record_id = create_onboarding_record(payload)
 
-        json.dump(
-            payload,
-            file,
-            indent=4
-        )
-          
+    print(
+        f"Odoo Record Created: {odoo_record_id}"
+    )
+    
     return {
-        "success": True
+        "success": True,
+        "submission_reference": payload["x_submit_reference"],
+        "odoo_record_id": odoo_record_id
     }
 
 @app.post("/event")
