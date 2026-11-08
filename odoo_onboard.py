@@ -117,7 +117,7 @@ def create_onboarding_record(data):
     result = response.json()
 
     if "result" not in result:
-        raise Exception
+        raise Exception(
             f"Odoo record creation failed: {result}"
         )
 
