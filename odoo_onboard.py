@@ -122,13 +122,48 @@ def create_onboarding_record(data):
         )
 
     record_id = result["result"]
-    
-    create_odoo_receipt(
+
+    receipt_json = create_odoo_receipt(
         submission_reference=data["x_submit_reference"],
         odoo_record_id=record_id,
         status="success",
         response_data=result
     )
+
+    write_payload = {
+        "jsonrpc": "2.0",
+        "method": "call",
+        "params": {
+            "service": "object",
+            "method": "execute_kw",
+            "args": [
+                os.getenv("ODOO_DB"),
+                uid,
+                os.getenv("ODOO_API_KEY"),
+                "x_payg_onboarding",
+                "write",
+                [
+                    [record_id],
+                    {
+                        "x_odoo_receipt": receipt_json
+                    }
+                ]
+            ]
+        },
+        "id": 3
+    }
+
+    response = requests.post(
+        os.getenv("ODOO_URL"),
+        json=write_payload
+    )
+
+    result = response.json()
+
+    if "result" not in result:
+        raise Exception(
+            f"Odoo receipt update failed: {result}"
+        )
 
     return record_id
 
@@ -153,15 +188,7 @@ def create_odoo_receipt(
     )
 
     with open(
-        receipt_file,
-        "w",
-        encoding="utf-8"
-    ) as file:
-
-        json.dump(
-            receipt,
-            file,
-            indent=4
-        )
+        receipt_file, "w", encoding="utf-8") as file:
+        json.dump(receipt, file, indent=4)
 
     return receipt_file
