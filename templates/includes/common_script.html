@@ -82,7 +82,7 @@ async function loadFinancialRanges_Negative()
     
 async function loadLiabilityInsurance()
 {
-    const response = await fetch("/static/reference/liability_insurance.json");
+    const response = await fetch("/static/reference/financial_ranges_neg.json");
     const ranges = await response.json();
 
     const dropdowns =
