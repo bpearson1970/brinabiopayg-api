@@ -1,42 +1,42 @@
 [
   {
-    "code": "CORP",
+    "code": "Corporation (C-Corp)",
     "name": "Corporation (C-Corp)"
   },
   {
-    "code": "SCORP",
+    "code": "S-Corporation",
     "name": "S-Corporation"
   },
   {
-    "code": "LLC",
+    "code": "Limited Liability Company (LLC)",
     "name": "Limited Liability Company (LLC)"
   },
   {
-    "code": "PART",
+    "code": "Partnership",
     "name": "Partnership"
   },
   {
-    "code": "LP",
+    "code": "Limited Partnership (LP)",
     "name": "Limited Partnership (LP)"
   },
   {
-    "code": "LLP",
+    "code": "Limited Liability Partnership (LLP)",
     "name": "Limited Liability Partnership (LLP)"
   },
   {
-    "code": "SOLE",
+    "code": "Sole Proprietorship",
     "name": "Sole Proprietorship"
   },
   {
-    "code": "NONPROFIT",
+    "code": "Non-Profit Organization",
     "name": "Non-Profit Organization"
   },
   {
-    "code": "TRUST",
+    "code": "Trust",
     "name": "Trust"
   },
   {
-    "code": "OTHER",
+    "code": "Other",
     "name": "Other"
   }
 ]
