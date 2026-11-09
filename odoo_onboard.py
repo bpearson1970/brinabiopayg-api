@@ -187,8 +187,9 @@ def create_odoo_receipt(
         f"{submission_reference}.receipt.json"
     )
 
-    with open(
-        receipt_file, "w", encoding="utf-8") as file:
-        json.dump(receipt, file, indent=4)
+    receipt_json = json.dumps(receipt, indent=4)
 
-    return receipt_file
+    with open(receipt_file, "w", encoding="utf-8") as file:
+        file.write(receipt_json)
+
+    return receipt_json
