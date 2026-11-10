@@ -78,8 +78,16 @@ def build_odoo_values(data):
         indent=2
     )
 
-    return vals
+    signature_image = data.get("signature_image")
+    
+    if signature_image:
 
+        if "," in signature_image:
+            signature_image = signature_image.split(",", 1)[1]
+
+        vals["x_signature_image"] = signature_image
+    
+    return vals
 
 # --------------------------------------------------
 # Create onboarding record
