@@ -581,6 +581,16 @@ async function prepareSubmission()
 
 async function submitApplication()
 {
+    // Create signature image
+    const canvas = await html2canvas(
+        document.getElementById('signature_preview'),
+        {
+            backgroundColor: null
+        }
+    );
+    
+    const signatureImage = canvas.toDataURL('image/png');
+
     const submittedTimestamp =
     new Date().toLocaleString(
         "en-GB",
@@ -612,6 +622,7 @@ async function submitApplication()
             });
     
         payload.x_version = document.getElementById("version").textContent;
+        payload.signature_image = signatureImage;
         
         const response = await fetch(
             "/onboard",
