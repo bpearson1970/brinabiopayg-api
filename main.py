@@ -106,27 +106,27 @@ async def receipt(
 @app.get("/receipt-pdf")
 async def receipt_pdf():
 
-template = templates.get_template(
-    "brinapayg_onboard_receipt.html"
-)
-
-html_content = template.render(
-    submission_reference=submission_reference,
-    company_name=company_name,
-    submitted_by=submitted_by,
-    version=version,
-    submitted_timestamp=submitted_timestamp,
-    ip_address=ip_address,
-    user_agent=user_agent,
-    active=active
-)
-
+    template = templates.get_template(
+        "brinapayg_onboard_receipt.html"
+    )
+    
+    html_content = template.render(
+        submission_reference=submission_reference,
+        company_name=company_name,
+        submitted_by=submitted_by,
+        version=version,
+        submitted_timestamp=submitted_timestamp,
+        ip_address=ip_address,
+        user_agent=user_agent,
+        active=active
+    )
+    
     pdf = HTML(string=html).write_pdf()
 
-    return Response(
-        content=pdf,
-        media_type="application/pdf"
-    )    
+return Response(
+    content=pdf,
+    media_type="application/pdf"
+)    
 
 def parse_user_agent(user_agent: str) -> str:
 
