@@ -36,5 +36,7 @@
     "x_active": "x_active_code",
     "x_version": "x_version",
     "x_ip_address": "x_ip_address",
+    "x_submission_receipt_pdf": "x_submission_receipt_pdf",
+    "x_submission_receipt_filename": "x_submission_receipt_filename",
     "x_user_agent": "x_user_agent"
 }
