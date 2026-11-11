@@ -122,7 +122,7 @@ async def receipt_pdf(request: Request):
     )
 
     with open("receipt_debug.html", "w", encoding="utf-8") as f:
-    f.write(html_content)
+        f.write(html_content)
     
     print(html_content)
 
