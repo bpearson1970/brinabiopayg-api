@@ -123,10 +123,10 @@ async def receipt_pdf():
     
     pdf = HTML(string=html).write_pdf()
 
-return Response(
-    content=pdf,
-    media_type="application/pdf"
-)    
+    return Response(
+        content=pdf,
+        media_type="application/pdf"
+    )    
 
 def parse_user_agent(user_agent: str) -> str:
 
