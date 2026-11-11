@@ -109,6 +109,9 @@ async def receipt_pdf(request: Request):
 
     data = await request.json()
 
+    with open("./static/images/BrinaBioPAYG.png", "rb") as f:
+        logo_b64 = base64.b64encode(f.read()).decode("utf-8")
+    
     html_content = templates.get_template(
         "brinapayg_onboard_receipt.html"
     ).render(
@@ -118,7 +121,8 @@ async def receipt_pdf(request: Request):
         submitter_type=data["submitter_type"],
         version=data["version"],
         submitted_timestamp=data["submitted_timestamp"],
-        active=data["active_value"]
+        active=data["active_value"],
+        logo_b64=logo_b64
     )
 
     pdf = HTML(string=html_content).write_pdf()
