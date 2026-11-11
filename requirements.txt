@@ -4,3 +4,4 @@ gunicorn
 requests
 jinja2
 weasyprint
+cairocffi
