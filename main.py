@@ -121,6 +121,14 @@ async def receipt_pdf(request: Request):
 
     data = await request.json()
 
+    ip_address = request.client.host
+
+    user_agent_raw = request.headers.get(
+        "user-agent", ""
+    )
+
+    user_agent = parse_user_agent(user_agent_raw)
+
     with open("./static/images/BrinaBioPAYG.png", "rb") as f:
         bbpayg_logo = base64.b64encode(f.read()).decode("utf-8")
 
@@ -137,6 +145,8 @@ async def receipt_pdf(request: Request):
         version=data["version"],
         submitted_timestamp=data["submitted_timestamp"],
         active=data["active_value"],
+        ip_address=ip_address,
+        user_agent=user_agent,
         header_logo=bbpayg_logo,
         footer_logo=brina_logo
     )
