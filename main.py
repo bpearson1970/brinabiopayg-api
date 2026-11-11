@@ -6,6 +6,7 @@ import os
 import json
 import random
 import requests
+import base64
 import xml.etree.ElementTree as ET
 from datetime import datetime
 from fastapi.staticfiles import StaticFiles
@@ -125,10 +126,21 @@ async def receipt_pdf(request: Request):
     pdf = HTML(string=html_content).write_pdf()
     print("Receipt HTML rendered successfully")
 
+    pdf_base64 = base64.b64encode(
+        pdf
+    ).decode("utf-8")
+    
+    filename = (
+        f"PAYG_Submission_Receipt_"
+        f"{data['submission_reference']}.pdf"
+    )
+    
     return {
         "success": True,
-        "submission_reference": data["submission_reference"]
-    }   
+        "submission_reference": data["submission_reference"],
+        "filename": filename,
+        "pdf_base64": pdf_base64
+    }
 
 def parse_user_agent(user_agent: str) -> str:
 
