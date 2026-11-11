@@ -627,8 +627,8 @@ async function submitApplication()
         payload.signature_image = signatureImage;
 
         const result = await generatePDFReceipt();
-            payload.x_submission_receipt_pdf = result.pdf_base64;
-            payload.x_submission_receipt_filename = result.filename;
+            //payload.x_submission_receipt_pdf = result.pdf_base64;
+            //payload.x_submission_receipt_filename = result.filename;
         
         const response = await fetch(
             "/onboard",
