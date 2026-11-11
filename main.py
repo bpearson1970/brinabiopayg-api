@@ -84,6 +84,11 @@ async def receipt(
         bbpayg_logo = base64.b64encode(
             f.read()
         ).decode("utf-8")
+
+    with open("./static/images/BrinaMedical.png", "rb") as f:
+        brina_logo = base64.b64encode(
+            f.read()
+        ).decode("utf-8")
         
     ip_address = request.client.host
 
@@ -105,7 +110,8 @@ async def receipt(
             "ip_address": ip_address,
             "user_agent": user_agent,
             "active": active,
-            "header_logo": bbpayg_logo
+            "header_logo": bbpayg_logo,
+            "footer_logo": brina_logo
         }
     )
 
@@ -117,6 +123,9 @@ async def receipt_pdf(request: Request):
 
     with open("./static/images/BrinaBioPAYG.png", "rb") as f:
         bbpayg_logo = base64.b64encode(f.read()).decode("utf-8")
+
+    with open("./static/images/BrinaMedical.png", "rb") as f:
+        brina_logo = base64.b64encode(f.read()).decode("utf-8")
     
     html_content = templates.get_template(
         "brinapayg_onboard_receipt.html"
@@ -128,7 +137,8 @@ async def receipt_pdf(request: Request):
         version=data["version"],
         submitted_timestamp=data["submitted_timestamp"],
         active=data["active_value"],
-        header_logo=bbpayg_logo
+        header_logo=bbpayg_logo,
+        footer_logo=brina_logo
     )
 
     pdf = HTML(string=html_content).write_pdf()
