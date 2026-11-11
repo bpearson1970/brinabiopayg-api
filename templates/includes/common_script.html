@@ -625,6 +625,10 @@ async function submitApplication()
     
         payload.x_version = document.getElementById("version").textContent;
         payload.signature_image = signatureImage;
+
+        await generatePDFReceipt();
+        // payload.x_submission_receipt_pdf = ...
+        // payload.x_submission_receipt_filename = ...
         
         const response = await fetch(
             "/onboard",
@@ -649,7 +653,6 @@ async function submitApplication()
             }
     }
 
-    await generatePDFReceipt();
     printReceipt();
     
     /* CHANGE SUBMIT BUTTON CHARACTERISTICS */
