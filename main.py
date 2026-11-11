@@ -118,8 +118,8 @@ async def receipt_pdf(request: Request):
         submitter_type=data["submitter_type"],
         version=data["version"],
         submitted_timestamp=data["submitted_timestamp"],
-        ip_address=data["ip_address"],
-        user_agent=data["user_agent"],
+        ip_address=request.client.host,
+        user_agent="I dont know",
         active=data["active_value"]
     )
     
