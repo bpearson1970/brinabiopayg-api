@@ -626,9 +626,9 @@ async function submitApplication()
         payload.x_version = document.getElementById("version").textContent;
         payload.signature_image = signatureImage;
 
-        await generatePDFReceipt();
-        // payload.x_submission_receipt_pdf = ...
-        // payload.x_submission_receipt_filename = ...
+        const result = await generatePDFReceipt();
+            payload.x_submission_receipt_pdf = result.pdf_base64;
+            payload.x_submission_receipt_filename = result.filename;
         
         const response = await fetch(
             "/onboard",
@@ -690,6 +690,7 @@ async function generatePDFReceipt()
 
     const result = await response.json();
     console.log(result);
+    return result;
 }
     
 function printReceipt()
