@@ -120,7 +120,9 @@ async def receipt_pdf(request: Request):
         submitted_timestamp=data["submitted_timestamp"],
         active=data["active_value"]
     )
-    
+
+    print(html_content)
+
     pdf = HTML(string=html_content).write_pdf()
     print("Receipt HTML rendered successfully")
 
