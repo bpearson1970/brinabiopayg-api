@@ -103,30 +103,29 @@ async def receipt(
     )
 
 #Create receipt PDF
-@app.get("/receipt-pdf")
-async def receipt_pdf():
+@app.post("/generate-receipt-pdf")
+async def receipt_pdf(request: Request):
 
-    template = templates.get_template(
+    data = await request.json()
+
+    html_content = templates.get_template(
         "brinapayg_onboard_receipt.html"
+    ).render(
+        submission_reference=data["submission_reference"],
+        company_name=data["company_name"],
+        submitted_by=data["submitted_by"],
+        submitter_type=data["submitter_type"],
+        version=data["version"],
+        submitted_timestamp=data["submitted_timestamp"],
+        active=data["active_value"]
     )
-    
-    html_content = template.render(
-        submission_reference=submission_reference,
-        company_name=company_name,
-        submitted_by=submitted_by,
-        version=version,
-        submitted_timestamp=submitted_timestamp,
-        ip_address=ip_address,
-        user_agent=user_agent,
-        active=active
-    )
-    
-    pdf = HTML(string=html).write_pdf()
 
-    return Response(
-        content=pdf,
-        media_type="application/pdf"
-    )    
+    pdf = HTML(string=html_content).write_pdf()
+
+    return {
+        "success": True,
+        "submission_reference": data["submission_reference"]
+    }   
 
 def parse_user_agent(user_agent: str) -> str:
 
