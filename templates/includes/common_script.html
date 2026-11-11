@@ -649,6 +649,7 @@ async function submitApplication()
             }
     }
 
+    await generatePDFReceipt();
     printReceipt();
     
     /* CHANGE SUBMIT BUTTON CHARACTERISTICS */
@@ -658,6 +659,36 @@ async function submitApplication()
     submitButton.onclick = printReceipt;
 }
 
+async function generatePDFReceipt()
+{
+    const submittedTimestamp = document.getElementById("submitted_timestamp").value;
+    const submissionReference = document.getElementById("submit_reference").value;
+    const companyName = document.getElementById("company_name").value;
+    const submittedBy = document.getElementById("submitted_by_name").value;
+    const submitterType = document.getElementById("submitter_type_value").value;
+    const version = document.getElementById("version").textContent;
+    const activeValue = document.getElementById("active").value;
+    
+    const response = await fetch("/generate-receipt-pdf", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },        
+        body: JSON.stringify({
+            submission_reference: submissionReference,
+            company_name: companyName,
+            submitted_by: submittedBy,
+            submitter_type: submitterType,
+            submitted_timestamp: submittedTimestamp,
+            version: version,
+            active_value: activeValue
+        })
+    });
+
+    const result = await response.json();
+    console.log(result);
+}
+    
 function printReceipt()
 {
     const submittedTimestamp = document.getElementById("submitted_timestamp").value;
