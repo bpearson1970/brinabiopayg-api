@@ -121,7 +121,7 @@ async def receipt_pdf(request: Request):
         active=data["active_value"]
     )
 
-    pdf = HTML(string=html_content, base_url="https://brinabiopayg-api.onrender.com").write_pdf()
+    pdf = HTML(string=html_content).write_pdf()
     print("Receipt HTML rendered successfully")
 
     pdf_base64 = base64.b64encode(
