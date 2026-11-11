@@ -8,8 +8,10 @@
         <title>BrinaBio PAYG Submission Receipt</title>
     </head>
     
-    <body>   
-        <input type="hidden" id="active" value="{{ active }}">
+    <body>
+        {% if not pdf_mode %}
+            <input type="hidden" id="active" value="{{ active }}">
+        {% endif %}
         
         <img id="test-watermark"
             src="/static/images/SampleOnly.png"
