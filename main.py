@@ -118,12 +118,12 @@ async def receipt_pdf(request: Request):
         submitter_type=data["submitter_type"],
         version=data["version"],
         submitted_timestamp=data["submitted_timestamp"],
-        ip_address=data.get("ip_address", ""),
-        user_agent=data.get("user_agent", ""),
+        ip_address=data["ip_address"],
+        user_agent=data["user_agent"],
         active=data["active_value"]
     )
     
-    pdf = HTML(string=html_content).write_pdf()
+    pdf = HTML(string=html_content, base_url=str(request.base_url)).write_pdf()
     print("Receipt HTML rendered successfully")
 
     pdf_base64 = base64.b64encode(
