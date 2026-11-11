@@ -141,7 +141,6 @@ async def receipt_pdf(request: Request):
         submission_reference=data["submission_reference"],
         company_name=data["company_name"],
         submitted_by=data["submitted_by"],
-        submitter_type=data["submitter_type"],
         version=data["version"],
         submitted_timestamp=data["submitted_timestamp"],
         active=data["active_value"],
