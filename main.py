@@ -151,7 +151,7 @@ async def receipt_pdf(request: Request):
         footer_logo=brina_logo
     )
 
-    pdf = HTML(string=html_content).write_pdf()
+    pdf = HTML(string=html_content).write_pdf(zoom=0.8)
     print("Receipt HTML rendered successfully")
 
     pdf_base64 = base64.b64encode(
