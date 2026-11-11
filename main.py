@@ -79,7 +79,12 @@ async def receipt(
     submitted_timestamp: str = "",
     active: str = ""
 ):
-    
+
+    with open("./static/images/BrinaBioPAYG.png", "rb") as f:
+        bbpayg_logo = base64.b64encode(
+            f.read()
+        ).decode("utf-8")
+        
     ip_address = request.client.host
 
     user_agent_raw = request.headers.get(
@@ -99,7 +104,8 @@ async def receipt(
             "submitted_timestamp": submitted_timestamp,
             "ip_address": ip_address,
             "user_agent": user_agent,
-            "active": active
+            "active": active,
+            "header_logo": bbpayg_logo
         }
     )
 
