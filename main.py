@@ -11,6 +11,8 @@ from datetime import datetime
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from odoo_onboard import create_onboarding_record
+from weasyprint import HTML
+from fastapi.responses import Response
 
 templates = Jinja2Templates(directory="templates")
 
@@ -99,6 +101,26 @@ async def receipt(
             "active": active
         }
     )
+
+#Create receipt PDF
+@app.get("/receipt-pdf")
+async def receipt_pdf():
+
+    html = """
+    <html>
+    <body>
+        <h1>PAYG Test PDF</h1>
+        <p>If you can read this, WeasyPrint works.</p>
+    </body>
+    </html>
+    """
+
+    pdf = HTML(string=html).write_pdf()
+
+    return Response(
+        content=pdf,
+        media_type="application/pdf"
+    )    
 
 def parse_user_agent(user_agent: str) -> str:
 
