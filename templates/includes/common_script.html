@@ -667,8 +667,8 @@ async function generatePDFReceipt()
     const submittedTimestamp = document.getElementById("submitted_timestamp").value;
     const submissionReference = document.getElementById("submit_reference").value;
     const companyName = document.getElementById("company_name").value;
-    const submittedBy = document.getElementById("submitted_by_name").value;
-    const submitterType = document.getElementById("submitter_type_value").value;
+    const submittedBy = document.getElementById("submitted_by_name").value + " (" +
+        document.getElementById("submitter_type_value").value + ")";
     const version = document.getElementById("version").textContent;
     const activeValue = document.getElementById("active").value;
     
