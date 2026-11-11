@@ -121,6 +121,9 @@ async def receipt_pdf(request: Request):
         active=data["active_value"]
     )
 
+    with open("receipt_debug.html", "w", encoding="utf-8") as f:
+    f.write(html_content)
+    
     print(html_content)
 
     pdf = HTML(string=html_content).write_pdf()
