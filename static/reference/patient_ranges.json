@@ -1,0 +1,22 @@
+[
+  {
+    "code": "Less than 50 patients",
+    "name": "Less than 50 patients"
+  },
+  {
+    "code": "50-100 patients",
+    "name": "50-100 patients"
+  },
+  {
+    "code": "101-200 patients",
+    "name": "101-200 patients"
+  },
+  {
+    "code": "201-500 patients",
+    "name": "201-500 patients"
+  },
+  {
+    "code": "More than 500 patients",
+    "name": "More than 500 patients"
+  }
+]
