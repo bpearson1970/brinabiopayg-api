@@ -1,0 +1,22 @@
+[
+  {
+    "code": "Less than 50 interactions",
+    "name": "Less than 50 interactions"
+  },
+  {
+    "code": "50-100 interactions",
+    "name": "50-100 interactions"
+  },
+  {
+    "code": "101-250 interactions",
+    "name": "101-200 interactions"
+  },
+  {
+    "code": "251-500 interactions",
+    "name": "251-500 interactions"
+  },
+  {
+    "code": "More than 500 interactions",
+    "name": "More than 500 interactions"
+  }
+]
