@@ -1,8 +1,8 @@
 [
-  {"code":"NIL","name":"NIL"},
-  {"code":"less than $100,000","name":"less than $100,000"},
+  {"code":"None","name":"None"},
+  {"code":"Less than $100,000","name":"Less than $100,000"},
   {"code":"$100,001 - $500,000","name":"$100,001 - $500,000"},
   {"code":"$500,001 - $2,000,000","name":"$500,001 - $2,000,000"},
   {"code":"$2,000,001 - $5,000,000","name":"$2,000,001 - $5,000,000"},
-  {"code":"greater than $5,000,000","name":"greater than $5,000,000"}
+  {"code":"Greater than $5,000,000","name":"Greater than $5,000,000"}
 ]
