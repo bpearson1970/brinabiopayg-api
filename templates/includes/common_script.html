@@ -82,7 +82,7 @@ async function loadPatientRanges()
 
 async function loadInteractionRanges()
 {
-    const response = await fetch("/static/reference/interactions_ranges.json");
+    const response = await fetch("/static/reference/interactions_range.json");
     const ranges = await response.json();
 
     const dropdowns =
