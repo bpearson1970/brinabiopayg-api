@@ -80,6 +80,32 @@ async function loadPatientRanges()
     });
 }
 
+async function loadInteractionRanges()
+{
+    const response = await fetch("/static/reference/interactions_ranges.json");
+    const ranges = await response.json();
+
+    const dropdowns =
+    [
+        "patient_interactions"
+    ];
+
+    dropdowns.forEach(id =>
+    {
+        const select = document.getElementById(id);
+        
+        if (!select) { return; }
+        select.innerHTML = '<option value="">-- Select Range --</option>';
+        ranges.forEach(range =>
+        {
+            const option = document.createElement("option");
+            option.value = range.code;
+            option.textContent = range.name;
+            select.appendChild(option);
+        });
+    });
+}
+
 async function loadFinancialRanges()
 {
     const response = await fetch("/static/reference/financial_ranges.json");
@@ -253,6 +279,9 @@ async function loadVersion()
     
 loadStates();
 loadLegalForms();
+loadStaffRanges();
+loadPatientRanges();
+loadInteractionRanges();
 loadFinancialRanges();
 loadFinancialRanges1();
 loadFinancialRanges_Negative();
