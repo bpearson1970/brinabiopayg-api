@@ -160,14 +160,17 @@ async function loadFinancialRanges_Negative()
     });
 }
     
-async function loadLiabilityInsurance()
+async function loadInsuranceRanges()
 {
-    const response = await fetch("/static/reference/liability_insurance.json");
+    const response = await fetch("/static/reference/insurance_ranges.json");
     const ranges = await response.json();
 
     const dropdowns =
     [
-        "liability_insurance"
+        "liability_insurance",
+        "indemnity_insurance",
+        "business_insurance",
+        "property_insurance"
     ];
 
     dropdowns.forEach(id =>
@@ -286,7 +289,7 @@ loadFinancialRanges();
 loadFinancialRanges1();
 loadFinancialRanges_Negative();
 loadYearRanges();
-loadLiabilityInsurance();
+loadInsuranceRanges();
 loadVersion();
 
 function checkActive()
