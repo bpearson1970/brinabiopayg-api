@@ -1,0 +1,11 @@
+    <div class="four_column-group">
+        <label for="liability_insurance">
+            Prof. Indemnity Insurance
+        </label>
+        <select
+            id="liability_insurance"
+            name="x_liability_insurance"
+            required>
+        </select>
+    </div>
+
