@@ -1,1 +1,21 @@
-sdf
+[
+  {
+    "code": "None",
+    "name": "None"
+  },
+  {
+    "code": "Dun & Bradstreet,
+    "name": "Dun & Bradstreet",
+    "measure": "PAYDEX Score"
+  },
+  {
+    "code": "Experian Business",
+    "name": "Experian Business",
+    "measure": "Intelliscore Plus V1/V2"
+  },
+  {
+    "code": "Equifax Business",
+    "name": "Equifax Business",
+    "measure": "Commercial Credit Risk Score"
+  }
+]
