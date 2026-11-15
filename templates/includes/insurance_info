@@ -1,6 +1,21 @@
+<h2>Insurance Information</h2>
+
+<div class="four_column-row">
+
+    <div class="four_column-group">
+        <label for="indemnity_insurance">
+            Commercial Property Insurance
+        </label>
+        <select
+            id="indemnity_insurance"
+            name="x_indemnity_insurance"
+            required>
+        </select>
+    </div>
+
     <div class="four_column-group">
         <label for="liability_insurance">
-            Prof. Indemnity Insurance
+            General Liability Insurance
         </label>
         <select
             id="liability_insurance"
@@ -8,4 +23,27 @@
             required>
         </select>
     </div>
+
+    <div class="four_column-group">
+        <label for="indemnity_insurance">
+            <smaller>Professional Indemnity Insurance</smaller>
+        </label>
+        <select
+            id="indemnity_insurance"
+            name="x_indemnity_insurance"
+            required>
+        </select>
+    </div>
+
+    <div class="four_column-group">
+        <label for="business_insurance">
+            Business Insurance
+        </label>
+        <select
+            id="business_insurance"
+            name="x_business_insurance"
+            required>
+        </select>
+    </div>
+</div>
 
