@@ -9,6 +9,8 @@ function toggleBureauFields(val) {
     const cbOtherText = document.getElementById("credit_bureau_other");
     const cbOther = document.getElementById("cb_other");
     const cbScoreLabel = document.getElementById("cb_score_label");
+    const scoreSelect = document.getElementById("credit_score");
+    const scoreOther = document.getElementById("other_score");
 
     cbSelect.value = "";
     col3.style.display = "none";
@@ -22,12 +24,15 @@ function toggleBureauFields(val) {
         cbOtherText.required = false;
         cbOtherText.value = "";
         cbOther.style.display = "none";
+        scoreOther.required = false;
+        cbSelect.required = false;
     }
     else {
         col2.style.display = "block";
         cbSelect.required = true;
         document.getElementById("credit_bureau_name").value = "None";
         document.getElementById("cs_score_value").value = "None";
+        cbSelect.required = true;
     }
 }
 
