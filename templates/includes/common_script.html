@@ -5,10 +5,6 @@
 function toggleBureauFields(val) {
     const col2 = document.getElementById("col_bureau_name");
     const cbSelect = document.getElementById("credit_bureau");
-    
-
-    col2.style.opacity = isYes ? "1" : "0.45";
-    col2.style.pointerEvents = isYes ? "auto" : "none";
 
     if (val === "no") {
         col2.style.opacity = "0.45";
