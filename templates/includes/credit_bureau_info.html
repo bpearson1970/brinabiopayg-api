@@ -27,11 +27,14 @@
             </label>
             <select
                 id="credit_bureau"
-                name="x_credit_bureau"
+                name="y_credit_bureau"
                 onchange="changeBureauSelect(this.value)"
             >
             </select>
         </div>
+        <div id="cb_other" style="display: block; margin-top: 10px;">
+            <input type="text" id="credit_bureau_other" name="y_credit_bureau_other" placeholder="Credit Bureau Name" />
+        </div>        
         <div id="cb_name" style="display: none;">
             <input type="text" id="credit_bureau_name" name="x_credit_bureau_name" value="None" readonly="readonly"/>
         </div>
