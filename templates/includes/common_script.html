@@ -55,6 +55,16 @@ function changeBureauSelect(val) {
     document.getElementById("cs_score_value").value = "None";
     document.getElementById("other_score_input").value = "";
     col3.style.display = "block";
+
+    //Update the Score Selection List
+    const rangeList = JSON.parse(selectedOption.dataset.ranges || "[]");
+    scoreSelect.innerHTML = '<option value="">-- Select Score Range --</option>';
+    rangeList.forEach(item => {
+        const opt = document.createElement("option");
+        opt.value = item.label;       // e.g., "80 – 100"
+        opt.textContent = item.label; // text displayed to user
+        scoreSelect.appendChild(opt);
+    });
     
     if (val === "Other") {
         cbOtherText.value = "";
