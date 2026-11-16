@@ -1,0 +1,41 @@
+<h2>Credit Bureau</h2>
+
+<div class="three_column-row">
+
+    <div class="three_column-group">
+      <label>Are you registered with a Credit Bureau?</label>
+      <div class="cb-radio-group">
+          <label class="cb-radio-label">
+              <input type="radio" name="is_cb_registered" value="no" checked="checked" onchange="toggleBureauFields(this.value)"/>
+              No
+          </label>
+          <label class="cb-radio-label">
+              <input type="radio" name="is_cb_registered" value="yes" onchange="toggleBureauFields(this.value)"/>
+              Yes
+          </label>
+        </div>
+    </div>
+    
+    <div class="three_column-group">
+        <label for="bank_years">
+            Relationship Years
+        </label>
+        <select
+            id="bank_years"
+            name="x_bank_years"
+            required>
+        </select>
+    </div>
+
+    <div class="three_column-group">
+        <label for="approved_credit">
+            Approved Credit Facilities
+        </label>
+        <select
+            id="approved_credit"
+            name="x_approved_credit"
+            required>
+        </select>
+    </div>
+
+</div>
