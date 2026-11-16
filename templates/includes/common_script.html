@@ -46,8 +46,10 @@ function changeBureauSelect(val) {
     const cbSelect = document.getElementById("credit_bureau");
     const selectedOption = cbSelect.options[cbSelect.selectedIndex];
     const scoreLabel = selectedOption.dataset.score || "Credit Score";
+    const scoreSelect_Section = document.getElementById("csList");
     const scoreSelect = document.getElementById("credit_score");
-    const scoreOther = document.getElementById("other_score");
+    const scoreOther_Section = document.getElementById("other_score");
+    const scoreOther = document.getElementById("other_score_input");
     
     cbScoreLabel.innerText = scoreLabel;
     document.getElementById("cs_score_value").value = "None";
@@ -58,8 +60,8 @@ function changeBureauSelect(val) {
         cbOtherText.value = "";
         cbOtherText.required = true;
         cbOther.style.display = "block";
-        scoreSelect.style.display = "none";
-        scoreOther.style.display = "block";
+        scoreSelect_Section.style.display = "none";
+        scoreOther_Section.style.display = "block";
         scoreSelect.required = false;
         scoreOther.required = true;
     }
@@ -67,8 +69,8 @@ function changeBureauSelect(val) {
         scoreSelect.required = true;
         cbOtherText.required = false;
         cbOther.style.display = "none";
-        scoreSelect.style.display = "block";
-        scoreOther.style.display = "none";        
+        scoreSelect_Section.style.display = "block";
+        scoreOther_Section.style.display = "none";        
     }
 }
 
