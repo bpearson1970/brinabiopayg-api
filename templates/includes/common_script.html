@@ -38,9 +38,8 @@ function changeBureauSelect(val) {
     const col3 = document.getElementById("col_score");
     const cbSelect = document.getElementById("credit_bureau");
     const selectedOption = cbSelect.options[cbSelect.selectedIndex];
-
-    const selectedOption = this.selectedIndex;
     const scoreLabel = selectedOption.dataset.score || "Credit Score";
+    
     cbScoreLabel.innerText = scoreLabel;
     col3.style.display = "block";
     
