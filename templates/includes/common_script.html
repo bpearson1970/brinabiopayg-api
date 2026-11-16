@@ -108,7 +108,7 @@ async function loadInteractionRanges()
 
 async function loadCreditBureauList()
 {
-    const response = await fetch("/static/reference/interaction_ranges.json");
+    const response = await fetch("/static/reference/credit_bureau.json");
     const ranges = await response.json();
 
     const dropdowns =
