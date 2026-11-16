@@ -203,7 +203,7 @@ async function loadInteractionRanges()
 async function loadCreditBureauList()
 {
     const response = await fetch("/static/reference/credit_bureau.json");
-    const ranges = await response.json();
+    const bureauList = await response.json();
 
     const dropdowns =
     [
@@ -215,13 +215,14 @@ async function loadCreditBureauList()
         const select = document.getElementById(id);
         
         if (!select) { return; }
-        select.innerHTML = '<option value="">-- Select Range --</option>';
-        ranges.forEach(range =>
+        select.innerHTML = '<option value="">-- Select Bureau --</option>';
+        bureauList.forEach(bureau =>
         {
             const option = document.createElement("option");
-            option.value = range.code;
-            option.textContent = range.name;
-            option.dataset.score = range.score;
+            option.value = bureau.code;
+            option.textContent = bureau.name;
+            option.dataset.score = bureau.score;
+            option.dataset.ranges = JSON.stringify(bureau.ranges || []);
             select.appendChild(option);
         });
     });
@@ -230,7 +231,7 @@ async function loadCreditBureauList()
 async function loadFinancialRanges()
 {
     const response = await fetch("/static/reference/financial_ranges.json");
-    const bureauList = await response.json();
+    const ranges = await response.json();
 
     const dropdowns =
     [
@@ -245,13 +246,11 @@ async function loadFinancialRanges()
         
         if (!select) { return; }
         select.innerHTML = '<option value="">-- Select Range --</option>';
-        bureauList.forEach(range =>
+        ranges.forEach(range =>
         {
             const option = document.createElement("option");
-            option.value = bureauList.code;
-            option.textContent = bureauList.name;
-            option.dataset.score = bureauList.score;
-            option.dataset.ranges = JSON.stringify(bureauList.ranges || []);
+            option.value = range.code;
+            option.textContent = range.name;
             select.appendChild(option);
         });
     });
