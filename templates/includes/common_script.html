@@ -4,17 +4,18 @@
 
 function toggleBureauFields(val) {
     const col2 = document.getElementById("col_credit_bureau");
+    const col3 = document.getElementById("col_score");
     const cbSelect = document.getElementById("credit_bureau");
     const cbOtherText = document.getElementById("credit_bureau_other");
     const cbOther = document.getElementById("cb_other");
     const cbScoreLabel = document.getElementById("cb_score_label");
 
     cbSelect.value = "";
-    cbScoreLabel.style.display = "none";
+    col3.style.display = "none";
     
     if (val === "no") {
-        col2.style.opacity = "0.45";
-        col2.style.pointerEvents = "none";
+        col2.style.display = "none";
+        
         cbSelect.required = false;
         document.getElementById("credit_bureau_name").value = "None";
         cbOtherText.required = false;
@@ -22,8 +23,7 @@ function toggleBureauFields(val) {
         cbOther.style.display = "none";
     }
     else {
-        col2.style.opacity = "1";
-        col2.style.pointerEvents = "auto";
+        col2.style.display = "block";
         cbSelect.required = true;
         document.getElementById("credit_bureau_name").value = "None";
     }
@@ -35,16 +35,12 @@ function changeBureauSelect(val) {
     const cbOther = document.getElementById("cb_other");
     const cbOtherText = document.getElementById("credit_bureau_other");
     const cbScoreLabel = document.getElementById("cb_score_label");
+    const col3 = document.getElementById("col_score");
 
-    const matchedBureau = creditBureaus.find(item => item.id === val || item.name === val);
-
-    if (matchedBureau && matchedBureau.score) {
-        cbScoreLabel.innerText = matchedBureau.score;
-    } else {
-        cbScoreLabel.innerText = "Credit Score"; // Default fallback
-    }
-
-    cbScoreLabel.style.display = "block";
+    const selectedOption = this.selectedIndex;
+    const scoreLabel = selectedOption.dataset.score || "Credit Score";
+    cbScoreLabel.innerText = scoreLabel;
+    col3.display = "block";
     
     if (val === "Other") {
         cbOtherText.value = "";
