@@ -21,13 +21,12 @@
     </div>
     
     <div class="three_column-group" id="col_credit_bureau" style="display: none;">
-        <div>
+        <div style="margin-bottom: 5px;">
             <label for="credit_bureau">
                 Name of Credit Bureau
             </label>
             <select
                 id="credit_bureau"
-                name="y_credit_bureau"
                 onchange="changeBureauSelect(this.value)"
             >
             </select>
@@ -36,7 +35,7 @@
             <input type="text" id="credit_bureau_other" name="y_credit_bureau_other" placeholder="Credit Bureau Name" oninput="updateOtherBureau(this.value)" />
         </div>        
         <div id="cb_name" style="display: none;">
-            <input type="text" id="credit_bureau_name" name="x_credit_bureau_name" value="None" readonly="readonly"/>
+            <input type="text" id="credit_bureau_name" name="x_credit_bureau_name" value="None" readonly="readonly" required />
         </div>
     </div>
     
@@ -44,13 +43,17 @@
         <div style="margin-bottom: 5px;">
             <label id="cb_score_label" style="display: block;" value=""/>
         </div>
-        <div>
+        <div id="csList" style="display: none; margin-top: 5px;">
             <select
-                id="approved_credit"
-                name="x_approved_credit"
-                style="display: none;"
+                id="credit_score"
                 >
             </select>
+        </div>
+        <div id="other_score" style="display: none; margin-top: 5px;">
+            <input type="text" id="other_score_input" placeholder="Enter score" oninput="updateOtherScore(this.value)" />
+        </div>
+        <div id="cs_score" style="display: none;">
+            <input type="text" id="cs_score_value" name="x_cs_score_value" value="None" readonly="readonly" required/>
         </div>
     </div>
 
