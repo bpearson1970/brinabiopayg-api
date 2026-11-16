@@ -31,10 +31,11 @@ function changeBureauSelect(val) {
     if (val === "Other") {
         cbOtherText.value = "";
         cbOtherText.required = true;
-        cbOther.hidden = false;
+        cbOther.style.display = "block";
     }
     else if {
-        cbOtherText.required = true;
+        cbOtherText.required = false;
+        cbOther.style.display = "none"
     }
 }
     
