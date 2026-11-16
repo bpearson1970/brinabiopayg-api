@@ -106,6 +106,32 @@ async function loadInteractionRanges()
     });
 }
 
+async function loadCreditBureauList()
+{
+    const response = await fetch("/static/reference/interaction_ranges.json");
+    const ranges = await response.json();
+
+    const dropdowns =
+    [
+        "credit_bureau"
+    ];
+
+    dropdowns.forEach(id =>
+    {
+        const select = document.getElementById(id);
+        
+        if (!select) { return; }
+        select.innerHTML = '<option value="">-- Select Range --</option>';
+        ranges.forEach(range =>
+        {
+            const option = document.createElement("option");
+            option.value = range.code;
+            option.textContent = range.name;
+            select.appendChild(option);
+        });
+    });
+}
+    
 async function loadFinancialRanges()
 {
     const response = await fetch("/static/reference/financial_ranges.json");
@@ -318,6 +344,7 @@ loadFinancialRanges2();
 loadFinancialRanges_Negative();
 loadYearRanges();
 loadInsuranceRanges();
+loadCreditBureauList();
 loadVersion();
 
 function checkActive()
