@@ -230,7 +230,7 @@ async function loadCreditBureauList()
 async function loadFinancialRanges()
 {
     const response = await fetch("/static/reference/financial_ranges.json");
-    const ranges = await response.json();
+    const bureauList = await response.json();
 
     const dropdowns =
     [
@@ -245,13 +245,13 @@ async function loadFinancialRanges()
         
         if (!select) { return; }
         select.innerHTML = '<option value="">-- Select Range --</option>';
-        ranges.forEach(range =>
+        bureauList.forEach(range =>
         {
             const option = document.createElement("option");
-            option.value = range.code;
-            option.textContent = range.name;
-            option.dataset.score = range.score;
-            option.dataset.ranges = JSON.stringify(bureau.ranges || []);
+            option.value = bureauList.code;
+            option.textContent = bureauList.name;
+            option.dataset.score = bureauList.score;
+            option.dataset.ranges = JSON.stringify(bureauList.ranges || []);
             select.appendChild(option);
         });
     });
