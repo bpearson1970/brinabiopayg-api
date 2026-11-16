@@ -51,7 +51,8 @@
             </select>
         </div>
         <div id="other_score" style="display: none; margin-top: 5px;">
-            <input type="text" id="other_score_input" placeholder="Enter score" oninput="updateOtherScore(this.value)" />
+            <input type="text" id="other_score_input" placeholder="Enter score" inputmode="numeric" 
+                oninput="this.value = this.value.replace(/[^0-9]/g, ''); updateOtherScore(this.value)" />
         </div>
         <div id="cs_score" style="display: block;">
             <input type="text" id="cs_score_value" name="x_cs_score_value" value="None" readonly="readonly" required/>
