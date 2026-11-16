@@ -3,18 +3,20 @@
 <div class="three_column-row">
 
     <div class="three_column-group">
-        <label style="display: block; text-align: center; line-height: 2;">
-            Are you registered with a Credit Bureau?
-        </label>
-      <div class="cb-radio-group">
-          <label class="cb-radio-label">
-              <input type="radio" name="is_cb_registered" value="no" checked="checked" onchange="toggleBureauFields(this.value)"/>
-              No
-          </label>
-          <label class="cb-radio-label">
-              <input type="radio" name="is_cb_registered" value="yes" onchange="toggleBureauFields(this.value)"/>
-              Yes
-          </label>
+        <div>
+            <label style="display: block; text-align: center; line-height: 1.5;">
+                Are you registered with a Credit Bureau?
+            </label>
+        </div>
+        <div style="display: flex; align-items: center; gap: 20px; height: 36px;">
+              <label style="display: inline-flex; align-items: center; gap: 6px;">
+                  <input type="radio" name="is_cb_registered" value="no" checked="checked" onchange="toggleBureauFields(this.value)"/>
+                  No
+              </label>
+              <label style="display: inline-flex; align-items: center; gap: 6px;">
+                  <input type="radio" name="is_cb_registered" value="yes" onchange="toggleBureauFields(this.value)"/>
+                  Yes
+              </label>
         </div>
     </div>
     
