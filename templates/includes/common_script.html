@@ -60,8 +60,11 @@ function changeBureauSelect(val) {
         cbOther.style.display = "block";
         scoreSelect.style.display = "none";
         scoreOther.style.display = "block";
+        scoreSelect.required = false;
+        scoreOther.required = true;
     }
     else {
+        scoreSelect.required = true;
         cbOtherText.required = false;
         cbOther.style.display = "none";
         scoreSelect.style.display = "block";
@@ -71,6 +74,10 @@ function changeBureauSelect(val) {
 
 function updateOtherBureau(val) {
     document.getElementById("credit_bureau_name").value = val + " (Other)";
+}
+
+function updateOtherScore(val) {
+    document.getElementById("cs_score_value").value = val;
 }
     
 async function loadStates()
