@@ -186,6 +186,7 @@ async function loadCreditBureauList()
             const option = document.createElement("option");
             option.value = range.code;
             option.textContent = range.name;
+            option.dataset.score = range.score;
             select.appendChild(option);
         });
     });
