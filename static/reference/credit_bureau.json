@@ -1,21 +1,32 @@
 [
   {
-    "code": "None",
-    "name": "None"
-  },
-  {
     "code": "Dun & Bradstreet",
     "name": "Dun & Bradstreet",
-    "measure": "PAYDEX Score"
+    "score": "PAYDEX Score"
   },
   {
     "code": "Experian Business",
     "name": "Experian Business",
-    "measure": "Intelliscore Plus V1/V2"
+    "score": "Intelliscore Plus"
   },
   {
-    "code": "Equifax Business",
-    "name": "Equifax Business",
-    "measure": "Commercial Credit Risk Score"
+    "code": "Equifax Commercial",
+    "name": "Equifax Commercial",
+    "score": "Commercial Credit Risk Score"
+  },
+    {
+    "code": "Creditsafe",
+    "name": "Creditsafe",
+    "score": "Creditsafe Rating"
+  },
+  {
+    "code": "Cortera / Moody's",
+    "name": "Cortera / Moody's",
+    "score": "Cortera Plus Score"
+  },
+  {
+    "code": "Other",
+    "name": "Other",
+    "score": "Credit Score / Rating"
   }
 ]
