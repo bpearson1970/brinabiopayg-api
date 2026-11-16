@@ -35,7 +35,7 @@
         <div id="cb_other" style="display: none; margin-top: 10px;">
             <input type="text" id="credit_bureau_other" name="y_credit_bureau_other" placeholder="Credit Bureau Name" oninput="updateOtherBureau(this.value)" />
         </div>        
-        <div id="cb_name" style="display: block;">
+        <div id="cb_name" style="display: none;">
             <input type="text" id="credit_bureau_name" name="x_credit_bureau_name" value="None" readonly="readonly"/>
         </div>
     </div>
@@ -48,7 +48,8 @@
             <select
                 id="approved_credit"
                 name="x_approved_credit"
-                required>
+                style="display: none;"
+                >
             </select>
         </div>
     </div>
