@@ -7,11 +7,14 @@ function toggleBureauFields(val) {
     const cbSelect = document.getElementById("credit_bureau");
     const cbOtherText = document.getElementById("credit_bureau_other");
     const cbOther = document.getElementById("cb_other");
+    const cbScoreLabel = document.getElementById("cb_score_label");
 
+    cbSelect.value = "";
+    cbScoreLabel.style.display = "none";
+    
     if (val === "no") {
         col2.style.opacity = "0.45";
         col2.style.pointerEvents = "none";
-        cbSelect.value = "";
         cbSelect.required = false;
         document.getElementById("credit_bureau_name").value = "None";
         cbOtherText.required = false;
@@ -21,7 +24,6 @@ function toggleBureauFields(val) {
     else {
         col2.style.opacity = "1";
         col2.style.pointerEvents = "auto";
-        cbSelect.value = "";
         cbSelect.required = true;
         document.getElementById("credit_bureau_name").value = "None";
     }
@@ -32,7 +34,18 @@ function changeBureauSelect(val) {
 
     const cbOther = document.getElementById("cb_other");
     const cbOtherText = document.getElementById("credit_bureau_other");
+    const cbScoreLabel = document.getElementById("cb_score_label");
 
+    const matchedBureau = creditBureaus.find(item => item.id === val || item.name === val);
+
+    if (matchedBureau && matchedBureau.score) {
+        cbScoreLabel.innerText = matchedBureau.score;
+    } else {
+        cbScoreLabel.innerText = "Credit Score"; // Default fallback
+    }
+
+    cbScoreLabel.style.display = "block";
+    
     if (val === "Other") {
         cbOtherText.value = "";
         cbOtherText.required = true;
