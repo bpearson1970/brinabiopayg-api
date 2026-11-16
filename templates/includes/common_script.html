@@ -63,7 +63,6 @@ function changeBureauSelect(val) {
         const opt = document.createElement("option");
         opt.value = item.label;       // e.g., "80 – 100"
         opt.textContent = item.label; // text displayed to user
-        opt.dataset.ranges = JSON.stringify(range.ranges || []);
         scoreSelect.appendChild(opt);
     });
     
@@ -252,6 +251,7 @@ async function loadFinancialRanges()
             option.value = range.code;
             option.textContent = range.name;
             option.dataset.score = range.score;
+            option.dataset.ranges = JSON.stringify(bureau.ranges || []);
             select.appendChild(option);
         });
     });
