@@ -8,13 +8,14 @@
                 Are you registered with a Credit Bureau?
             </label>
         </div>
-        <div style="display: flex; align-items: center; gap: 20px; height: 36px;">
+        <div style="display: flex; align-items: center; gap: 20px; height: 36px; text-align: center; font-weight: normal;">
               <label style="display: inline-flex; align-items: center; gap: 6px;">
-                  <input type="radio" name="is_cb_registered" value="no" checked="checked" onchange="toggleBureauFields(this.value)"/>
-                  No
+                  Yes
+                  <input type="radio" name="is_cb_registered" value="yes" onchange="toggleBureauFields(this.value)"/>
               </label>
               <label style="display: inline-flex; align-items: center; gap: 6px;">
-                  <input type="radio" name="is_cb_registered" value="yes" onchange="toggleBureauFields(this.value)"/>
+                  No
+                  <input type="radio" name="is_cb_registered" value="no" checked="checked" onchange="toggleBureauFields(this.value)"/>
                   Yes
               </label>
         </div>
