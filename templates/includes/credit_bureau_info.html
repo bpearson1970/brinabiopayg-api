@@ -22,13 +22,14 @@
     
     <div class="three_column-group" id="col_credit_bureau" style="opacity: 0.45; pointer-events: none;">
         <div>
-            <label for="credit_bureaus">
+            <label for="credit_bureau">
                 Name of Credit Bureau
             </label>
             <select
                 id="credit_bureau"
                 name="x_credit_bureau"
-                required>
+                onchange="changeBureauSelect(this.value)"
+            >
             </select>
         </div>
         <div>
