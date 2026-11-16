@@ -4,6 +4,7 @@
 
 function toggleBureauFields(val) {
     const col2 = document.getElementById("col_bureau_name");
+    const cbSelect = document.getElementById("credit_bureau");
     
 
     col2.style.opacity = isYes ? "1" : "0.45";
@@ -12,15 +13,23 @@ function toggleBureauFields(val) {
     if (val === "no") {
         col2.style.opacity = "0.45";
         col2.style.pointerEvents = "none";
-        document.getElementById("credit_bureau").value = "";
+        cbSelect.value = "";
+        cbSelect.required = false;
         document.getElementById("credit_bureau_name").value = "None";
     }
     else {
         col2.style.opacity = "1";
         col2.style.pointerEvents = "auto";
-        document.getElementById("credit_bureau").value = "";
+        cbSelect.value = "";
+        cbSelect.required = true;
         document.getElementById("credit_bureau_name").value = "None";
     }
+}
+
+function changeBureauSelect(val) {
+    alert(val);
+
+
 }
     
 async function loadStates()
