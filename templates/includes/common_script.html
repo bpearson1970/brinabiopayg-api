@@ -24,6 +24,18 @@ function toggleBureauFields(val) {
 
 function changeBureauSelect(val) {
     document.getElementById("credit_bureau_name").value = val;
+
+    const cbOther = document.getElementById("cb_other");
+    const cbOtherText = document.getElementById("credit_bureau_other");
+
+    if (val === "Other") {
+        cbOtherText.value = "";
+        cbOtherText.required = true;
+        cbOther.hidden = false;
+    }
+    else if {
+        cbOtherText.required = true;
+    }
 }
     
 async function loadStates()
