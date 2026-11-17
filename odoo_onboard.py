@@ -97,12 +97,6 @@ def build_odoo_values(data, field_map_categories=None):
     # Create a copy so you don't affect other processes using data
     payload_to_save = data.copy()
 
-    if "signature_image" in payload_to_save:
-        payload_to_save["signature_image"] = "[SIGNATURE_IMAGE_ATTACHED_SEPARATELY]"
-        
-    if "x_submission_receipt_pdf" in payload_to_save:
-        payload_to_save["x_submission_receipt_pdf"] = "[SUBMISSION_RECEIPT_PDF_ATTACHED_SEPARATELY]"
-
     # Signature handling
     signature_image = data.get("signature_image")
     if signature_image:
@@ -138,11 +132,36 @@ def build_report_layout_json(data, field_map_categories=None):
             val = data.get(form_key)
             if val is None:
                 val = ""
+                
+            # Check if this field represents a binary/file upload
+            is_file = (
+                fld.get("type") in ("binary", "file")
+                or "receipt" in form_key.lower()
+                or fld.get("is_file", False)
+            )
 
-            field_entry = {
-                "odoo_field": fld["odoo_field"],
-                "value": str(val).strip() if isinstance(val, str) else val
-            }
+            if is_file:
+                # If a file was uploaded, substitute the display comment instead of raw base64
+                if val:
+                    filename = data.get(f"{form_key}_filename") or data.get(fld.get("filename_field", ""))
+                    display_comment = f"[File Attached: {filename}]" if filename else "[File Attached]"
+                else:
+                    display_comment = ""
+
+                field_entry = {
+                    "odoo_field": fld["odoo_field"],
+                    "is_file": True,
+                    "filename_field": fld.get("filename_field"),
+                    "value": display_comment
+                }
+            else:
+                # Standard Char, Text, Number, Selection field
+                field_entry = {
+                    "odoo_field": fld["odoo_field"],
+                    "is_file": False,
+                    "value": str(val).strip() if isinstance(val, str) else val
+                }
+
                 
             # Include label if defined
             if "label" in fld:
