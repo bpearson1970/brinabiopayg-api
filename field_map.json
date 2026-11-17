@@ -1,48 +1,335 @@
-{
-    "x_company_name": "x_company_name",
-    "x_trading_name": "x_trading_name",
-    "x_ein": "x_ein",
-    "x_legal_form": "x_legal_form",
-    "x_entity_formed": "x_entity_formed",
-    "x_registered_address": "x_registered_address",
-    "x_state": "x_state",
-    "x_zip": "x_zip",
-    "x_city_town": "x_city_town",
-    "x_primary_contact_name": "x_primary_contact_name",
-    "x_primary_contact_title": "x_primary_contact_title",
-    "x_primary_contact_email": "x_primary_contact_email",
-    "x_primary_contact_phone": "x_primary_contact_phone",
-    "x_secondary_contact_name": "x_secondary_contact_name",
-    "x_secondary_contact_title": "x_secondary_contact_title",
-    "x_secondary_contact_email": "x_secondary_contact_email",
-    "x_secondary_contact_phone": "x_secondary_contact_phone",
-    "x_business_years": "x_business_years",
-    "x_staff": "x_staff",
-    "x_active_patients": "x_active_patients",
-    "x_patient_interactions": "x_patient_interactions",
-    "x_annual_turnover": "x_annual_turnover",
-    "x_total_assets": "x_total_assets",
-    "x_total_liabilities": "x_total_liabilities",
-    "x_net_assets": "x_net_assets",
-    "x_cash_assets": "x_cash_assets",
-    "x_payables": "x_cash_assets",
-    "x_bank_name": "x_bank_name",
-    "x_bank_years": "x_bank_years",
-    "x_approved_credit": "x_approved_credit",
-    "x_liability_insurance": "x_liability_insurance",
-    "x_property_insurance": "x_property_insurance",
-    "x_business_insurance": "x_business_insurance",
-    "x_credit_bureau_name": "x_credit_bureau_name",
-    "x_cs_score_value": "x_cs_score_value",
-    "x_submitter_type_value": "x_submitter_type_value",
-    "x_submitted_by_name": "x_submitted_by_name",
-    "x_submit_reference": "x_name",
-    "x_submitted_timestamp": "x_submitted_timestamp",
-    "x_client_id": "x_client_id",
-    "x_active": "x_active_code",
-    "x_version": "x_version",
-    "x_ip_address": "x_ip_address",
-    "x_submission_receipt_pdf": "x_submission_receipt_pdf",
-    "x_submission_receipt_filename": "x_submission_receipt_filename",
-    "x_user_agent": "x_user_agent"
-}
+[
+  {
+    "category": "Company Information",
+    "exclude_from_report": false,
+    "fields": [
+      {
+        "form_field": "x_company_name",
+        "odoo_field": "x_company_name",
+        "label": "Company Name",
+        "sequence": 10
+      },
+      {
+        "form_field": "x_trading_name",
+        "odoo_field": "x_trading_name",
+        "label": "Trading Name",
+        "sequence": 20
+      },
+      {
+        "form_field": "x_legal_form",
+        "odoo_field": "x_legal_form",
+        "label": "Legal Form",
+        "sequence": 30
+      },
+      {
+        "form_field": "x_ein",
+        "odoo_field": "x_ein",
+        "label": "EIN / Tax ID",
+        "sequence": 40
+      },
+      {
+        "form_field": "x_entity_formed",
+        "odoo_field": "x_entity_formed",
+        "label": "Date Entity Formed",
+        "sequence": 40
+      }
+    ]
+  },
+  {
+    "category": "Registered Office",
+    "exclude_from_report": false,
+    "fields": [
+      {
+        "form_field": "x_registered_address",
+        "odoo_field": "x_registered_address",
+        "label": "Registered Address",
+        "sequence": 10
+      },
+      {
+        "form_field": "x_city_town",
+        "odoo_field": "x_city_town,
+        "label": "City / Town",
+        "sequence": 20
+      },
+      {
+        "form_field": ""x_state"",
+        "odoo_field": ""x_state"",
+        "label": "State",
+        "sequence": 30
+      },
+      {
+        "form_field": "x_zip",
+        "odoo_field": "x_zip",
+        "label": "Zip Code",
+        "sequence": 40
+      }
+    ]
+  },
+  {
+    "category": "Primary Contact",
+    "exclude_from_report": false,
+    "fields": [
+      {
+        "form_field": "x_primary_contact_name",
+        "odoo_field": "x_primary_contact_name",
+        "label": "Contact Name",
+        "sequence": 10
+      },
+      {
+        "form_field": "x_primary_contact_title",
+        "odoo_field": "x_primary_contact_title",
+        "label": "Position / Title",
+        "sequence": 20
+      },
+      {
+        "form_field": "x_primary_contact_email",
+        "odoo_field": "x_primary_contact_email",
+        "label": "Email",
+        "sequence": 30
+      },    
+      {
+        "form_field": "x_primary_contact_phone",
+        "odoo_field": "x_primary_contact_Phone",
+        "label": "Phone",
+        "sequence": 40
+      }
+    ]
+  },
+  {
+    "category": "Secondary Contact",
+    "exclude_from_report": false,
+    "fields": [
+      {
+        "form_field": "x_secondary_contact_name",
+        "odoo_field": "x_secondary_contact_name",
+        "label": "Contact Name",
+        "sequence": 10
+      },
+      {
+        "form_field": "x_secondary_contact_title",
+        "odoo_field": "x_secondary_contact_title",
+        "label": "Position / Title",
+        "sequence": 20
+      },
+      {
+        "form_field": "x_secondary_contact_email",
+        "odoo_field": "x_secondary_contact_email",
+        "label": "Email",
+        "sequence": 30
+      },    
+      {
+        "form_field": "x_secondary_contact_phone",
+        "odoo_field": "x_secondary_contact_Phone",
+        "label": "Phone",
+        "sequence": 40
+      }
+    ]
+  },
+  {
+    "category": "Operations Information",
+    "exclude_from_report": false,
+    "fields": [
+      {
+        "form_field": "x_business_years",
+        "odoo_field": "x_business_years",
+        "label": "Years of Operation",
+        "sequence": 10
+      },
+      {
+        "form_field": "x_staff",
+        "odoo_field": "x_staff",
+        "label": "Number of Staff",
+        "sequence": 20
+      },
+      {
+        "form_field": "x_active_patients",
+        "odoo_field": "x_active_patients",
+        "label": "Active Patients",
+        "sequence": 30
+      },
+      {
+        "form_field": "x_patient_interactions",
+        "odoo_field": "x_patient_interactions",
+        "label": "Patient Interactions (Monthly)",
+        "sequence": 40
+      }
+    ]
+  },
+  {
+    "category": "Financial Information",
+    "exclude_from_report": false,
+    "fields": [
+      {
+        "form_field": "x_annual_turnover",
+        "odoo_field": "x_annual_turnover",
+        "label": "Annual Turnover",
+        "sequence": 10
+      },
+      {
+        "form_field": "x_total_assets",
+        "odoo_field": "x_total_assets",
+        "label": "Total Assets",
+        "sequence": 20
+      },
+      {
+        "form_field": "x_total_liabilities",
+        "odoo_field": "x_total_liabilities",
+        "label": "Total Liabilities",
+        "sequence": 30
+      },
+      {
+        "form_field": "x_net_assets",
+        "odoo_field": "x_net_assets",
+        "label": "Net Assets",
+        "sequence": 40
+      },
+      {
+        "form_field": "x_cash_assets",
+        "odoo_field": "x_cash_assets",
+        "label": "Cash and Cash Equivalents",
+        "sequence": 50
+      },
+      {
+        "form_field": "x_payables",
+        "odoo_field": "x_payables",
+        "label": "Short Term Payables",
+        "sequence": 60
+      }
+     ]
+  },
+  {
+    "category": "Banking Information",
+    "exclude_from_report": false,
+    "fields": [
+      {
+        "form_field": "x_bank_name",
+        "odoo_field": "x_bank_name",
+        "label": "Primary Banking Relationship",
+        "sequence": 10
+      },       
+      {
+        "form_field": "x_bank_years",
+        "odoo_field": "x_bank_years",
+        "label": "Years with Primary Bank",
+        "sequence": 20
+      },       
+      {
+        "form_field": "x_approved_credit",
+        "odoo_field": "x_approved_credit",
+        "label": "Existing Approved Credit Lines",
+        "sequence": 30
+      }
+     ]
+  },
+  {
+    "category": "Insurance Details",
+    "exclude_from_report": false,
+    "fields": [
+      {
+        "form_field": "x_property_insurance",
+        "odoo_field": "x_property_insurance",
+        "label": "Commercial Property Insurance",
+        "sequence": 10
+      },       
+      {
+        "form_field": "x_liability_insurance",
+        "odoo_field": "x_liability_insurance",
+        "label": "General Liability Insurance",
+        "sequence": 20
+      },       
+      {
+        "form_field": "x_indemnity_insurance",
+        "odoo_field": "x_indemnity_insurance",
+        "label": "Professional Indenmity Insurance",
+        "sequence": 30
+      },       
+      {
+        "form_field": "x_business_insurance",
+        "odoo_field": "x_business_insurance",
+        "label": "Business Income Insurance",
+        "sequence": 40
+      }       
+     ]
+  },
+  {
+    "category": "Credit Bureau Rating",
+    "exclude_from_report": false,
+    "fields": [
+      {
+        "form_field": "x_credit_bureau_name",
+        "odoo_field": "x_credit_bureau_name",
+        "label": "Credit Bureau",
+        "sequence": 10
+      },       
+      {
+        "form_field": "x_cs_score_value",
+        "odoo_field": "x_cs_score_value",
+        "label": "Score",
+        "sequence": 20
+      }
+     ]
+  },
+  {
+    "category": "Other Submission Details",
+    "exclude_from_report": false,
+    "fields": [
+      {
+        "form_field": "x_ip_address",
+        "odoo_field": "x_ip_address",
+        "label": "Submitter IP Address",
+        "sequence": 10
+      }, 
+      {
+        "form_field": "x_user_agent",
+        "odoo_field": "x_user_agent",
+        "label": "Platform",
+        "sequence": 20
+      }, 
+      {
+        "form_field": "x_version",
+        "odoo_field": "x_version",
+        "label": "Software Version",
+        "sequence": 30
+      } 
+    ]
+  },
+  {
+    "category": "System",
+    "exclude_from_report": true,
+    "fields": [
+      {
+        "form_field": "x_submitter_type_value",
+        "odoo_field": "x_submitter_type_value",
+      }, 
+      {
+        "form_field": "x_submitted_by_name",
+        "odoo_field": "x_submitted_by_name",
+      }, 
+      {
+        "form_field": "x_submit_reference",
+        "odoo_field": "x_name",
+      }, 
+      {
+        "form_field": "x_submitted_timestamp",
+        "odoo_field": "x_submitted_timestamp",
+      }, 
+      {
+        "form_field": "x_client_id",
+        "odoo_field": "x_client_id",
+      }, 
+      {
+        "form_field": "x_active",
+        "odoo_field": "x_active_code",
+      }, 
+      {
+        "form_field": "x_submission_receipt_pdf",
+        "odoo_field": "x_submission_receipt_pdf",
+      }, 
+     {
+        "form_field": "x_submission_receipt_filename",
+        "odoo_field": "x_submission_receipt_filename",
+      }
+     ]
+  }         
+]
+
