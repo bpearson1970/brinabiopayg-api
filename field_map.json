@@ -47,13 +47,13 @@
       },
       {
         "form_field": "x_city_town",
-        "odoo_field": "x_city_town,
+        "odoo_field": "x_city_town",
         "label": "City / Town",
         "sequence": 20
       },
       {
-        "form_field": ""x_state"",
-        "odoo_field": ""x_state"",
+        "form_field": "x_state",
+        "odoo_field": "x_stat"",
         "label": "State",
         "sequence": 30
       },
