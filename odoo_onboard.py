@@ -52,32 +52,28 @@ def load_field_map():
     with open("field_map.json", "r") as f:
         return json.load(f)
 
-def get_flat_field_map():
-    """Flattens the nested category structure into a simple source -> target dictionary."""
-    categories = load_field_map()
+def build_odoo_values(data, field_map_categories=None):
+    """
+    1. Flattens field_map.json to map form_field -> odoo_field.
+    2. Maps submitted form data to the Odoo record values dictionary.
+    3. Identifies unexpected/unmapped keys and saves them to 'x_unmapped_fields'.
+    """
+    if field_map_categories is None:
+        field_map_categories = load_field_map()
+
+    # 1. Flatten the nested structure into a direct form_field -> odoo_field dictionary
     flat_map = {}
-    
-    for category in categories:
-        for fld in category.get("fields", []):
+    for cat in field_map_categories:
+        for fld in cat.get("fields", []):
             flat_map[fld["form_field"]] = fld["odoo_field"]
-            
-    return flat_map
     
-# --------------------------------------------------
-# Build Odoo values dictionary
-# --------------------------------------------------
-
-def build_odoo_values(data):
-    flat_map = get_flat_field_map()
+    # 2. Map known fields from incoming payload into Odoo values
     vals = {}
-
-    # 1. Map existing fields into Odoo field name
     for source_field, target_field in flat_map.items():
-
         if source_field in data:
             vals[target_field] = data[source_field]
 
-    # 2. Find any fields in the incoming payload that are NOT in field_map.json
+    # 3. Find any fields in the incoming payload that are NOT in field_map.json
         incoming_keys = set(data.keys())
         mapped_keys = set(flat_map.keys())
         unmapped = incoming_keys - mapped_keys
@@ -106,7 +102,7 @@ def build_odoo_values(data):
     if "x_submission_receipt_pdf" in payload_to_save:
         payload_to_save["x_submission_receipt_pdf"] = "[SUBMISSION_RECEIPT_PDF_ATTACHED_SEPARATELY]"
 
-    # Now dump to JSON / file
+    # 5. Now dump to JSON / file
     vals["x_json_payload"]  = json.dumps(payload_to_save, indent=2)
 
     signature_image = data.get("signature_image")
@@ -118,6 +114,68 @@ def build_odoo_values(data):
 
         vals["x_signature_image"] = signature_image
     
+    return vals
+
+def build_report_layout_json(data, field_map_categories=None):
+    """
+    Creates the dynamic audit trail & report blueprint JSON string.
+    - Preserves submitted categories and fields.
+    - Fields with sequences are pre-sorted (10, 20, 30...).
+    - System / telemetry fields are retained with exclude_from_report: true.
+    - Empty or unsubmitted fields are omitted.
+    """
+   report_layout = []
+
+    for cat in field_map_categories:
+        submitted_fields = []
+        
+        # Sort fields by sequence if available; fallback to natural order (999)
+        sorted_fields = sorted(cat.get("fields", []), key=lambda x: x.get("sequence", 999))
+
+        for fld in sorted_fields:
+            form_key = fld["form_field"]
+
+            # Only include if submitted and not empty
+            if form_key in data and data[form_key] not in [None, ""]:
+                field_entry = {
+                    "odoo_field": fld["odoo_field"]
+                }
+                
+                # Include label if defined
+                if "label" in fld:
+                    field_entry["label"] = fld["label"]
+
+                # Include sequence if defined
+                if "sequence" in fld:
+                    field_entry["sequence"] = fld["sequence"]
+
+                submitted_fields.append(field_entry)
+
+        # Include category only if it has submitted fields
+        if submitted_fields:
+            report_layout.append({
+                "category": cat["category"],
+                "exclude_from_report": cat.get("exclude_from_report", False),
+                "fields": submitted_fields
+            })
+
+    return json.dumps(report_layout, indent=2)
+
+def process_submission_for_odoo(data):
+    """
+    Main helper function to call inside your endpoint/route handler.
+    Returns the complete values dictionary ready to create/write in Odoo.
+    """
+    # Load mapping once for performance
+    field_map_categories = load_field_map()
+
+    # 1. Build standard Odoo table values
+    vals = build_odoo_values(data, field_map_categories)
+
+    # 2. Build the structured audit & report layout JSON
+    # (Adjust 'x_report_layout_json' to match the exact field name on your Odoo model)
+    vals["x_report_layout_json"] = build_report_layout_json(data, field_map_categories)
+
     return vals
 
 # --------------------------------------------------
