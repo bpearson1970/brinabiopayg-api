@@ -137,7 +137,8 @@ def build_report_layout_json(data, field_map_categories=None):
             # Only include if submitted and not empty
             if form_key in data and data[form_key] not in [None, ""]:
                 field_entry = {
-                    "odoo_field": fld["odoo_field"]
+                    "odoo_field": fld["odoo_field"],
+                     "value": data[form_key] 
                 }
                 
                 # Include label if defined
