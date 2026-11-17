@@ -11,6 +11,9 @@ function checkSecondaryContactFields(val) {
         SecondTitle.required = true;
         SecondEmail.required = true;
         SecondPhone.required = true;        
+        SecondTitle.disabled = true;
+        SecondEmail.disabled = true;
+        SecondPhone.disabled = true;
     }
     else {
         SecondTitle.required = false;
@@ -19,6 +22,9 @@ function checkSecondaryContactFields(val) {
         SecondTitle.value = "";
         SecondEmail.value = "";
         SecondPhone.value = "";
+        SecondTitle.disabled = true;
+        SecondEmail.disabled = true;
+        SecondPhone.disabled = true;
     }
 }
     
@@ -781,6 +787,16 @@ function resetForm()
         document.getElementById("col_credit_bureau").style.display = "none";
         document.getElementById("col_score").style.display = "none";
 
+        const SecondTitle = document.getElementById("secondary_contact_title");
+        const SecondEmail = document.getElementById("secondary_contact_email");
+        const SecondPhone = document.getElementById("secondary_contact_phone");
+        SecondTitle.disabled = true;
+        SecondEmail.disabled = true;
+        SecondPhone.disabled = true;
+        SecondTitle.required = false;
+        SecondEmail.required = false;
+        SecondPhone.required = false;
+        
         /* REVERT SUBMIT BUTTON CHARACTERISTICS */
         const submitButton = document.getElementById("submitButton");
         submitButton.textContent = "Submit";
