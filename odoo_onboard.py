@@ -133,13 +133,16 @@ def build_report_layout_json(data, field_map_categories=None):
 
         for fld in sorted_fields:
             form_key = fld["form_field"]
+            
+            # Grab submitted value; if missing or None, default to ""
+            val = data.get(form_key)
+            if val is None:
+                val = ""
 
-            # Only include if submitted and not empty
-            if form_key in data and data[form_key] not in [None, ""]:
-                field_entry = {
-                    "odoo_field": fld["odoo_field"],
-                     "value": data[form_key] 
-                }
+            field_entry = {
+                "odoo_field": fld["odoo_field"],
+                "value": str(val).strip() if isinstance(val, str) else val
+            }
                 
                 # Include label if defined
                 if "label" in fld:
