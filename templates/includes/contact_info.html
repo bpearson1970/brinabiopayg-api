@@ -44,14 +44,15 @@
         </div>
             
         <label>Full Name</label>
-        <input id="secondary_contact_name" name="x_secondary_contact_name" oninput="updateSubmitter()">
+        <input id="secondary_contact_name" name="x_secondary_contact_name" oninput="updateSubmitter(); checkSecondaryContactFields()">
 
         <label>Position / Title</label>
-        <input name="x_secondary_contact_title">
+        <input id="secondary_contact_title" name="x_secondary_contact_title">
 
         <label>Email</label>
         <input
             type="email"
+            id="secondary_contact_email"
             name="x_secondary_contact_email"
             onblur="validateEmail(this)">
 
