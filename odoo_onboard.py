@@ -64,12 +64,26 @@ def build_odoo_values(data):
 
     vals = {}
 
+    # 1. Map existing fields into Odoo field name
     for source_field, target_field in field_map.items():
 
         if source_field in data:
             vals[target_field] = data[source_field]
 
-    # System-managed fields
+    # 2. Find any fields in the incoming payload that are NOT in field_map.json
+        incoming_keys = set(data.keys())
+        mapped_keys = set(field_map.keys())
+        unmapped = incoming_keys - mapped_keys
+
+    # 3. Send unmapped fields to Odoo field as JSON
+    if unmapped:
+        # Collects the field names AND their entered values:
+        unmapped_data = {k: data[k] for k in unmapped}
+        vals["x_unmapped_fields"] = json.dumps(unmapped_data, indent=2)
+    else:
+        vals["x_unmapped_fields"] = False
+
+    # 4. System-managed fields
 
     vals["x_status"] = "Received"
 
