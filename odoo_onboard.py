@@ -102,6 +102,9 @@ def build_odoo_values(data):
 
     if "signature_image" in payload_to_save:
         payload_to_save["signature_image"] = "[SIGNATURE_IMAGE_ATTACHED_SEPARATELY]"
+        
+    if "x_submission_receipt" in payload_to_save:
+        payload_to_save["x_submission_receipt"] = "[SUBMISSION_RECEIPT_ATTACHED_SEPARATELY]"
 
     # Now dump to JSON / file
     vals["x_json_payload"]  = json.dumps(payload_to_save, indent=2)
