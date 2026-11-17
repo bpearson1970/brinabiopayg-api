@@ -321,10 +321,6 @@
         "form_field": "x_active",
         "odoo_field": "x_active_code"
       }, 
-      {
-        "form_field": "x_submission_receipt_pdf",
-        "odoo_field": "x_submission_receipt_pdf"
-      }, 
      {
         "form_field": "x_submission_receipt_filename",
         "odoo_field": "x_submission_receipt_filename"
