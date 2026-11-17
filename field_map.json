@@ -53,7 +53,7 @@
       },
       {
         "form_field": "x_state",
-        "odoo_field": "x_stat"",
+        "odoo_field": "x_state",
         "label": "State",
         "sequence": 30
       },
