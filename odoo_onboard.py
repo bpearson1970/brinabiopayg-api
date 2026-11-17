@@ -124,7 +124,7 @@ def build_report_layout_json(data, field_map_categories=None):
     - System / telemetry fields are retained with exclude_from_report: true.
     - Empty or unsubmitted fields are omitted.
     """
-   report_layout = []
+    report_layout = []
 
     for cat in field_map_categories:
         submitted_fields = []
