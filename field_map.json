@@ -31,7 +31,7 @@
         "form_field": "x_entity_formed",
         "odoo_field": "x_entity_formed",
         "label": "Date Entity Formed",
-        "sequence": 40
+        "sequence": 50
       }
     ]
   },
@@ -240,7 +240,7 @@
       {
         "form_field": "x_indemnity_insurance",
         "odoo_field": "x_indemnity_insurance",
-        "label": "Professional Indenmity Insurance",
+        "label": "Professional Indemnity Insurance",
         "sequence": 30
       },       
       {
