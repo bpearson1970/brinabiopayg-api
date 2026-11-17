@@ -87,13 +87,17 @@ def build_odoo_values(data):
         vals["x_unmapped_fields"] = False
 
     # 4. System-managed fields
-
     vals["x_status"] = "Received"
 
-    vals["x_json_payload"] = json.dumps(
-        data,
-        indent=2
-    )
+    # Clean up JSON file to remove signature image text
+    # Create a copy so you don't affect other processes using data
+    payload_to_save = data.copy()
+
+    if "signature_image" in payload_to_save:
+        payload_to_save["signature_image"] = "[SIGNATURE_IMAGE_ATTACHED_SEPARATELY]"
+
+    # Now dump to JSON / file
+    vals["x_json_payload"]  = json.dumps(payload_to_save, indent=2)
 
     signature_image = data.get("signature_image")
     
