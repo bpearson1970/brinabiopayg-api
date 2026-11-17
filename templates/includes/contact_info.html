@@ -47,14 +47,16 @@
         <input id="secondary_contact_name" name="x_secondary_contact_name" oninput="updateSubmitter(); checkSecondaryContactFields(this.value)">
 
         <label>Position / Title</label>
-        <input id="secondary_contact_title" name="x_secondary_contact_title">
+        <input id="secondary_contact_title" name="x_secondary_contact_title" disabled>
 
         <label>Email</label>
         <input
             type="email"
             id="secondary_contact_email"
             name="x_secondary_contact_email"
-            onblur="validateEmail(this)">
+            onblur="validateEmail(this)"
+            disabled
+            >
 
         <label>Phone</label>
         <input
@@ -64,6 +66,8 @@
             placeholder="(555) 123-4567"
             maxlength="14"
             oninput="formatPhone(this)"
-            onblur="validatePhone(this)">
+            onblur="validatePhone(this)"
+            disabled
+            >
     </div>
 </div>
