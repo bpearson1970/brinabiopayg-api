@@ -4,10 +4,10 @@
     "name": "Dun & Bradstreet",
     "score": "PAYDEX Score",
     "ranges": [
-      { "category": "Positive", "label": "80 - 100", "description": "Positive (80 – 100)" },
-      { "category": "Mild Positive", "label": "70 - 79", "description": "Mild Positive (70 – 79)" },
-      { "category": "Mild Negative", "label": "50 - 69", "description": "Mild Negative (50 – 69)" },
-      { "category": "Negative", "label": "1 - 49", "description": "Negative (1 – 49)" }  
+      { "category": "Positive", "label": "80 - 100", "description": "Positive (80 - 100)" },
+      { "category": "Mild Positive", "label": "70 - 79", "description": "Mild Positive (70 - 79)" },
+      { "category": "Mild Negative", "label": "50 - 69", "description": "Mild Negative (50 - 69)" },
+      { "category": "Negative", "label": "1 - 49", "description": "Negative (1 - 49)" }  
     ]
   },
   {
@@ -15,10 +15,10 @@
     "name": "Experian Business",
     "score": "Intelliscore Plus",
    "ranges": [
-      { "category": "Positive", "label": "76 – 100", "description": "Positive (76 – 100)" },
-      { "category": "Mild Positive", "label": "51 – 75", "description": "Mild Positive (51 – 75)" },
-      { "category": "Mild Negative", "label": "26 – 50", "description": "Mild Negative (26 – 50)" },
-      { "category": "Negative", "label": "1 – 25", "description": "Negative (1 – 25)" }
+      { "category": "Positive", "label": "76 - 100", "description": "Positive (76 - 100)" },
+      { "category": "Mild Positive", "label": "51 - 75", "description": "Mild Positive (51 - 75)" },
+      { "category": "Mild Negative", "label": "26 - 50", "description": "Mild Negative (26 - 50)" },
+      { "category": "Negative", "label": "1 - 25", "description": "Negative (1 - 25)" }
     ]
   },
   {
@@ -26,10 +26,10 @@
     "name": "Equifax Commercial",
     "score": "Commercial Credit Risk Score",
     "ranges": [
-      { "category": "Positive", "label": "556 – 992", "description": "Positive (556 – 992)" },
-      { "category": "Mild Positive", "label": "496 – 555", "description": "Mild Positive (496 – 555)" },
-      { "category": "Mild Negative", "label": "438 – 495", "description": "Mild Negative (438 – 495)" },
-      { "category": "Negative", "label": "101 – 437", "description": "Negative (101 – 437)" }
+      { "category": "Positive", "label": "556 - 992", "description": "Positive (556 - 992)" },
+      { "category": "Mild Positive", "label": "496 - 555", "description": "Mild Positive (496 - 555)" },
+      { "category": "Mild Negative", "label": "438 - 495", "description": "Mild Negative (438 - 495)" },
+      { "category": "Negative", "label": "101 - 437", "description": "Negative (101 - 437)" }
     ]
   },
     {
@@ -37,10 +37,10 @@
     "name": "Creditsafe",
     "score": "Creditsafe Rating",
      "ranges": [
-      { "category": "Positive", "label": "71 – 100", "description": "Positive (71 – 100)" },
-      { "category": "Mild Positive", "label": "51 – 70", "description": "Mild Positive (51 – 70)" },
-      { "category": "Mild Negative", "label": "30 – 50", "description": "Mild Negative (30 – 50)" },
-      { "category": "Negative", "label": "1 – 29", "description": "Negative (1 – 29)" }
+      { "category": "Positive", "label": "71 - 100", "description": "Positive (71 - 100)" },
+      { "category": "Mild Positive", "label": "51 - 70", "description": "Mild Positive (51 - 70)" },
+      { "category": "Mild Negative", "label": "30 - 50", "description": "Mild Negative (30 - 50)" },
+      { "category": "Negative", "label": "1 - 29", "description": "Negative (1 - 29)" }
     ]
   },
   {
@@ -48,10 +48,10 @@
     "name": "Cortera (Moody's)",
     "score": "Cortera Plus Score",
      "ranges": [
-      { "category": "Positive", "label": "700 – 999", "description": "Positive (700 – 999)" },
-      { "category": "Mild Positive", "label": "500 – 699", "description": "Mild Positive (500 – 699)" },
-      { "category": "Mild Negative", "label": "300 – 499", "description": "Mild Negative (300 – 499)" },
-      { "category": "Negative", "label": "101 – 299", "description": "Negative (101 – 299)" }
+      { "category": "Positive", "label": "700 - 999", "description": "Positive (700 - 999)" },
+      { "category": "Mild Positive", "label": "500 - 699", "description": "Mild Positive (500 - 699)" },
+      { "category": "Mild Negative", "label": "300 - 499", "description": "Mild Negative (300 - 499)" },
+      { "category": "Negative", "label": "101 - 299", "description": "Negative (101 - 299)" }
      ]
   },
   {
