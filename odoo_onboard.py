@@ -74,6 +74,9 @@ def build_odoo_values(data):
         incoming_keys = set(data.keys())
         mapped_keys = set(field_map.keys())
         unmapped = incoming_keys - mapped_keys
+        
+        # Exclude fields handled separately
+        unmapped.discard("signature_image")
 
     # 3. Send unmapped fields to Odoo field as JSON
     if unmapped:
