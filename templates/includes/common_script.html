@@ -2,6 +2,26 @@
 
 <script>   
 
+function checkSecondaryContactFields(val) {
+    const SecondTitle = document.getElementById("secondary_contact_title");
+    const SecondEmail = document.getElementById("secondary_contact_email");
+    const SecondPhone = document.getElementById("secondary_contact_phone");
+
+    if (val.length > 0) {
+        SecondTitle.required = true;
+        SecondEmail.required = true;
+        SecondPhone.required = true;        
+    }
+    else {
+        SecondTitle.required = false;
+        SecondEmail.required = false;
+        SecondPhone.required = false;
+        SecondTitle.value = "";
+        SecondEmail.value = "";
+        SecondPhone.value = "";
+    }
+}
+    
 function toggleBureauFields(val) {
     const col2 = document.getElementById("col_credit_bureau");
     const col3 = document.getElementById("col_score");
