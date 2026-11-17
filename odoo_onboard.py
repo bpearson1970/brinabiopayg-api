@@ -144,15 +144,15 @@ def build_report_layout_json(data, field_map_categories=None):
                 "value": str(val).strip() if isinstance(val, str) else val
             }
                 
-                # Include label if defined
-                if "label" in fld:
-                    field_entry["label"] = fld["label"]
+            # Include label if defined
+            if "label" in fld:
+                field_entry["label"] = fld["label"]
 
-                # Include sequence if defined
-                if "sequence" in fld:
-                    field_entry["sequence"] = fld["sequence"]
+            # Include sequence if defined
+            if "sequence" in fld:
+                field_entry["sequence"] = fld["sequence"]
 
-                submitted_fields.append(field_entry)
+            submitted_fields.append(field_entry)
 
         # Include category only if it has submitted fields
         if submitted_fields:
