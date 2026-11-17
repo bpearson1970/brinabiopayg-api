@@ -57,6 +57,7 @@ def build_odoo_values(data, field_map_categories=None):
     1. Flattens field_map.json to map form_field -> odoo_field.
     2. Maps submitted form data to the Odoo record values dictionary.
     3. Identifies unexpected/unmapped keys and saves them to 'x_unmapped_fields'.
+    4. Attaches the structured audit & report blueprint to 'x_json_payload'.
     """
     if field_map_categories is None:
         field_map_categories = load_field_map()
@@ -74,12 +75,12 @@ def build_odoo_values(data, field_map_categories=None):
             vals[target_field] = data[source_field]
 
     # 3. Find any fields in the incoming payload that are NOT in field_map.json
-        incoming_keys = set(data.keys())
-        mapped_keys = set(flat_map.keys())
-        unmapped = incoming_keys - mapped_keys
+    incoming_keys = set(data.keys())
+    mapped_keys = set(flat_map.keys())
+    unmapped = incoming_keys - mapped_keys
         
-        # Exclude fields handled separately
-        unmapped.discard("signature_image")
+    # Exclude fields handled separately
+    unmapped.discard("signature_image")
 
     # 3. Send unmapped fields to Odoo field as JSON
     if unmapped:
@@ -102,18 +103,16 @@ def build_odoo_values(data, field_map_categories=None):
     if "x_submission_receipt_pdf" in payload_to_save:
         payload_to_save["x_submission_receipt_pdf"] = "[SUBMISSION_RECEIPT_PDF_ATTACHED_SEPARATELY]"
 
-    # 5. Now dump to JSON / file
-    vals["x_json_payload"]  = json.dumps(payload_to_save, indent=2)
-
+    # Signature handling
     signature_image = data.get("signature_image")
-    
     if signature_image:
-
         if "," in signature_image:
             signature_image = signature_image.split(",", 1)[1]
-
         vals["x_signature_image"] = signature_image
     
+    # 5. Now dump to JSON / file
+    vals["x_json_payload"] = build_report_layout_json(data, field_map_categories)
+   
     return vals
 
 def build_report_layout_json(data, field_map_categories=None):
