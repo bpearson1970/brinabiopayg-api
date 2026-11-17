@@ -133,35 +133,45 @@ def build_report_layout_json(data, field_map_categories=None):
             if val is None:
                 val = ""
                 
-            # Check if this field represents a binary/file upload
-            is_file = (
-                fld.get("type") in ("binary", "file")
-                or "receipt" in form_key.lower()
-                or fld.get("is_file", False)
+            # Check if this is explicitly a filename field (always treated as normal string)
+            is_filename_text = (
+                "filename" in form_key.lower() 
+                or "filename" in odoo_key.lower()
             )
 
-            if is_file:
-                # If a file was uploaded, substitute the display comment instead of raw base64
+            # Check if this field represents the actual binary upload
+            is_binary_file = not is_filename_text and (
+                fld.get("type") in ("binary", "file")
+                or fld.get("is_file", False)
+                or form_key.lower().endswith(("_pdf", "_file", "_doc", "_attachment"))
+                or odoo_key.lower().endswith(("_pdf", "_file", "_doc", "_attachment"))
+            )
+
+            if is_binary_file:
+                # Actual binary file: replace with comment or attached name
                 if val:
-                    filename = data.get(f"{form_key}_filename") or data.get(fld.get("filename_field", ""))
+                    filename = (
+                        data.get(f"{form_key}_filename") 
+                        or data.get(fld.get("filename_field", ""))
+                        or data.get("x_submission_receipt_filename", "")
+                    )
                     display_comment = f"[File Attached: {filename}]" if filename else "[File Attached]"
                 else:
                     display_comment = ""
 
                 field_entry = {
-                    "odoo_field": fld["odoo_field"],
+                    "odoo_field": odoo_key,
                     "is_file": True,
                     "filename_field": fld.get("filename_field"),
                     "value": display_comment
                 }
             else:
-                # Standard Char, Text, Number, Selection field
+                # Regular Char, Text, Number, Selection, or Filename String
                 field_entry = {
-                    "odoo_field": fld["odoo_field"],
+                    "odoo_field": odoo_key,
                     "is_file": False,
                     "value": str(val).strip() if isinstance(val, str) else val
                 }
-
                 
             # Include label if defined
             if "label" in fld:
