@@ -49,30 +49,37 @@ def authenticate_odoo():
 # --------------------------------------------------
 
 def load_field_map():
-
     with open("field_map.json", "r") as f:
         return json.load(f)
 
-
+def get_flat_field_map():
+    """Flattens the nested category structure into a simple source -> target dictionary."""
+    categories = load_field_map()
+    flat_map = {}
+    
+    for category in categories:
+        for fld in category.get("fields", []):
+            flat_map[fld["form_field"]] = fld["odoo_field"]
+            
+    return flat_map
+    
 # --------------------------------------------------
 # Build Odoo values dictionary
 # --------------------------------------------------
 
 def build_odoo_values(data):
-
-    field_map = load_field_map()
-
+    flat_map = get_flat_field_map()
     vals = {}
 
     # 1. Map existing fields into Odoo field name
-    for source_field, target_field in field_map.items():
+    for source_field, target_field in flat_map.items():
 
         if source_field in data:
             vals[target_field] = data[source_field]
 
     # 2. Find any fields in the incoming payload that are NOT in field_map.json
         incoming_keys = set(data.keys())
-        mapped_keys = set(field_map.keys())
+        mapped_keys = set(flat_map.keys())
         unmapped = incoming_keys - mapped_keys
         
         # Exclude fields handled separately
