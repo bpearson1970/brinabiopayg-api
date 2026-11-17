@@ -89,7 +89,7 @@
       },    
       {
         "form_field": "x_primary_contact_phone",
-        "odoo_field": "x_primary_contact_Phone",
+        "odoo_field": "x_primary_contact_phone",
         "label": "Phone",
         "sequence": 40
       }
@@ -119,7 +119,7 @@
       },    
       {
         "form_field": "x_secondary_contact_phone",
-        "odoo_field": "x_secondary_contact_Phone",
+        "odoo_field": "x_secondary_contact_phone",
         "label": "Phone",
         "sequence": 40
       }
@@ -299,35 +299,35 @@
     "fields": [
       {
         "form_field": "x_submitter_type_value",
-        "odoo_field": "x_submitter_type_value",
+        "odoo_field": "x_submitter_type_value"
       }, 
       {
         "form_field": "x_submitted_by_name",
-        "odoo_field": "x_submitted_by_name",
+        "odoo_field": "x_submitted_by_name"
       }, 
       {
         "form_field": "x_submit_reference",
-        "odoo_field": "x_name",
+        "odoo_field": "x_name"
       }, 
       {
         "form_field": "x_submitted_timestamp",
-        "odoo_field": "x_submitted_timestamp",
+        "odoo_field": "x_submitted_timestamp"
       }, 
       {
         "form_field": "x_client_id",
-        "odoo_field": "x_client_id",
+        "odoo_field": "x_client_id"
       }, 
       {
         "form_field": "x_active",
-        "odoo_field": "x_active_code",
+        "odoo_field": "x_active_code"
       }, 
       {
         "form_field": "x_submission_receipt_pdf",
-        "odoo_field": "x_submission_receipt_pdf",
+        "odoo_field": "x_submission_receipt_pdf"
       }, 
      {
         "form_field": "x_submission_receipt_filename",
-        "odoo_field": "x_submission_receipt_filename",
+        "odoo_field": "x_submission_receipt_filename"
       }
      ]
   }         
