@@ -127,6 +127,7 @@ def build_report_layout_json(data, field_map_categories=None):
 
         for fld in sorted_fields:
             form_key = fld["form_field"]
+            odoo_key = fld.get("odoo_field", "")
             
             # Grab submitted value; if missing or None, default to ""
             val = data.get(form_key)
