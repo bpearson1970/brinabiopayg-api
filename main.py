@@ -17,8 +17,9 @@ from fastapi.responses import Response
 
 templates = Jinja2Templates(directory="templates")
 
-# Load API key from environment
+# Load API Key and Client Mapping File from environment 
 API_KEY = os.getenv("BRINABIOPAYG_API_KEY")
+CLIENT_MAP_FILE = os.getenv("CLIENT_MAP_FILE", "client_map.json")
 
 app = FastAPI()
 
@@ -35,7 +36,7 @@ async def onboard_form(
     request: Request,
     client_code: str
 ):
-    with open("client_map.json") as f:
+    with open(CLIENT_MAP_FILE) as f:
         client_map = json.load(f)
 
     client_info = client_map.get(client_code)
