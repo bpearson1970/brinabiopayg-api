@@ -1,0 +1,37 @@
+{
+  "MediWeightLoss": {
+    "client_id": "43352",
+    "company_name": "Medi-WeightLoss",
+    "logo": "MediWeightLoss.png",
+    "template": "brinapayg_onboard_form_43352.html",
+    "active": "0",
+    "active_comment": "0 means Inactive, 1 means Active, 100 means Test Mode, Any other number is a passcode to activate"
+  },
+
+  "Standard": {
+    "client_id": "00042",
+    "company_name": null,
+    "logo": null,
+    "template": "brinapayg_onboard_form_00042.html",
+    "active": "0",
+    "active_comment": "0 means Inactive, 1 means Active, 100 means Test Mode, Any other number is a passcode to activate"
+  },
+
+  "TestMedicalGroup": {
+    "client_id": "10001",
+    "company_name": "Test Medical Group",
+    "logo": "testmedicallogo.png",
+    "template": "brinapayg_onboard_form_10001.html",
+    "active": "100",
+    "active_comment": "0 means Inactive, 1 means Active, 100 means Test Mode, Any other number is a passcode to activate"
+  },
+
+   "Test": {
+    "client_id": "10002",
+    "company_name": null,
+    "logo": null,
+    "template": "brinapayg_onboard_form_10002.html",
+    "active": "100",
+    "active_comment": "0 means Inactive, 1 means Active, 100 means Test Mode, Any other number is a passcode to activate"
+  }
+}
