@@ -2,18 +2,23 @@
 <html>
     
 {% include "includes/styles.html" %}
-{% include "includes/header.html" %}
+{% include "includes/core/header.html" %}
 
 <body>
 <div class="container">
 
-{% include "includes/title.html" %}
+{% include "includes/core/title.html" %}
 
 <form id="onboardForm">
 
-{% include "includes/sections.html" %}
+  {% for section in form_sections %}
+    {% include section.file %}
+  {% endfor %}
 
+  {% include "includes/core/footer.html" %}
+    
 </form>
+    
 </div>
 {% include "includes/common_script.html" %}
 </body>
