@@ -29,10 +29,10 @@
       "entity": "corporate",
       "contacts": "standard",
       "operations": "standard",
-      "financials": "standard",
-      "banking": "standard",
-      "insurances": "standard",
-      "credit_bureau": "standard",
+      "financials": "none",
+      "banking": "none",
+      "insurances": "none",
+      "credit_bureau": ""none",
       "submission": "standard"
     }     
   },
