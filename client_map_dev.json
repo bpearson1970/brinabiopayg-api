@@ -28,7 +28,7 @@
     "sections": {
       "entity": "corporate",
       "contacts": "standard",
-      "operations": "standard",
+      "operations": "none",
       "financials": "none",
       "banking": "none",
       "insurances": "none",
