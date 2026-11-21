@@ -31,7 +31,7 @@
       }
     },
     "operations": {
-      "title": "Operations",
+      "title": "Operational Statistics",
       "versions": {
         "standard": {
           "file": "sections/operations_info.html",
@@ -44,7 +44,7 @@
       }
     },
     "financials": {
-      "title": "Financial",
+      "title": "Financial Information",
       "versions": {
         "standard": {
           "file": "sections/financial_info.html",
@@ -57,7 +57,7 @@
       }
     },
     "banking": {
-      "title": "Banking",
+      "title": "Banking Information",
       "versions": {
         "standard": {
           "file": "sections/banking_info.html",
@@ -70,7 +70,7 @@
       }
     },
     "insurances": {
-      "title": "Insurances",
+      "title": "Insurance Details",
       "versions": {
         "standard": {
           "file": "sections/insurance_info.html",
@@ -83,7 +83,7 @@
       }
     },
     "credit_bureau": {
-      "title": "Credit Bureau",
+      "title": "Credit Bureau / Agency",
       "versions": {
         "standard": {
           "file": "sections/credit_bureau_info.html",
@@ -96,7 +96,7 @@
       }
     },
     "submission": {
-      "title": "Declaration and Submit",
+      "title": "Declaration and Form Submission",
       "versions": {
         "standard": {
           "file": "sections/submit_form.html",
