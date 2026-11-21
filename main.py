@@ -64,7 +64,11 @@ async def onboard_form(
         if version_name and version_name != "none":
             version_entry = section_meta.get("versions", {}).get(version_name)
             if version_entry and version_entry.get("file"):
-                form_sections.append(f"includes/{version_entry['file']}")
+               form_sections.append({
+                    "key": section_key,
+                    "title": section_meta.get("title", ""),
+                    "file": f"includes/{version_entry['file']}"
+                })
                 
     # --- DYNAMIC SECTION RESOLUTION END ---
 
