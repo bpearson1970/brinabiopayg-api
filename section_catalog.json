@@ -96,7 +96,7 @@
       }
     },
     "submission": {
-      "name": "Legal & Compliance Declarations",
+      "title": "Declaration and Submit",
       "versions": {
         "standard": {
           "file": "sections/submit_form.html",
