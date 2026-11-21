@@ -1,11 +1,11 @@
 {
   "sections": {
-    "business_info": {
-      "name": "Business Information",
+    "entity": {
+      "title": "Business / Entity",
       "versions": {
-        "full_corporate": {
-          "file": "sections/business_info_corporate.html",
-          "description": "Full corporate registration, ABN, ACN, trading name, registered address"
+        "corporate": {
+          "file": "sections/business_info.html",
+          "description": "Full corporate registration, EIN, trading name and registered address"
         },
         "gov_dept": {
           "file": "sections/business_info_gov.html",
@@ -13,34 +13,103 @@
         },
         "none": {
           "file": null,
-          "description": "Omits business information entirely"
+          "description": "Omits information entirely"
         }
       }
     },
-    "financial_info": {
-      "name": "Financial & Banking",
+    "contacts": {
+      "title": "Contact Details",
       "versions": {
-        "direct_eft": {
-          "file": "sections/financial_eft_standard.html",
-          "description": "Account name, BSB, Account Number"
+        "standard": {
+          "file": "sections/contact_info.html",
+          "description": "Primary and Secondary contacts including Position / Title, Email and Phone"
         },
-        "invoiced_vendor": {
-          "file": "sections/financial_vendor_terms.html",
-          "description": "Remittance email, AP contact, payment cycle terms"
+        "none": {
+          "file": null,
+          "description": "Omits information entirely"
         }
       }
     },
-    "declarations": {
+    "operations": {
+      "title": "Operations",
+      "versions": {
+        "standard": {
+          "file": "sections/operations_info.html",
+          "description": "Years in Operation, No. of Staff, Active Patients, Monthly Patient Interations"
+        },
+        "none": {
+          "file": null,
+          "description": "Omits information entirely"
+        }
+      }
+    },
+    "financials": {
+      "title": "Financial",
+      "versions": {
+        "standard": {
+          "file": "sections/financial_info.html",
+          "description": "Turnover, Balance Sheet and Cash Assets"
+        },
+        "none": {
+          "file": null,
+          "description": "Omits information entirely"
+        }
+      }
+    },
+    "banking": {
+      "title": "Banking",
+      "versions": {
+        "standard": {
+          "file": "sections/banking_info.html",
+          "description": "Primary Bank, Relationship Tenure, Approved Credit Facilities"
+        },
+        "none": {
+          "file": null,
+          "description": "Omits information entirely"
+        }
+      }
+    },
+    "insurances": {
+      "title": "Insurances",
+      "versions": {
+        "standard": {
+          "file": "sections/insurance_info.html",
+          "description": "Commercial Property, General Liability, Professional Indemnity, Business Income"
+        },
+        "none": {
+          "file": null,
+          "description": "Omits information entirely"
+        }
+      }
+    },
+    "credit_bureau": {
+      "title": "Credit Bureau",
+      "versions": {
+        "standard": {
+          "file": "sections/credit_bureau_info.html",
+          "description": "Agency and Rating"
+        },
+        "none": {
+          "file": null,
+          "description": "Omits information entirely"
+        }
+      }
+    },
+    "submission": {
       "name": "Legal & Compliance Declarations",
       "versions": {
-        "standard_contractor": {
-          "file": "sections/declarations_contractor.html",
-          "description": "Standard IP assignment, privacy, and PAYG terms"
+        "standard": {
+          "file": "sections/submit_form.html",
+          "description": "Declaration of true and correct plus eSignature"
         },
         "government_civil": {
           "file": "sections/declarations_gov.html",
           "description": "Public sector statutory declaration and security clearance acknowledgement"
-        }
+        },
+        "none": {
+          "file": null,
+          "description": "Omits information entirely"
+        }        
       }
     }
   }
