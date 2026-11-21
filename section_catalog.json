@@ -1,1 +1,48 @@
+{
+  "sections": {
+    "business_info": {
+      "name": "Business Information",
+      "versions": {
+        "full_corporate": {
+          "file": "sections/business_info_corporate.html",
+          "description": "Full corporate registration, ABN, ACN, trading name, registered address"
+        },
+        "gov_dept": {
+          "file": "sections/business_info_gov.html",
+          "description": "Department code, division, cost centre, AGS number"
+        },
+        "none": {
+          "file": null,
+          "description": "Omits business information entirely"
+        }
+      }
+    },
+    "financial_info": {
+      "name": "Financial & Banking",
+      "versions": {
+        "direct_eft": {
+          "file": "sections/financial_eft_standard.html",
+          "description": "Account name, BSB, Account Number"
+        },
+        "invoiced_vendor": {
+          "file": "sections/financial_vendor_terms.html",
+          "description": "Remittance email, AP contact, payment cycle terms"
+        }
+      }
+    },
+    "declarations": {
+      "name": "Legal & Compliance Declarations",
+      "versions": {
+        "standard_contractor": {
+          "file": "sections/declarations_contractor.html",
+          "description": "Standard IP assignment, privacy, and PAYG terms"
+        },
+        "government_civil": {
+          "file": "sections/declarations_gov.html",
+          "description": "Public sector statutory declaration and security clearance acknowledgement"
+        }
+      }
+    }
+  }
+}
 
