@@ -11,10 +11,14 @@
 
 <form id="onboardForm">
 
-{% include "includes/sections/sections.html" %}
-{% include "includes/core/footer.html" %}
+  {% for section in form_sections %}
+    {% include section.file %}
+  {% endfor %}
+
+  {% include "includes/core/footer.html" %}
     
 </form>
+    
 </div>
 {% include "includes/common_script.html" %}
 </body>
