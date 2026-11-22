@@ -37,6 +37,25 @@
     }     
   },
 
+  "ProductionTest": {
+    "client_id": "99099",
+    "company_name": null,
+    "logo": null,
+    "template": "brinapayg_onboard_form_99099.html",
+    "active": "99",
+    "active_comment": "0 means Inactive, 1 means Active, 100 means Test Mode, Any other number is a passcode to activate",
+    "sections": {
+      "entity": "corporate",
+      "contacts": "standard",
+      "operations": "standard",
+      "financials": "standard",
+      "banking": "standard",
+      "insurances": "standard",
+      "credit_bureau": "standard",
+      "submission": "standard"
+    }     
+  },
+  
     "TestMedicalGroup": {
     "client_id": "10001",
     "company_name": "Test Medical Group",
