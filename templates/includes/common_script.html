@@ -36,10 +36,11 @@ function toggleBureauFields(val) {
     const cbOther = document.getElementById("cb_other");
     const cbScoreLabel = document.getElementById("cb_score_label");
     const scoreSelect = document.getElementById("credit_score");
-    const scoreOther = document.getElementById("other_score");
+    const scoreOther = document.getElementById("other_score_input");
 
     cbSelect.value = "";
     col3.style.display = "none";
+    scoreOther.required = false;
     
     if (val === "no") {
         col2.style.display = "none";
@@ -50,7 +51,6 @@ function toggleBureauFields(val) {
         cbOtherText.required = false;
         cbOtherText.value = "";
         cbOther.style.display = "none";
-        scoreOther.required = false;
         cbSelect.required = false;
     }
     else {
@@ -106,7 +106,8 @@ function changeBureauSelect(val) {
         cbOtherText.required = false;
         cbOther.style.display = "none";
         scoreSelect_Section.style.display = "block";
-        scoreOther_Section.style.display = "none";        
+        scoreOther_Section.style.display = "none";
+        scoreOther.required = false;
     }
 }
 

@@ -5,7 +5,17 @@
     "logo": "MediWeightLoss.png",
     "template": "brinapayg_onboard_form_43352.html",
     "active": "0",
-    "active_comment": "0 means Inactive, 1 means Active, 100 means Test Mode, Any other number is a passcode to activate"
+    "active_comment": "0 means Inactive, 1 means Active, 100 means Test Mode, Any other number is a passcode to activate",
+    "sections": {
+      "entity": "corporate",
+      "contacts": "standard",
+      "operations": "standard",
+      "financials": "standard",
+      "banking": "standard",
+      "insurances": "standard",
+      "credit_bureau": "standard",
+      "submission": "standard"
+    }     
   },
 
   "Standard": {
@@ -13,8 +23,37 @@
     "company_name": null,
     "logo": null,
     "template": "brinapayg_onboard_form_00042.html",
-    "active": "0",
-    "active_comment": "0 means Inactive, 1 means Active, 100 means Test Mode, Any other number is a passcode to activate"
+    "active": "1",
+    "active_comment": "0 means Inactive, 1 means Active, 100 means Test Mode, Any other number is a passcode to activate",
+    "sections": {
+      "entity": "corporate",
+      "contacts": "standard",
+      "operations": "none",
+      "financials": "none",
+      "banking": "none",
+      "insurances": "none",
+      "credit_bureau": "none",
+      "submission": "standard"
+    }     
+  },
+
+  "ProductionTest": {
+    "client_id": "99099",
+    "company_name": null,
+    "logo": null,
+    "template": "brinapayg_onboard_form_99099.html",
+    "active": "99",
+    "active_comment": "0 means Inactive, 1 means Active, 100 means Test Mode, Any other number is a passcode to activate",
+    "sections": {
+      "entity": "corporate",
+      "contacts": "standard",
+      "operations": "standard",
+      "financials": "standard",
+      "banking": "standard",
+      "insurances": "standard",
+      "credit_bureau": "standard",
+      "submission": "standard"
+    }     
   },
 
   "TestMedicalGroup": {
@@ -23,7 +62,17 @@
     "logo": "testmedicallogo.png",
     "template": "brinapayg_onboard_form_10001.html",
     "active": "100",
-    "active_comment": "0 means Inactive, 1 means Active, 100 means Test Mode, Any other number is a passcode to activate"
+    "active_comment": "0 means Inactive, 1 means Active, 100 means Test Mode, Any other number is a passcode to activate",
+    "sections": {
+      "entity": "corporate",
+      "contacts": "standard",
+      "operations": "standard",
+      "financials": "standard",
+      "banking": "standard",
+      "insurances": "standard",
+      "credit_bureau": "standard",
+      "submission": "standard"
+    }     
   },
 
    "Test": {
@@ -32,6 +81,16 @@
     "logo": null,
     "template": "brinapayg_onboard_form_10002.html",
     "active": "100",
-    "active_comment": "0 means Inactive, 1 means Active, 100 means Test Mode, Any other number is a passcode to activate"
+    "active_comment": "0 means Inactive, 1 means Active, 100 means Test Mode, Any other number is a passcode to activate",
+    "sections": {
+      "entity": "corporate",
+      "contacts": "standard",
+      "operations": "standard",
+      "financials": "standard",
+      "banking": "standard",
+      "insurances": "standard",
+      "credit_bureau": "standard",
+      "submission": "standard"
+    }     
   }
 }

@@ -91,7 +91,7 @@ def build_odoo_values(data, field_map_categories=None):
         vals["x_unmapped_fields"] = False
 
     # 4. System-managed fields
-    vals["x_status"] = "Received"
+    vals["x_status"] = "received"
 
     # Clean up JSON file to remove signature image text
     # Create a copy so you don't affect other processes using data
@@ -128,7 +128,11 @@ def build_report_layout_json(data, field_map_categories=None):
         for fld in sorted_fields:
             form_key = fld["form_field"]
             odoo_key = fld.get("odoo_field", "")
-            
+
+            # If the field was not submitted (e.g. section omitted from form), skip it entirely!
+            if form_key not in data:
+                continue
+    
             # Grab submitted value; if missing or None, default to ""
             val = data.get(form_key)
             if val is None:

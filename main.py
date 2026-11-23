@@ -49,12 +49,36 @@ async def onboard_form(
 
     template_name = client_info["template"]
 
+    # --- DYNAMIC SECTION RESOLUTION START ---
+    # 1. Load section catalog
+    # (Adjust SECTION_CATALOG_FILE if you have a constant defined, or use the direct path)
+    with open("section_catalog.json") as f:
+        catalog = json.load(f).get("sections", {})
+
+    client_sections = client_info.get("sections", {})
+    form_sections = []
+
+    # 2. Match the client's version picks against the catalog
+    for section_key, section_meta in catalog.items():
+        version_name = client_sections.get(section_key)
+        if version_name and version_name != "none":
+            version_entry = section_meta.get("versions", {}).get(version_name)
+            if version_entry and version_entry.get("file"):
+               form_sections.append({
+                    "key": section_key,
+                    "title": section_meta.get("title", ""),
+                    "file": f"includes/{version_entry['file']}"
+                })
+                
+    # --- DYNAMIC SECTION RESOLUTION END ---
+
     print("Client Code:", client_code)
     print("Client ID:", client_info["client_id"])
     print("Company Name:", client_info["company_name"])
     print("Logo:", client_info["logo"])
     print("Template:", client_info["template"])
     print("Active:", client_info["active"])
+    print("Form Sections:", form_sections)
     
     return templates.TemplateResponse(
         request=request,
@@ -64,7 +88,8 @@ async def onboard_form(
             "client_id": client_info["client_id"],
             "company_name": client_info["company_name"],
             "logo": client_info["logo"],
-            "active": client_info["active"]
+            "active": client_info["active"],
+            "form_sections": form_sections  # <--- Added to context
         }
     )
     print(type(request))    

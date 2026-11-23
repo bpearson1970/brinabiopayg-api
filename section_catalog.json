@@ -1,0 +1,117 @@
+{
+  "sections": {
+    "entity": {
+      "title": "Business / Entity",
+      "versions": {
+        "corporate": {
+          "file": "sections/business_info.html",
+          "description": "Full corporate registration, EIN, trading name and registered address"
+        },
+        "gov_dept": {
+          "file": "sections/business_info_gov.html",
+          "description": "Department code, division, cost centre, AGS number"
+        },
+        "none": {
+          "file": null,
+          "description": "Omits information entirely"
+        }
+      }
+    },
+    "contacts": {
+      "title": "Contact Details",
+      "versions": {
+        "standard": {
+          "file": "sections/contact_info.html",
+          "description": "Primary and Secondary contacts including Position / Title, Email and Phone"
+        },
+        "none": {
+          "file": null,
+          "description": "Omits information entirely"
+        }
+      }
+    },
+    "operations": {
+      "title": "Operational Statistics",
+      "versions": {
+        "standard": {
+          "file": "sections/operations_info.html",
+          "description": "Years in Operation, No. of Staff, Active Patients, Monthly Patient Interations"
+        },
+        "none": {
+          "file": null,
+          "description": "Omits information entirely"
+        }
+      }
+    },
+    "financials": {
+      "title": "Financial Information",
+      "versions": {
+        "standard": {
+          "file": "sections/financial_info.html",
+          "description": "Turnover, Balance Sheet and Cash Assets"
+        },
+        "none": {
+          "file": null,
+          "description": "Omits information entirely"
+        }
+      }
+    },
+    "banking": {
+      "title": "Banking Information",
+      "versions": {
+        "standard": {
+          "file": "sections/banking_info.html",
+          "description": "Primary Bank, Relationship Tenure, Approved Credit Facilities"
+        },
+        "none": {
+          "file": null,
+          "description": "Omits information entirely"
+        }
+      }
+    },
+    "insurances": {
+      "title": "Insurance Details",
+      "versions": {
+        "standard": {
+          "file": "sections/insurance_info.html",
+          "description": "Commercial Property, General Liability, Professional Indemnity, Business Income"
+        },
+        "none": {
+          "file": null,
+          "description": "Omits information entirely"
+        }
+      }
+    },
+    "credit_bureau": {
+      "title": "Credit Bureau / Agency",
+      "versions": {
+        "standard": {
+          "file": "sections/credit_bureau_info.html",
+          "description": "Agency and Rating"
+        },
+        "none": {
+          "file": null,
+          "description": "Omits information entirely"
+        }
+      }
+    },
+    "submission": {
+      "title": "Declaration and Form Submission",
+      "versions": {
+        "standard": {
+          "file": "sections/submit_form.html",
+          "description": "Declaration of true and correct plus eSignature"
+        },
+        "government_civil": {
+          "file": "sections/declarations_gov.html",
+          "description": "Public sector statutory declaration and security clearance acknowledgement"
+        },
+        "none": {
+          "file": null,
+          "description": "Omits information entirely"
+        }        
+      }
+    }
+  }
+}
+
