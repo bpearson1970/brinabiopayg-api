@@ -1,5 +1,5 @@
 {
-    "version": "2.02",
-    "updated": "10th November 2026",
-    "update_description": "Submission to Odoo complete"
+    "version": "2.03",
+    "updated": "23rd November 2026",
+    "update_description": "Fully dynamic web form and Odoo Submission Report.  Correction of past issues in Odoo and established means to convert custom charges into Studio customisations for changes in Test"
 }
