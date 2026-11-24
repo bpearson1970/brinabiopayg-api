@@ -13,5 +13,10 @@
     "version": "2.05",
     "updated": "2026-11-24",
     "update_description": "Added version syncing that updates x_payg_version in Odoo"
+  },
+  {
+    "version": "2.05a",
+    "updated": "2026-11-24",
+    "update_description": "Testing version code works after making modifications for onboarding code"
   }
 ]
