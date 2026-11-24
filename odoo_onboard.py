@@ -37,6 +37,27 @@ def build_odoo_values(data, field_map_categories=None):
         if source_field in data:
             vals[target_field] = data[source_field]
 
+    # --------------------------------------------------
+    # Convert x_version string to Many2one integer ID
+    # --------------------------------------------------
+    version_val = vals.get("x_version")
+    if version_val:
+        # If it's already an integer (e.g. passed as ID), keep it
+        if not isinstance(version_val, int):
+            try:
+                # Query x_payg_version to find the matching ID by string name
+                matched = odoo.search_read(
+                    "x_payg_version",
+                    [("x_name", "=", str(version_val).strip())],
+                    ["id"],
+                    limit=1
+                )
+                vals["x_version"] = matched[0]["id"] if matched else False
+            except Exception as e:
+                # Log or fallback to False so Odoo doesn't throw InvalidTextRepresentation
+                print(f"[ODOO ONBOARD] Failed to resolve version ID for '{version_val}': {e}")
+                vals["x_version"] = False
+
     # 3. Find any fields in the incoming payload that are NOT in field_map.json
     incoming_keys = set(data.keys())
     mapped_keys = set(flat_map.keys())
