@@ -96,7 +96,6 @@ def sync_versions_to_odoo(json_file_path: str = DEFAULT_VERSION_FILE) -> str:
         return
 
     print(f"[VERSION SYNC] Connecting to Odoo DB '{odoo.db}'...")
-    return latest_version  # <--- Return it here
 
     # Step 1: Get the 100 most recent versions from Odoo
     odoo_records = odoo.execute_kw(
@@ -170,7 +169,7 @@ def sync_versions_to_odoo(json_file_path: str = DEFAULT_VERSION_FILE) -> str:
         print(f"  + Added Version '{version_num}' (ID: {record_id}, Commit: {commit_hash})")
 
     print("[VERSION SYNC] Sync complete.")
-
+    return latest_version  # <--- Return it here
 
 if __name__ == "__main__":
     sync_versions_to_odoo()
