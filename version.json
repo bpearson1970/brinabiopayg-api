@@ -28,5 +28,10 @@
     "version": "2.07",
     "updated": "2026-11-25",
     "update_description": "Correcting version no. error in Odoo that is expecting an integer because it is a Many2one field in x_payg_onboarding"
+  },
+  {
+    "version": "2.07a",
+    "updated": "2026-11-25",
+    "update_description": "Testing: Correcting version no. error in Odoo that is expecting an integer because it is a Many2one field in x_payg_onboarding"
   }
 ]
