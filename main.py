@@ -1,4 +1,4 @@
-# main.py version 2.0
+# main.py
 
 from fastapi import FastAPI, Request, HTTPException
 from fastapi.responses import JSONResponse
@@ -15,12 +15,22 @@ from odoo_onboard import create_onboarding_record
 from weasyprint import HTML
 from fastapi.responses import Response
 from services.odoo_client import odoo
+import logging
+from contextlib import asynccontextmanager
+from sync_versions import sync_versions_to_odoo
 
 templates = Jinja2Templates(directory="templates")
 
 # Load API Key and Client Mapping File from environment 
 API_KEY = os.getenv("BRINABIOPAYG_API_KEY")
 CLIENT_MAP_FILE = os.getenv("CLIENT_MAP_FILE", "client_map.json")
+
+@app.on_event("startup")
+def startup_event():
+    try:
+        sync_versions_to_odoo()
+    except Exception as e:
+        print(f"Version sync failed on startup: {e}")
 
 app = FastAPI()
 
