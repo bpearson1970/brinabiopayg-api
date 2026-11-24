@@ -8,5 +8,10 @@
     "version": "2.04",
     "updated": "2026-11-24",
     "update_description": "Created odoo_client.py to be sole authentication and connection to Odoo."
+  },
+  {
+    "version": "2.05",
+    "updated": "2026-11-24",
+    "update_description": "Added version syncing that updates x_payg_version in Odoo"
   }
 ]
