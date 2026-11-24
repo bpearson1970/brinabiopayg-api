@@ -2,7 +2,8 @@ import os
 import json
 import shutil
 from datetime import datetime
-from odoo_rpc import odoo_jsonrpc
+import time
+from services.odoo_client import odoo
 
 DEPOSIT_DIR = "/var/data/event_deposit"
 PROCESSED_DIR = "/var/data/event_processed"
@@ -60,10 +61,12 @@ def process_event_file(filename: str):
         return {"status": "error", "message": f"Timestamp parse error: {e}"}
 
     # Check duplicate
-    existing = odoo_jsonrpc("x_payg_event", "search_read", [
-        [["x_studio_payg_event_id", "=", data["EventTS"]]],
-        ["id"]
-    ])
+    existing = odoo.search_read(
+        "x_payg_event",
+        domain=[["x_studio_payg_event_id", "=", data["EventTS"]]],
+        fields=["id"],
+        limit=1
+    )
 
     if existing:
         dst_path = os.path.join(PROCESSED_DIR, clean_name)
@@ -96,7 +99,7 @@ def process_event_file(filename: str):
     }
 
     try:
-        odoo_jsonrpc("x_payg_event", "create", [payload])
+        odoo.create("x_payg_event", payload)
     except Exception as e:
         dst_path = os.path.join(ERROR_DIR, clean_name)
         shutil.move(src_path, dst_path)
@@ -106,15 +109,15 @@ def process_event_file(filename: str):
     shutil.move(src_path, dst_path)
     return {"status": "ok", "message": "Event created"}
 
-    def main():
-        while True:
-            files = os.listdir(DEPOSIT_DIR)
-    
-            for filename in files:
-                result = process_event_file(filename)
-                print(result)
-    
-            time.sleep(1)
+def main():
+    while True:
+        files = os.listdir(DEPOSIT_DIR)
+
+        for filename in files:
+            result = process_event_file(filename)
+            print(result)
+
+        time.sleep(1)
 
 if __name__ == "__main__":
     main()
