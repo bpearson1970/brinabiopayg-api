@@ -14,7 +14,7 @@ from fastapi.templating import Jinja2Templates
 from odoo_onboard import create_onboarding_record
 from weasyprint import HTML
 from fastapi.responses import Response
-from odoo_client import odoo
+from services.odoo_client import odoo
 
 templates = Jinja2Templates(directory="templates")
 
