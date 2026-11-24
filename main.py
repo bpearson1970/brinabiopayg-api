@@ -17,7 +17,7 @@ from weasyprint import HTML
 
 from odoo_onboard import create_onboarding_record
 from services.odoo_client import odoo
-from sync_versions import sync_versions_to_odoo
+from sync_versions import sync_versions_to_odoo, get_current_version
 
 logger = logging.getLogger(__name__)
 
@@ -26,9 +26,12 @@ logger = logging.getLogger(__name__)
 async def lifespan(app: FastAPI):
     try:
         print("[STARTUP] Running Odoo version sync...")
-        sync_versions_to_odoo()
+        # Save the version into FastAPI app memory
+        app.state.current_version = sync_versions_to_odoo()
     except Exception as e:
         print(f"[STARTUP] Version sync failed: {e}")
+        # Fallback: Read directly from version.json if Odoo connection fails
+        app.state.current_version = get_current_version()
     yield
 
 # Initialize FastAPI with the lifespan handler
