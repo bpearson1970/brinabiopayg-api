@@ -6,6 +6,7 @@ import os
 import json
 import requests
 from datetime import datetime
+from odoo_client import odoo
 
 # --------------------------------------------------
 # Authenticate to Odoo
