@@ -21,6 +21,10 @@ from sync_versions import sync_versions_to_odoo, get_current_version
 
 logger = logging.getLogger(__name__)
 
+@app.get("/version.json")
+async def get_version_json():
+    return FileResponse("version.json", media_type="application/json")
+
 # Lifespan event handler to sync versions on startup
 @asynccontextmanager
 async def lifespan(app: FastAPI):
