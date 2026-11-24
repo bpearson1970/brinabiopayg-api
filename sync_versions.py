@@ -83,12 +83,11 @@ def sync_versions_to_odoo(json_file_path: str = "version.json"):
     print(f"[VERSION SYNC] Connecting to Odoo DB '{odoo.db}'...")
 
     # Step 1: Get the 100 most recent versions from Odoo
-    odoo_records = odoo.search_read(
+    odoo_records = odoo.execute_kw(
         "x_payg_version",
-        domain=[],
-        fields=["x_name"],
-        order="id desc",
-        limit=100,
+        "search_read",
+        [[]],
+        {"fields": ["x_name"], "order": "id desc", "limit": 100},
     )
 
     # Step 2: Get the 100 most recent versions from JSON
