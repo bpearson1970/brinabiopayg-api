@@ -21,10 +21,6 @@ from sync_versions import sync_versions_to_odoo, get_current_version
 
 logger = logging.getLogger(__name__)
 
-@app.get("/version.json")
-async def get_version_json():
-    return FileResponse("version.json", media_type="application/json")
-
 # Lifespan event handler to sync versions on startup
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -42,6 +38,10 @@ async def lifespan(app: FastAPI):
 app = FastAPI(lifespan=lifespan)
 
 templates = Jinja2Templates(directory="templates")
+
+@app.get("/version.json")
+async def get_version_json():
+    return FileResponse("version.json", media_type="application/json")
 
 # Load API Key and Client Mapping File from environment 
 API_KEY = os.getenv("BRINABIOPAYG_API_KEY")
