@@ -53,6 +53,16 @@ def detect_git_hash(version_str: str) -> str:
     env_hash = os.getenv("RENDER_GIT_COMMIT") or os.getenv("GIT_COMMIT") or ""
     return env_hash[:7] if env_hash else "manual"
 
+def get_current_version(json_file_path: str = DEFAULT_VERSION_FILE) -> str:
+    """Reads the last entry from version.json without talking to Odoo."""
+    try:
+        with open(json_file_path, "r", encoding="utf-8") as f:
+            data = json.load(f)
+            if data and isinstance(data, list):
+                return str(data[-1].get("version", "Unknown"))
+    except Exception:
+        pass
+    return "Unknown"
 
 def parse_date_to_odoo(date_str: str) -> str:
     """Parses various date string formats and returns YYYY-MM-DD for Odoo."""
@@ -63,24 +73,27 @@ def parse_date_to_odoo(date_str: str) -> str:
             continue
     return datetime.utcnow().strftime("%Y-%m-%d")
 
-
-def sync_versions_to_odoo(json_file_path: str = "version.json"):
+def sync_versions_to_odoo(json_file_path: str = DEFAULT_VERSION_FILE) -> str:
     if not os.path.exists(json_file_path):
         print(f"[VERSION SYNC] '{json_file_path}' not found. Skipping.")
-        return
+        return "Unknown"
 
     with open(json_file_path, "r", encoding="utf-8") as f:
         try:
             all_json_versions = json.load(f)
         except json.JSONDecodeError as e:
             print(f"[VERSION SYNC] Error parsing {json_file_path}: {e}")
-            return
+            return "Unknown"
+
+    # Grab the latest version from the very last item in version.json
+    latest_version = str(all_json_versions[-1].get("version", "Unknown"))
 
     if not isinstance(all_json_versions, list) or not all_json_versions:
         print(f"[VERSION SYNC] {json_file_path} is empty or not an array.")
         return
 
     print(f"[VERSION SYNC] Connecting to Odoo DB '{odoo.db}'...")
+    return latest_version  # <--- Return it here
 
     # Step 1: Get the 100 most recent versions from Odoo
     odoo_records = odoo.execute_kw(
