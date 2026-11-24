@@ -24,14 +24,34 @@ logger = logging.getLogger(__name__)
 # Lifespan event handler to sync versions on startup
 @asynccontextmanager
 async def lifespan(app: FastAPI):
+    app.state.current_version_id = False
     try:
         print("[STARTUP] Running Odoo version sync...")
-        # Save the version into FastAPI app memory
+        # Save the version string into FastAPI app memory (e.g. "2.06")
         app.state.current_version = sync_versions_to_odoo()
     except Exception as e:
         print(f"[STARTUP] Version sync failed: {e}")
         # Fallback: Read directly from version.json if Odoo connection fails
         app.state.current_version = get_current_version()
+
+    # Look up the integer ID for the Many2one field
+    try:
+        if app.state.current_version:
+            # Using your odoo client's search_read
+            records = odoo.search_read(
+                "x_payg_version",
+                [("x_name", "=", app.state.current_version)],
+                ["id"],
+                limit=1
+            )
+            if records:
+                app.state.current_version_id = records[0]["id"]
+                print(f"[STARTUP] Active version ID resolved to: {app.state.current_version_id}")
+            else:
+                print(f"[STARTUP] Warning: No record found in x_payg_version for {app.state.current_version}")
+    except Exception as e:
+        print(f"[STARTUP] Could not resolve version record ID: {e}")
+
     yield
 
 # Initialize FastAPI with the lifespan handler
