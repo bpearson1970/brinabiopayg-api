@@ -2,47 +2,10 @@
 # Odoo Onboarding Integration
 # --------------------------------------------------
 
-import os
 import json
-import requests
+import os
 from datetime import datetime
-
-# --------------------------------------------------
-# Authenticate to Odoo
-# --------------------------------------------------
-
-def authenticate_odoo():
-
-    payload = {
-        "jsonrpc": "2.0",
-        "method": "call",
-        "params": {
-            "service": "common",
-            "method": "authenticate",
-            "args": [
-                os.getenv("ODOO_DB"),
-                os.getenv("ODOO_LOGIN"),
-                os.getenv("ODOO_API_KEY"),
-                {}
-            ]
-        },
-        "id": 1
-    }
-
-    response = requests.post(
-        os.getenv("ODOO_URL"),
-        json=payload
-    )
-
-    result = response.json()
-
-    if "result" not in result:
-        raise Exception(
-            f"Odoo authentication failed: {result}"
-        )
-
-    return result["result"]
-
+from services.odoo_client import odoo
 
 # --------------------------------------------------
 # Load field mappings
@@ -220,84 +183,24 @@ def process_submission_for_odoo(data):
 # --------------------------------------------------
 
 def create_onboarding_record(data):
-
-    uid = authenticate_odoo()
-
+    # 1. Map values using your existing business logic
     vals = build_odoo_values(data)
 
-    payload = {
-        "jsonrpc": "2.0",
-        "method": "call",
-        "params": {
-            "service": "object",
-            "method": "execute_kw",
-            "args": [
-                os.getenv("ODOO_DB"),
-                uid,
-                os.getenv("ODOO_API_KEY"),
-                "x_payg_onboarding",
-                "create",
-                [vals]
-            ]
-        },
-        "id": 2
-    }
+    # 2. Create the record in Odoo via the shared client
+    record_id = odoo.create("x_payg_onboarding", vals)
 
-    response = requests.post(
-        os.getenv("ODOO_URL"),
-        json=payload
-    )
-
-    result = response.json()
-
-    if "result" not in result:
-        raise Exception(
-            f"Odoo record creation failed: {result}"
-        )
-
-    record_id = result["result"]
-
+    # 3. Create your local receipt file
     receipt_json = create_odoo_receipt(
         submission_reference=data["x_submit_reference"],
         odoo_record_id=record_id,
         status="success",
-        response_data=result
+        response_data={"record_id": record_id}
     )
 
-    write_payload = {
-        "jsonrpc": "2.0",
-        "method": "call",
-        "params": {
-            "service": "object",
-            "method": "execute_kw",
-            "args": [
-                os.getenv("ODOO_DB"),
-                uid,
-                os.getenv("ODOO_API_KEY"),
-                "x_payg_onboarding",
-                "write",
-                [
-                    [record_id],
-                    {
-                        "x_odoo_receipt": receipt_json
-                    }
-                ]
-            ]
-        },
-        "id": 3
-    }
-
-    response = requests.post(
-        os.getenv("ODOO_URL"),
-        json=write_payload
-    )
-
-    result = response.json()
-
-    if "result" not in result:
-        raise Exception(
-            f"Odoo receipt update failed: {result}"
-        )
+    # 4. Update the Odoo record with the receipt JSON
+    odoo.write("x_payg_onboarding", record_id, {
+        "x_odoo_receipt": receipt_json
+    })
 
     return record_id
 

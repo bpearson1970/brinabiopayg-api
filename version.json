@@ -1,0 +1,27 @@
+[
+  {
+    "version": "2.03",
+    "updated": "2026-11-23",
+    "update_description": "Fully dynamic web form and Odoo Submission Report. Correction of past issues in Odoo and established means to convert custom charges into Studio customisations for changes in Test."
+  },
+  {
+    "version": "2.04",
+    "updated": "2026-11-24",
+    "update_description": "Created odoo_client.py to be sole authentication and connection to Odoo."
+  },
+  {
+    "version": "2.05",
+    "updated": "2026-11-24",
+    "update_description": "Added version syncing that updates x_payg_version in Odoo"
+  },
+  {
+    "version": "2.05a",
+    "updated": "2026-11-24",
+    "update_description": "Testing version code works after making modifications for onboarding code"
+  },
+  {
+    "version": "2.06",
+    "updated": "2026-11-24",
+    "update_description": "Updating environmental variables in Production for odoo@brinamedical.com"
+  }
+]

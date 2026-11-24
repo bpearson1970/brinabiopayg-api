@@ -1,82 +1,112 @@
 """
 odoo_client.py
-Centralized Odoo XML-RPC connection manager.
+Centralized Odoo JSON-RPC client preserving your exact environment variable conventions.
 """
 
 import os
-import xmlrpc.client
+import requests
 from typing import Any, Dict, List, Optional
+
 
 class OdooClient:
     def __init__(
         self,
         url: Optional[str] = None,
         db: Optional[str] = None,
-        user: Optional[str] = None,
+        login: Optional[str] = None,
         api_key: Optional[str] = None,
     ):
-        # Pulls from environment variables by default, or accepts explicit overrides
-        self.url = (url or os.getenv("ODOO_URL", "")).rstrip("/")
+        # Match your exact environment variable names
+        raw_url = url or os.getenv("ODOO_URL", "")
+        # Ensure the URL points to the JSON-RPC endpoint
+        if raw_url and not raw_url.endswith("/jsonrpc"):
+            raw_url = raw_url.rstrip("/") + "/jsonrpc"
+        self.url = raw_url
+
         self.db = db or os.getenv("ODOO_DB", "")
-        self.user = user or os.getenv("ODOO_USER", "odoo@brinamedical.com")
+        self.login = login or os.getenv("ODOO_LOGIN", "odoo@brinamedical.com")
         self.api_key = api_key or os.getenv("ODOO_API_KEY", "")
 
         self._uid: Optional[int] = None
-        self._common_proxy = None
-        self._models_proxy = None
+        self._request_id: int = 1
 
-    @property
-    def common(self):
-        if not self._common_proxy:
-            self._common_proxy = xmlrpc.client.ServerProxy(
-                f"{self.url}/xmlrpc/2/common"
+    def _call(self, service: str, method: str, *args) -> Any:
+        """Low-level JSON-RPC transport wrapper."""
+        if not all([self.url, self.db, self.login, self.api_key]):
+            raise ValueError(
+                "Missing Odoo configuration. Verify ODOO_URL, ODOO_DB, "
+                "ODOO_LOGIN, and ODOO_API_KEY are set."
             )
-        return self._common_proxy
 
-    @property
-    def models(self):
-        if not self._models_proxy:
-            self._models_proxy = xmlrpc.client.ServerProxy(
-                f"{self.url}/xmlrpc/2/object"
-            )
-        return self._models_proxy
+        payload = {
+            "jsonrpc": "2.0",
+            "method": "call",
+            "params": {
+                "service": service,
+                "method": method,
+                "args": list(args),
+            },
+            "id": self._request_id,
+        }
+        self._request_id += 1
+
+        response = requests.post(self.url, json=payload, timeout=30)
+        response.raise_for_status()
+        data = response.json()
+
+        if "error" in data:
+            raise Exception(f"Odoo JSON-RPC Error: {data['error']}")
+        if "result" not in data:
+            raise Exception(f"Malformed Odoo response: {data}")
+
+        return data["result"]
 
     def authenticate(self) -> int:
-        """Authenticates with Odoo and caches the UID."""
+        """Preserves your existing authenticate_odoo logic and caches the UID."""
         if self._uid is not None:
             return self._uid
 
-        if not all([self.url, self.db, self.user, self.api_key]):
-            raise ValueError(
-                "Missing Odoo credentials. Ensure ODOO_URL, ODOO_DB, "
-                "ODOO_USER, and ODOO_API_KEY are configured."
-            )
+        uid = self._call(
+            "common",
+            "authenticate",
+            self.db,
+            self.login,
+            self.api_key,
+            {},
+        )
 
-        uid = self.common.authenticate(self.db, self.user, self.api_key, {})
         if not uid:
             raise PermissionError(
-                f"Odoo authentication failed for user '{self.user}' on DB '{self.db}'."
+                f"Odoo authentication failed for login '{self.login}' on DB '{self.db}'."
             )
 
         self._uid = uid
         return self._uid
 
-    def execute(self, model: str, method: str, *args, **kwargs) -> Any:
-        """Generic execution wrapper for any Odoo model method."""
+    def execute_kw(self, model: str, method: str, args: List[Any], kwargs: Optional[Dict[str, Any]] = None) -> Any:
+        """Calls object execute_kw through the jsonrpc endpoint."""
         uid = self.authenticate()
-        return self.models.execute_kw(
-            self.db, uid, self.api_key, model, method, list(args), kwargs
+        return self._call(
+            "object",
+            "execute_kw",
+            self.db,
+            uid,
+            self.api_key,
+            model,
+            method,
+            args,
+            kwargs or {},
         )
 
-    # --- Convenience Helpers ---
+    # --- High-level CRUD operations ---
 
     def create(self, model: str, values: Dict[str, Any]) -> int:
-        """Create a single record in the specified model and return its ID."""
-        return self.execute(model, "create", [values])
+        """Create a record and return its new ID."""
+        return self.execute_kw(model, "create", [values])
 
     def write(self, model: str, record_id: int, values: Dict[str, Any]) -> bool:
         """Update a record by ID."""
-        return self.execute(model, "write", [[record_id], values])
+        return self.execute_kw(model, "write", [[record_id], values])
 
     def search_read(
         self,
@@ -85,15 +115,14 @@ class OdooClient:
         fields: Optional[List[str]] = None,
         limit: int = 80,
     ) -> List[Dict[str, Any]]:
-        """Search and read records matching a domain."""
-        return self.execute(
+        """Search and read matching records."""
+        return self.execute_kw(
             model,
             "search_read",
-            domain or [],
+            [domain or []],
             {"fields": fields or [], "limit": limit},
         )
 
 
-# Singleton instance ready to import directly
+# Global singleton instance
 odoo = OdooClient()
-
