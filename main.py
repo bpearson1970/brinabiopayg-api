@@ -39,9 +39,15 @@ app = FastAPI(lifespan=lifespan)
 
 templates = Jinja2Templates(directory="templates")
 
+# Ensure absolute path to version.json in project root
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+VERSION_FILE_PATH = os.path.join(BASE_DIR, "version.json")
+
 @app.get("/version.json")
 async def get_version_json():
-    return FileResponse("version.json", media_type="application/json")
+    if os.path.exists(VERSION_FILE_PATH):
+        return FileResponse(VERSION_FILE_PATH, media_type="application/json")
+    return JSONResponse(content=[], status_code=200)
 
 # Load API Key and Client Mapping File from environment 
 API_KEY = os.getenv("BRINABIOPAYG_API_KEY")
