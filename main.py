@@ -1,7 +1,9 @@
 # main.py
 
 from fastapi import FastAPI, Request, HTTPException
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, Response
+from fastapi.staticfiles import StaticFiles
+from fastapi.templating import Jinja2Templates
 import os
 import json
 import random
@@ -9,30 +11,34 @@ import requests
 import base64
 import xml.etree.ElementTree as ET
 from datetime import datetime
-from fastapi.staticfiles import StaticFiles
-from fastapi.templating import Jinja2Templates
-from odoo_onboard import create_onboarding_record
-from weasyprint import HTML
-from fastapi.responses import Response
-from services.odoo_client import odoo
 import logging
 from contextlib import asynccontextmanager
+from weasyprint import HTML
+
+from odoo_onboard import create_onboarding_record
+from services.odoo_client import odoo
 from sync_versions import sync_versions_to_odoo
+
+logger = logging.getLogger(__name__)
+
+# Lifespan event handler to sync versions on startup
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    try:
+        print("[STARTUP] Running Odoo version sync...")
+        sync_versions_to_odoo()
+    except Exception as e:
+        print(f"[STARTUP] Version sync failed: {e}")
+    yield
+
+# Initialize FastAPI with the lifespan handler
+app = FastAPI(lifespan=lifespan)
 
 templates = Jinja2Templates(directory="templates")
 
 # Load API Key and Client Mapping File from environment 
 API_KEY = os.getenv("BRINABIOPAYG_API_KEY")
 CLIENT_MAP_FILE = os.getenv("CLIENT_MAP_FILE", "client_map.json")
-
-@app.on_event("startup")
-def startup_event():
-    try:
-        sync_versions_to_odoo()
-    except Exception as e:
-        print(f"Version sync failed on startup: {e}")
-
-app = FastAPI()
 
 # Load "static" directory
 app.mount(
@@ -61,26 +67,22 @@ async def onboard_form(
     template_name = client_info["template"]
 
     # --- DYNAMIC SECTION RESOLUTION START ---
-    # 1. Load section catalog
-    # (Adjust SECTION_CATALOG_FILE if you have a constant defined, or use the direct path)
     with open("section_catalog.json") as f:
         catalog = json.load(f).get("sections", {})
 
     client_sections = client_info.get("sections", {})
     form_sections = []
 
-    # 2. Match the client's version picks against the catalog
     for section_key, section_meta in catalog.items():
         version_name = client_sections.get(section_key)
         if version_name and version_name != "none":
             version_entry = section_meta.get("versions", {}).get(version_name)
             if version_entry and version_entry.get("file"):
-               form_sections.append({
+                form_sections.append({
                     "key": section_key,
                     "title": section_meta.get("title", ""),
                     "file": f"includes/{version_entry['file']}"
                 })
-                
     # --- DYNAMIC SECTION RESOLUTION END ---
 
     print("Client Code:", client_code)
@@ -100,12 +102,11 @@ async def onboard_form(
             "company_name": client_info["company_name"],
             "logo": client_info["logo"],
             "active": client_info["active"],
-            "form_sections": form_sections  # <--- Added to context
+            "form_sections": form_sections
         }
     )
-    print(type(request))    
 
-#On-boarding Receipt
+# On-boarding Receipt
 @app.get("/receipt")
 async def receipt(
     request: Request,
@@ -116,30 +117,21 @@ async def receipt(
     submitted_timestamp: str = "",
     active: str = ""
 ):
-
     with open("./static/images/BrinaBioPAYG.png", "rb") as f:
-        bbpayg_logo = base64.b64encode(
-            f.read()
-        ).decode("utf-8")
+        bbpayg_logo = base64.b64encode(f.read()).decode("utf-8")
 
     with open("./static/images/BrinaMedical.png", "rb") as f:
-        brina_logo = base64.b64encode(
-            f.read()
-        ).decode("utf-8")
+        brina_logo = base64.b64encode(f.read()).decode("utf-8")
         
     ip_address = request.client.host
-
-    user_agent_raw = request.headers.get(
-        "user-agent", ""
-    )
-
-    user_agent = parse_user_agent( user_agent_raw )
+    user_agent_raw = request.headers.get("user-agent", "")
+    user_agent = parse_user_agent(user_agent_raw)
     
     return templates.TemplateResponse(
         request=request,
         name="brinapayg_onboard_receipt.html",
         context={
-           "submission_reference": submission_reference,
+            "submission_reference": submission_reference,
             "company_name": company_name,
             "submitted_by": submitted_by,
             "version": version,
@@ -152,18 +144,12 @@ async def receipt(
         }
     )
 
-#Create receipt PDF
+# Create receipt PDF
 @app.post("/generate-receipt-pdf")
 async def receipt_pdf(request: Request):
-
     data = await request.json()
-
     ip_address = request.client.host
-
-    user_agent_raw = request.headers.get(
-        "user-agent", ""
-    )
-
+    user_agent_raw = request.headers.get("user-agent", "")
     user_agent = parse_user_agent(user_agent_raw)
 
     with open("./static/images/BrinaBioPAYG.png", "rb") as f:
@@ -190,9 +176,7 @@ async def receipt_pdf(request: Request):
     pdf = HTML(string=html_content).write_pdf(zoom=0.8)
     print("Receipt HTML rendered successfully")
 
-    pdf_base64 = base64.b64encode(
-        pdf
-    ).decode("utf-8")
+    pdf_base64 = base64.b64encode(pdf).decode("utf-8")
     
     filename = (
         f"PAYG_Submission_Receipt_"
@@ -207,11 +191,8 @@ async def receipt_pdf(request: Request):
     }
 
 def parse_user_agent(user_agent: str) -> str:
-
     browser = "Unknown Browser"
     operating_system = "Unknown OS"
-
-    # Browser
 
     if "Edg/" in user_agent:
         browser = "Microsoft Edge"
@@ -222,27 +203,20 @@ def parse_user_agent(user_agent: str) -> str:
     elif "Safari/" in user_agent and "Chrome/" not in user_agent:
         browser = "Safari"
 
-    # Operating System
-
     if "Windows NT 10.0" in user_agent:
         operating_system = "Windows 10/11"
-
     elif "Android" in user_agent:
         operating_system = "Android"
-
     elif "iPhone" in user_agent:
         operating_system = "iPhone"
-
     elif "iPad" in user_agent:
         operating_system = "iPad"
-
     elif "Mac OS X" in user_agent:
         operating_system = "macOS"
 
     return f"{browser} on {operating_system}"
 
-
-# Define the Endpoints
+# Define deposit and onboarding directories
 EVENT_DIR = "/var/data/event_deposit"
 os.makedirs(EVENT_DIR, exist_ok=True)
 
@@ -258,49 +232,37 @@ os.makedirs(ONBOARDSub_DIR, exist_ok=True)
 ODOOReceipt_DIR = "/var/data/onboard/odoo_receipts"
 os.makedirs(ODOOReceipt_DIR, exist_ok=True)
 
-# Testing directories exist
-
+# Testing endpoints
 @app.get("/")
 def root():
     return {"status": "ok", "message": "BrinaBio PAYG API running"}
 
 @app.get("/onboard")
-async def onboard_submit():
+async def onboard_status():
     return {
         "status": "ok",
         "message": "Onboarding endpoint ready"
     }
 
-#App definitions
-
+# App definitions
 @app.post("/onboard")
-async def onboard_submit(
-    request: Request
-):
+async def onboard_submit(request: Request):
     payload = await request.json()
 
     payload["x_ip_address"] = request.client.host
     payload["x_user_agent"] = parse_user_agent(
-        request.headers.get(
-            "user-agent",
-            ""
-        )
+        request.headers.get("user-agent", "")
     )
 
-    submission_reference = payload.get(
-        "x_submit_reference"
-    )
+    submission_reference = payload.get("x_submit_reference")
 
     if not submission_reference:
         return {
             "success": False,
-            "message":
-                "Submission reference missing."
+            "message": "Submission reference missing."
         }
 
-    file_name = os.path.join( ONBOARDSub_DIR , f"{submission_reference}.json"
-    )
-
+    file_name = os.path.join(ONBOARDSub_DIR, f"{submission_reference}.json")
     print(f"Writing file: {file_name}")
     
     with open(file_name, "w", encoding="utf-8") as file:
@@ -308,9 +270,7 @@ async def onboard_submit(
         
     odoo_record_id = create_onboarding_record(payload)
 
-    print(
-        f"Odoo Record Created: {odoo_record_id}"
-    )
+    print(f"Odoo Record Created: {odoo_record_id}")
     
     return {
         "success": True,
@@ -320,7 +280,6 @@ async def onboard_submit(
 
 @app.post("/event")
 async def receive_event(request: Request):
-    # Authorization check
     auth_header = request.headers.get("Authorization")
     if auth_header != f"Bearer {API_KEY}":
         raise HTTPException(status_code=401, detail="Unauthorized")
@@ -328,13 +287,11 @@ async def receive_event(request: Request):
     try:
         payload = await request.json()
 
-        # Create filename
         timestamp = datetime.utcnow().strftime("%Y%m%dT%H%M%S")
         rand = random.randint(10000, 99999)
         filename = f"event_{timestamp}_{rand}.tmp"
         filepath = os.path.join(EVENT_DIR, filename)
 
-        # Write JSON payload to file
         with open(filepath, "w") as f:
             json.dump(payload, f)
 
@@ -348,7 +305,6 @@ async def receive_event(request: Request):
 
 @app.post("/log")
 async def receive_log(request: Request):
-    # Authorization check
     auth_header = request.headers.get("Authorization")
     if auth_header != f"Bearer {API_KEY}":
         raise HTTPException(status_code=401, detail="Unauthorized")
@@ -356,13 +312,11 @@ async def receive_log(request: Request):
     try:
         payload = await request.json()
 
-        # Create filename
         timestamp = datetime.utcnow().strftime("%Y%m%dT%H%M%S")
         rand = random.randint(10000, 99999)
         filename = f"logdump_{timestamp}_{rand}.tmp"
         filepath = os.path.join(LOG_DIR, filename)
 
-        # Write JSON payload to file
         with open(filepath, "w") as f:
             json.dump(payload, f)
 
@@ -373,4 +327,3 @@ async def receive_log(request: Request):
             status_code=400,
             content={"status": "error", "message": str(e)}
         )
-
