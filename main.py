@@ -105,7 +105,8 @@ async def onboard_form(
             "company_name": client_info["company_name"],
             "logo": client_info["logo"],
             "active": client_info["active"],
-            "form_sections": form_sections
+            "form_sections": form_sections,
+            "version": request.app.state.current_version  # <--- Available in your form
         }
     )
 
