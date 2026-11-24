@@ -437,7 +437,7 @@ async function loadVersion()
 {
     const response =
         await fetch(
-            "/static/reference/version.json"
+            "/version.json"
         );
 
     const versionInfo =
@@ -445,15 +445,22 @@ async function loadVersion()
 
     console.log(versionInfo);
     
-    document
-        .getElementById("version")
-        .textContent =
-        versionInfo.version;
+    // Pick the last entry if array, otherwise use as object
+    const latest = Array.isArray(versionInfo)
+        ? versionInfo[versionInfo.length - 1]
+        : versionInfo;
 
-    document
-        .getElementById("updated")
-        .textContent =
-        versionInfo.updated;
+    if (latest) {
+        document
+            .getElementById("version")
+            .textContent =
+            latest.version || "";
+
+        document
+            .getElementById("updated")
+            .textContent =
+            latest.updated || "";
+    }
 }
     
 loadStates();
