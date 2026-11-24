@@ -16,6 +16,9 @@ import subprocess
 from datetime import datetime
 from services.odoo_client import odoo
 
+# Define project root and default version file path
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DEFAULT_VERSION_FILE = os.path.join(BASE_DIR, "version.json")
 
 def detect_git_hash(version_str: str) -> str:
     """Detects Git commit hash from git history, HEAD, or Render environment."""
