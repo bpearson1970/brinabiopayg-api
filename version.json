@@ -18,5 +18,10 @@
     "version": "2.05a",
     "updated": "2026-11-24",
     "update_description": "Testing version code works after making modifications for onboarding code"
+  },
+  {
+    "version": "2.06",
+    "updated": "2026-11-24",
+    "update_description": "Updating environmental variables in Production for odoo@brinamedical.com"
   }
 ]
