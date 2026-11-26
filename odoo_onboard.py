@@ -75,7 +75,7 @@ def build_odoo_values(data, field_map_categories=None):
         vals["x_unmapped_fields"] = False
 
     # 4. System-managed fields
-    vals["x_status"] = "received"
+    vals["x_stage_id"] = 1
 
     # Clean up JSON file to remove signature image text
     # Create a copy so you don't affect other processes using data
