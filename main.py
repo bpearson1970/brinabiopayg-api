@@ -89,7 +89,7 @@ VERSION_FILE_PATH = os.path.join(BASE_DIR, "version.json")
 @app.get("/version.json")
 async def get_version_json():
     if os.path.exists(VERSION_FILE_PATH):
-#       return FileResponse(VERSION_FILE_PATH, media_type="application/json")
+        return FileResponse(VERSION_FILE_PATH, media_type="application/json")
     return JSONResponse(content=[], status_code=200)
 
 # Load API Key and Client Mapping File from environment 
