@@ -44,6 +44,7 @@
     "updated": "2026-11-26",
     "update_description": "Change the structure of Processing Stages - added new table 'x_payg_onboarding_stages'"
   },
+  {
     "version": "4.02 Beta",
     "updated": "2026-11-26",
     "update_description": "Added an 'Under Maintenance' page utilising new environmental variable 'UNDER_MAINTENANCE'"
