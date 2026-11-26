@@ -1,7 +1,7 @@
 # main.py
 
 from fastapi import FastAPI, Request, HTTPException
-from fastapi.responses import JSONResponse, Response, FileResponse
+from fastapi.responses import JSONResponse, Response, FileResponse, HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 import os
@@ -58,6 +58,29 @@ async def lifespan(app: FastAPI):
 app = FastAPI(lifespan=lifespan)
 
 templates = Jinja2Templates(directory="templates")
+
+# Read the HTML template once at startup - UNDER MAINTENANCE
+with open("templates/maintenance.html", "r") as f:
+    MAINTENANCE_HTML = f.read()
+
+@app.middleware("http")
+async def maintenance_middleware(request: Request, call_next):
+    if os.getenv("UNDER_MAINTENANCE") == "1":
+        
+        # Whitelist health checks so container monitors don't panic
+        if request.url.path in ["/health", "/ping"] or request.url.path.startswith("/static/"):
+            return await call_next(request)
+
+        return HTMLResponse(
+            content=MAINTENANCE_HTML,
+            status_code=503,
+            headers={
+                "Retry-After": "1800",
+                "Cache-Control": "no-store"
+            }
+        )
+
+    return await call_next(request)
 
 # Ensure absolute path to version.json in project root
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
