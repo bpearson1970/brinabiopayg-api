@@ -39,4 +39,9 @@
     "updated": "2026-11-25",
     "update_description": "Deployment to Production: Version tracking / odoo@brinamedical.com log in / minor fixes"
   }
+  {
+    "version": "4.01 Beta",
+    "updated": "2026-11-26",
+    "update_description": "Change the structure of Processing Stages - added new table 'x_payg_onboarding_stages'"
+  }
 ]
