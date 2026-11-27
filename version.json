@@ -48,5 +48,10 @@
     "version": "4.02 Beta",
     "updated": "2026-11-26",
     "update_description": "Added an 'Under Maintenance' page utilising new environmental variable 'UNDER_MAINTENANCE'"
+  },
+  {
+    "version": "4.0",
+    "updated": "2026-11-27",
+    "update_description": "Implementation of Processing Stages and 'Under Maintenance' page"
   }
 ]
