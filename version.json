@@ -58,5 +58,10 @@
     "version": "4.03 Beta",
     "updated": "2026-11-28",
     "update_description": "Fix up Stage code due to transition into Odoo production"
+  },
+  {
+    "version": "4.0a",
+    "updated": "2026-11-28",
+    "update_description": "Amendment to 4.0 due to 4.03 Beta - loaded into Production"
   }
 ]
