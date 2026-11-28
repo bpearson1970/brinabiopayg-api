@@ -76,7 +76,7 @@ def build_odoo_values(data, field_map_categories=None):
         vals["x_unmapped_fields"] = False
 
     # 4. System-managed fields
-    vals["x_stage_id"] = 1
+    # vals["x_stage_id"] = 1 <-- blanked out and put into Odoo
 
     # Clean up JSON file to remove signature image text
     # Create a copy so you don't affect other processes using data
