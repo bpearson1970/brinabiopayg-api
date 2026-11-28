@@ -10,7 +10,7 @@ TENANT_ID = '8240a393-7a9f-4a79-8023-0c3b09a1bf2a'
 CLIENT_ID = 'c257f12b-331b-4b6c-8889-4c154994890c'
 TOKEN_CACHE_FILE = 'm365_token.json'
 
-SCOPES = ["Mail.Send", "offline_access"]
+SCOPES = ["Mail.Send"]
 AUTHORITY = f"https://login.microsoftonline.com/{TENANT_ID}"
 
 # Put the email address where you want to receive this test:
