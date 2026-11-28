@@ -53,5 +53,10 @@
     "version": "4.0",
     "updated": "2026-11-27",
     "update_description": "Implementation of Processing Stages and 'Under Maintenance' page"
+  },
+  {
+    "version": "4.03 Beta",
+    "updated": "2026-11-28",
+    "update_description": "Fix up Stage code due to transition into Odoo production"
   }
 ]
