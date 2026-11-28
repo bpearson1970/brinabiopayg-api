@@ -48,9 +48,10 @@ def build_odoo_values(data, field_map_categories=None):
                 # Query x_payg_version to find the matching ID by string name
                 matched = odoo.search_read(
                     "x_payg_version",
-                    [("x_name", "=", str(version_val).strip())],
-                    ["id"],
-                    limit=1
+                    [],
+                    ["id", "x_name"],
+                    limit=1,
+                    order="id desc"  # <--- Forces newest created record
                 )
                 vals["x_version"] = matched[0]["id"] if matched else False
             except Exception as e:
@@ -75,7 +76,7 @@ def build_odoo_values(data, field_map_categories=None):
         vals["x_unmapped_fields"] = False
 
     # 4. System-managed fields
-    vals["x_status"] = "received"
+    # vals["x_stage_id"] = 1 <-- blanked out and put into Odoo
 
     # Clean up JSON file to remove signature image text
     # Create a copy so you don't affect other processes using data

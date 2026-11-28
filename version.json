@@ -38,5 +38,30 @@
     "version": "3.0",
     "updated": "2026-11-25",
     "update_description": "Deployment to Production: Version tracking / odoo@brinamedical.com log in / minor fixes"
+  },
+  {
+    "version": "4.01 Beta",
+    "updated": "2026-11-26",
+    "update_description": "Change the structure of Processing Stages - added new table 'x_payg_onboarding_stages'"
+  },
+  {
+    "version": "4.02 Beta",
+    "updated": "2026-11-26",
+    "update_description": "Added an 'Under Maintenance' page utilising new environmental variable 'UNDER_MAINTENANCE'"
+  },
+  {
+    "version": "4.0",
+    "updated": "2026-11-27",
+    "update_description": "Implementation of Processing Stages and 'Under Maintenance' page"
+  },
+  {
+    "version": "4.03 Beta",
+    "updated": "2026-11-28",
+    "update_description": "Fix up Stage code due to transition into Odoo production"
+  },
+  {
+    "version": "4.0a",
+    "updated": "2026-11-28",
+    "update_description": "Amendment to 4.0 due to 4.03 Beta - loaded into Production"
   }
 ]
