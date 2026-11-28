@@ -63,5 +63,15 @@
     "version": "4.0a",
     "updated": "2026-11-28",
     "update_description": "Amendment to 4.0 due to 4.03 Beta - loaded into Production"
+  },
+  {
+    "version": "4.1",
+    "updated": "2026-11-28",
+    "update_description": "Replace 4.0a to 4.1 - better number philosophy to have upgrades as .1 rather than 'a'"
+  },
+  {
+    "version": "4.11 Beta",
+    "updated": "2026-11-28",
+    "update_description": "Integrate client-map.json into Odoo for Group submissions (e.g. Medi)"
   }
 ]
